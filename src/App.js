@@ -1,25 +1,75 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import Heading from "./components/Heading.jsx";
+import PostCreator from "./components/PostCreator.jsx";
+import { Routes, Route } from "react-router-dom";
+import ThreadForReplys from "./components/ThreadForReplys.jsx";
+import Threading from "./components/Threading.jsx";
+import Voltar from "./components/Voltar.jsx";
+import Footer from "./components/Footer.jsx";
+import Catalog from "./components/Catalog.jsx";
+import Homepage from "./components/Homepage.jsx"
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+  const [backendData, setBackendData] = useState([]);
+
+  const pages = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+  let threadsRange = [-15, 0];
+  
+  function nextPage(){
+    threadsRange = [threadsRange[0]+15,threadsRange[1]+15];
+  }
+  
+  useEffect(() => {
+    fetch("https://felino-chan-server.herokuapp.com/api").then(
+      response => response.json()
+      ).then(
+        data => {
+          setBackendData(data)
+        }
+      )  
+  }, []);
+
+    return (      
+      <div>
+
+      <Routes>
+        <Route path="/" element={<Homepage />}/>
+      </Routes>
+      
+        {/* Outras páginas */}
+        <Routes>
+        <Route path={"/Catalog"} element={<Catalog />} />
+        { pages.map((index, item)=>(
+          <Route key={item._id} path={"/hw/"+item} element={
+          <div>
+          <Threading key={item._id} pageFrom={threadsRange[0]} pageTo={threadsRange[1]}/>
+          {nextPage()}
+          </div>
+          }/>
+        ))}
+          
+        </Routes>
+          {/* pag 1/home */}
+          <Routes>
+          <Route path="hw" element={<Threading pageFrom="0" pageTo="15"/>} /> 
+          {/* threads por dentro com PostCreator modificado */}
+          { backendData.map((item, index) => (
+                item.op ?
+                <Route key={item._id} path={"/res/"+item.randomIdGeneratedByMe} element={
+                <div>
+                <Heading key={item._id} boardName="HW - Hello world"/>
+                <PostCreator key={item._id} replyTo={item.randomIdGeneratedByMe} isOp={false} sendButton="Responder" board="hw"/>
+                <ThreadForReplys key={item._id} id={index} threads={item} replys={backendData}/>
+                <Voltar key={item._id} url="hw"/>
+                <Footer key={item._id} />
+                </div>
+                }/>
+                : null
+              ))}
+          </Routes>
+          </div>
+)
+          }
 
 export default App;
