@@ -8,7 +8,8 @@ import { Interweave } from 'interweave';
 function Thread(props){//talvez eu nao precise mais disso, utilizar 
     
     let wat = props.threads.postContent.replace(/\n/g, "<p class='everyPostP'>")
-    $("p").each(function(){
+    const [styleChange, setStyleChange] = useState([
+        $("p").each(function(){
         if ($(this).text().indexOf(">>>")===0){
             $(this).addClass("pinkText everyPostP")
         } else if ($(this).text().indexOf(">>")===0){
@@ -16,7 +17,9 @@ function Thread(props){//talvez eu nao precise mais disso, utilizar
         } else if ($(this).text().indexOf(">")===0){
             $(this).addClass("quote everyPostP")
         } 
-    })
+    })]
+    )
+    
 
     const [postPassword] = useLocalStorage("postFormPassword", );
     
