@@ -246,7 +246,6 @@ th {
     white-space: pre-line;
     margin: 0;
     color: rgb(39, 34, 26);
-    display: contents;
 }
 p.quote{
     color: rgb(0, 77, 0);
