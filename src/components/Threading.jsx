@@ -33,13 +33,13 @@ function Threading(props){
         item.op ? 
 
         countThreads >= 150 & countThreads < 165 ?
-        <Thread key={item._id} id={index} threads={item} replys={backendData} delete={true}/>
+        <Thread key={index} id={index} threads={item} replys={backendData} delete={true}/>
         :
         countThreads >= props.pageFrom && countThreads < props.pageTo ?
 
-        <div>
+        <div key={index}>
         {countThreadsAdd()}
-        <Thread key={item._id} delete={false} id={index} threads={item} replys={backendData} />
+        <Thread key={index} delete={false} id={index} threads={item} replys={backendData} />
         </div>
         
         : countThreadsAdd()

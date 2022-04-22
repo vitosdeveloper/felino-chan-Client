@@ -41,9 +41,9 @@ function App() {
         <Routes>
         <Route path={"/Catalog"} element={<Catalog />} />
         { pages.map((index, item)=>(
-          <Route key={item._id} path={"/hw/"+item} element={
-          <div>
-          <Threading key={item._id} pageFrom={threadsRange[0]} pageTo={threadsRange[1]}/>
+          <Route key={index} path={"/hw/"+item} element={
+          <div key={index}>
+          <Threading key={index} pageFrom={threadsRange[0]} pageTo={threadsRange[1]}/>
           {nextPage()}
           </div>
           }/>
@@ -56,13 +56,13 @@ function App() {
           {/* threads por dentro com PostCreator modificado */}
           { backendData.map((item, index) => (
                 item.op ?
-                <Route key={item._id} path={"/res/"+item.randomIdGeneratedByMe} element={
-                <div>
-                <Heading key={item._id} boardName="HW - Hello world"/>
-                <PostCreator key={item._id} replyTo={item.randomIdGeneratedByMe} isOp={false} sendButton="Responder" board="hw"/>
-                <ThreadForReplys key={item._id} id={index} threads={item} replys={backendData}/>
-                <Voltar key={item._id} url="hw"/>
-                <Footer key={item._id} />
+                <Route key={index} path={"/res/"+item.randomIdGeneratedByMe} element={
+                <div key={index}>
+                <Heading key={index} boardName="HW - Hello world"/>
+                <PostCreator key={index} replyTo={item.randomIdGeneratedByMe} isOp={false} sendButton="Responder" board="hw"/>
+                <ThreadForReplys key={index} id={index} threads={item} replys={backendData}/>
+                <Voltar key={index} url="hw"/>
+                <Footer key={index} />
                 </div>
                 }/>
                 : null

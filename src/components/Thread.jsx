@@ -105,9 +105,9 @@ function Thread(props){//talvez eu nao precise mais disso, utilizar
             
             count < 5 ?
 
-            <div>
+            <div key={index}>
             {countAdd()}
-            <Replys key={item._id} index={index} replyData={item}/><br/>
+            <Replys key={index} index={index} replyData={item}/><br/>
             </div>
 
             :null

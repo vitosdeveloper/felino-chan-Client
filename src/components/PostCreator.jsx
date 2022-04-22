@@ -35,10 +35,10 @@ function PostCreator(props){
         }, []);
 
  
-    const [password, setPostPassword] = useLocalStorage("postFormPassword", );
+    const [password, setPostPassword] = useLocalStorage("postFormPassword", "");
     const [isPasswordSetOrWhat, setIsPasswordSetOrWhat]  = useLocalStorage("isPassSetOrWhat", false);
 
-    if (password.length === 0 && isPasswordSetOrWhat===false){
+    if (password.length===0 && isPasswordSetOrWhat===false){
         setPostPassword(Math.floor(Math.random()*1000000))
         setIsPasswordSetOrWhat(true);
     }
@@ -133,12 +133,12 @@ function PostCreator(props){
                     <th>Arquivo</th>
                     <td><button onClick={(event)=>{event.preventDefault()}} style={{opacity: "0.6", cursor: "not-allowed"}}>Upload desativado</button>
                     
-                    {props.catOption ? <input name="imgShow" type="checkbox" id="catImg" checked/> 
+                    {props.catOption ? <input name="imgShow" type="checkbox" id="catImg" readOnly checked/> 
                     : <input name="imgShow" onChange={()=>{
                     newPost.imgShow ? newPost.imgShow=false : newPost.imgShow=true}
                             } type="checkbox" id="catImg" />}
                     
-                    <label for="catImg" className="catCheckFont">Random Cat Images</label></td>
+                    <label htmlFor="catImg" className="catCheckFont">Random Cat Images</label></td>
                 </tr>
                 <tr>
                     <th>inserir</th>

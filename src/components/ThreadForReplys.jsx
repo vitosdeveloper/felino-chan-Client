@@ -83,8 +83,8 @@ function ThreadForReplys(props){//talvez eu nao precise mais disso, utilizar
             
             props.threads.randomIdGeneratedByMe === item.reply ?
             
-            <div>
-            <Replys key={item._id} index={index} replyData={item}/><br/>
+            <div key={index}>
+            <Replys key={index} index={index} replyData={item}/><br/>
             </div>
             
             :null
