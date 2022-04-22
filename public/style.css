@@ -21,8 +21,6 @@ i:hover{
     margin-top: 0;
     text-align: center;
     margin-bottom: 1rem;
-    top: 0;
-    right: 0;
 }
 .boardName {
     margin-top: 0.1rem;
@@ -90,6 +88,7 @@ th {
 .detailsDiv {
     padding: 0 1rem 0 1rem;
     font-size: 0.9rem; 
+    min-width: 18.5rem;
 }
 .anonName {
     color: #ce306a;
@@ -144,6 +143,7 @@ th {
     background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
     margin: 0.5rem 0.5rem 0 1rem;
     border-radius: 1%;
+    min-width: 18.5rem;
 }
 .divFloat {
     float:left;
@@ -173,14 +173,14 @@ th {
 
 .pagesStyle {
     display: inline-block;
-    margin: 1.5rem 2rem 1rem 5rem;
+    margin: 1.5rem 1.5rem 1rem 1.5rem;
     border: 1px dashed rgb(180, 158, 129);;
     padding: 0 1rem 0.3rem 1rem;
+    min-width: 15rem;
 }
 .footerSmall{
     font-size: 0.8rem;
     text-align: center;
-    line-height: 0.1rem;
     font-family: Calibri,sans-serif;
 }
 .emotis{
@@ -242,10 +242,11 @@ th {
 }
 /* outros */
 .everyPostP{
-    word-wrap: break-word;
+    /*word-wrap: break-word;*/
     white-space: pre-line;
     margin: 0;
     color: rgb(39, 34, 26);
+    padding-right: 0.5rem;
 }
 p.quote{
     color: rgb(0, 77, 0);
