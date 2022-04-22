@@ -10,6 +10,7 @@ function PostCreator(props){
     const dataNumero = new Date().toISOString().slice(0,10);
     const horaCompleta = new Date().getHours()+`:`+new Date().getMinutes()+`:`+new Date().getSeconds();
     const [finalHours, setFinalHour] = useState(`${dataNumero} ${diaDaSemana} ${horaCompleta}`);
+    const [passMessage, setPassMessage] = useState("");
 
         useEffect(() => {
 
@@ -146,7 +147,8 @@ function PostCreator(props){
                 </tr>
                 <tr>
                     <th>senha</th>
-                    <td><input name="password" type="password" onChange={editLocalPassword} minLength="3" maxLength="6" form="formita" value={password} size="10"/></td>
+                    <td><input name="password" type="password" onChange={editLocalPassword} onMouseOver={()=>{setPassMessage("Atualize a página para passar a utilizar a senha e salvá-la em cache!")}}
+                     onMouseOut={()=>{setPassMessage("")}} minLength="3" maxLength="6" form="formita" value={password} size="10"/><span className="passMessage">{passMessage}</span></td>
                 </tr>
             </tbody>
         </table>

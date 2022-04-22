@@ -138,7 +138,7 @@ th {
     display:inline-block;
     padding-top: 0.25rem;
     padding-left: 0.1rem;
-    padding-bottom: 0.4rem;
+    padding-bottom: 0.6rem;
     max-width: 90%!important;
     background-color:rgb(221, 169, 105);
     background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
@@ -246,6 +246,7 @@ th {
     white-space: pre-line;
     margin: 0;
     color: rgb(39, 34, 26);
+    display: contents;
 }
 p.quote{
     color: rgb(0, 77, 0);
@@ -348,4 +349,8 @@ p.quote{
     position: relative;
     top: 1.8rem;
     right: 11.5rem;
+}
+.passMessage{
+    position: absolute;
+    margin-left: 0.7rem;
 }

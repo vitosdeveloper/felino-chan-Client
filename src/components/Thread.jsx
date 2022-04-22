@@ -19,7 +19,7 @@ function Thread(props){//talvez eu nao precise mais disso, utilizar
             } 
         })
     }
-    setTimeout(()=>{a()},500)
+    setTimeout(()=>{a()},500);
 
     
     //tentar com window.onload

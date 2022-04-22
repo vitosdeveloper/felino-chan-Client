@@ -24,7 +24,7 @@ function Footer(props){
             <small >
             <p>Feito utilizando "MERN" stack</p>
             <p>Esse é o resultado de três meses de estudos intensos</p>
-            <p>Espremi a cabeça por uma semana pra fazer esse site</p>
+            <p>Espremi a cabeça por duas semana pra fazer esse site</p>
             <p>Sistema de sage funcionando (escreva "sage" no campo de e-mail para não bumpar um tópico/thread)</p>
             <p>Copyright {new Date().getUTCFullYear()} © Vitos Developer</p>
 
