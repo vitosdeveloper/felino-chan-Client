@@ -8,15 +8,24 @@ import { Interweave } from 'interweave';
 function Thread(props){//talvez eu nao precise mais disso, utilizar 
     
     let wat = props.threads.postContent.replace(/\n/g, "<p class='everyPostP'>")
-    $("p").each(function(){
-        if ($(this).text().indexOf(">>>")===0){
-            $(this).addClass("pinkText everyPostP")
-        } else if ($(this).text().indexOf(">>")===0){
-            $(this).addClass("quotin everyPostP")
-        } else if ($(this).text().indexOf(">")===0){
-            $(this).addClass("quote everyPostP")
-        } 
-    })
+    function a(){
+        $("p").each(function(){
+            if ($(this).text().indexOf(">>>")===0){
+                $(this).addClass("pinkText everyPostP")
+            } else if ($(this).text().indexOf(">>")===0){
+                $(this).addClass("quotin everyPostP")
+            } else if ($(this).text().indexOf(">")===0){
+                $(this).addClass("quote everyPostP")
+            } 
+        })
+    }
+    setTimeout(()=>{a()},500);
+
+    
+    //tentar com window.onload
+    //document.onload = styleChange;
+
+    
 
     const [postPassword] = useLocalStorage("postFormPassword", );
     
