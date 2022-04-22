@@ -6,15 +6,18 @@ function CatalogItems(props){
 
     let wat = props.CatalogContent.replace(/\n/g, "<p class='everyPostP'>");
 
-    $("p").each(function(){
-        if ($(this).text().indexOf(">>>")===0){
-            $(this).addClass("pinkText everyPostP")
-        } else if ($(this).text().indexOf(">>")===0){
-            $(this).addClass("quotin everyPostP")
-        } else if ($(this).text().indexOf(">")===0){
-            $(this).addClass("quote everyPostP")
-        } 
-    })
+    function c(){
+        $("p").each(function(){
+            if ($(this).text().indexOf(">>>")===0){
+                $(this).addClass("pinkText everyPostP")
+            } else if ($(this).text().indexOf(">>")===0){
+                $(this).addClass("quotin everyPostP")
+            } else if ($(this).text().indexOf(">")===0){
+                $(this).addClass("quote everyPostP")
+            } 
+        })
+    }
+    setTimeout(()=>{c()},500);
 
     return (
         <div className="catalogItemBorder">
