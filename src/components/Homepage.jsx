@@ -29,7 +29,7 @@ function Homepage(){
                     I was born in 1994, im from Brazil, i do enjoy computer, eletric-guitar, internet, games, tea and some coffe.<br/>
                     My compulsive computer use has always been part of my routine, so, 
                     I was introduced to a course where I learned to use different development technologies, 
-                    Since then, I've been learning and practicing, in order to become apt to get a job as a Fullstack Junior Web Developer.
+                    since then, I've been learning and practicing, in order to become apt to get a job as a Fullstack Junior Web Developer.
                 </h5>
             )
         } else if (whatLanguage==="portuguese"){
