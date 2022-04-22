@@ -10,7 +10,6 @@ function ThreadForReplys(props){//talvez eu nao precise mais disso, utilizar
 
     let wut = props.threads.postContent.replace(/\n/g, "<p class='everyPostP'>")
     $("p").each(function(){
-        
         if ($(this).text().indexOf(">>>")===0){
             $(this).addClass("pinkText everyPostP")
         } else if ($(this).text().indexOf(">>")===0){
@@ -19,7 +18,6 @@ function ThreadForReplys(props){//talvez eu nao precise mais disso, utilizar
             $(this).addClass("quote everyPostP")
         } 
     })
-
 
     const [postPassword] = useLocalStorage("postFormPassword", );
 

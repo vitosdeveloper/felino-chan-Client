@@ -111,8 +111,8 @@ function PostCreator(props){
                 </tr>
                 <tr>
                     <th>Assunto</th>
-                    <td><input onChange={editPost} name="assunto" form="formita" size="25" value={newPost.assunto}/> 
-                    {newPost.postContent.length <= 0 ? <button style={{opacity: "0.6", cursor: "not-allowed"}}>{props.sendButton}</button> : 
+                    <td><input onChange={editPost} name="assunto" form="formita" size="25" value={newPost.assunto}/><span> </span>
+                    {newPost.postContent.length <= 0 ? <button type="button" style={{opacity: "0.6", cursor: "not-allowed"}}>{props.sendButton}</button> : 
                         <button type="button" onMouseOver={()=>{setFinalHour(`${dataNumero} ${diaDaSemana} ${horaCompleta}`);}} onClick={()=>{
                         postToDatabase()}}>{props.sendButton}</button>}
                     </td>
@@ -131,7 +131,7 @@ function PostCreator(props){
                 </tr>
                 <tr>
                     <th>Arquivo</th>
-                    <td><button onClick={(event)=>{event.preventDefault()}} style={{opacity: "0.6", cursor: "not-allowed"}}>Upload desativado</button>
+                    <td><button type="button" onClick={(event)=>{event.preventDefault()}} style={{opacity: "0.6", cursor: "not-allowed"}}>Upload desativado</button>
                     
                     {props.catOption ? <input name="imgShow" type="checkbox" id="catImg" readOnly checked/> 
                     : <input name="imgShow" onChange={()=>{
