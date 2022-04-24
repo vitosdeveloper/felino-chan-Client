@@ -5,19 +5,7 @@ Esse projeto pode ser acessado através da seguinte url: https://felinochan.netl
 
 ## Tecnologias/ferramentas utilizadas:
 
--HTML
--CSS
--Javascript
--Jquery
--ReactJS
--NodeJS
--expressJS
--MongoDB
--Mongoose
--MongoDB Atlas (como host da database)
--Netlify (como host do client)
--Heroku (como host do server)
--thecatapi (como API da qual o site gera as imagens de gatinhos)
+HTML, CSS, Javascript, Jquery, ReactJS, NodeJS, expressJS, MongoDB, Mongoose, MongoDB Atlas (como host da database), Netlify (como host do client), Heroku (como host do server), thecatapi (como API da qual o site gera as imagens de gatinhos).
 
 ## Funcionalidades:
 
