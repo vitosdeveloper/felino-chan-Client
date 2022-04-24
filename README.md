@@ -19,3 +19,9 @@ HTML, CSS, Javascript, Jquery, ReactJS, NodeJS, expressJS, MongoDB, Mongoose, Mo
  
  Perceba que todas imagens são tiradas de uma API que gera fotos de gatinho aleatoriamente, o intuito desse projeto não é efetivamente ser um imageboard, e sim demonstrar meus aprendizados e capacidades.
  
+## Pequenas funções
+
+Para parágrafo verde, inicie o parágrafo com ">".
+Para parágrafo azul, inicie o parágrafo com ">>".
+Para parágrafo rosa, inicie o parágrafo com ">>>".
+Para responder um tópico sem subí-lo, escreva "sage" no campo de email da sua resposta.
