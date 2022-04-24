@@ -1,70 +1,33 @@
-# Getting Started with Create React App
+# Felino chan
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Um app com a funcionalidade de um imageaboard.
+Esse projeto pode ser acessado através da seguinte url: https://felinochan.netlify.app/
 
-## Available Scripts
+## Tecnologias/ferramentas utilizadas:
 
-In the project directory, you can run:
+-HTML
+-CSS
+-Javascript
+-Jquery
+-ReactJS
+-NodeJS
+-expressJS
+-MongoDB
+-Mongoose
+-MongoDB Atlas (como host da database)
+-Netlify (como host do client)
+-Heroku (como host do server)
+-thecatapi (como API da qual o site gera as imagens de gatinhos)
 
-### `npm start`
+## Funcionalidades:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+ Esse aplicativo exerce a função de um imageboard, o usuário escreve seu tópico ou resposta com possibilidade de outras informações como email, assunto, senha, essas informações são enviadas do front-end para o servidor, e do servidor para a data-base, então a data-base envia essas informações para serem mostradas no front-end. 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+ Perceba que os tópicos aparecem por ordem de criação e também sobem sobre os recém-criados quando são respondidos, sendo assim, para que cada post possa subir sempre que atualizado, ao receber uma resposta, o tópico em si é re-criado como uma cópia de si mesmo para que ele possa ser reposicionado como mais recente na data-base, e suas respectivas respostas são renderizadas dentro dele mesmo, o seguindo pelo "id" único do tópico, já a ordem das respostas é diferente, a mais antiga está sempre acima, e a mais recente sempre aparece embaixo, essa tarefa foi realizada com um simples .reverse() no fetch da database.
+ 
+ Pela página inicial, apenas as cinco últimas respostas de cada tópico são mostradas, e em cada página são mostrados 15 tópicos, essa foi uma tarefa particularmente difícil de se realizar, fiz uma mistura de loop com regras até chegar no resultado desejado, foi definitivamente a parte mais desafiadora do projeto.
+ 
+ Quando um post ultrapassa a última página do site, ele é automaticamente deletado da data-base, como parte do funcionamento comum de um imageboard.
+ 
+ Perceba que todas imagens são tiradas de uma API que gera fotos de gatinho aleatoriamente, o intuito desse projeto não é efetivamente ser um imageboard, e sim demonstrar meus aprendizados e capacidades.
+ 
