@@ -26,10 +26,10 @@ function Homepage(){
             setAboutContent(
                 <h5>
                     Hey there, my name is Vitor.<br/>
-                    I was born 1994, im from Brazil, i do enjoy computer, eletric-guitar, internet, games, tea and some coffe.<br/>
+                    I was born in 1994, im from Brazil, i do enjoy computer, eletric-guitar, internet, games, tea and some coffe.<br/>
                     My compulsive computer use has always been part of my routine, so, 
                     I was introduced to a course where I learned to use different development technologies, 
-                    Since then, I've been learning and practicing, in order to become apt to get a job as a Fullstack Junior Web Developer.
+                    since then, I've been learning and practicing, in order to become apt to get a job as a Fullstack Junior Web Developer.
                 </h5>
             )
         } else if (whatLanguage==="portuguese"){
@@ -39,7 +39,7 @@ function Homepage(){
                     Sou de 1994, gosto de computador, guitarra, internet, jogos, chá e café.<br/>
                     O uso compulsivo de computador sempre fez parte da minha rotina, então, 
                     fui apresentado para um curso no qual aprendi a utilizar diversas tecnologias 
-                    de desenvolvimento, desde então venho aprendendo e praticando, afim de me tornar hábio para o mercado de trabalho como Desenvolvedor Web Junior Fullstack.
+                    de desenvolvimento, desde então venho aprendendo e praticando, afim de me tornar hábil para o mercado de trabalho como Desenvolvedor Web Junior Fullstack.
                 </h5>
             )
         }

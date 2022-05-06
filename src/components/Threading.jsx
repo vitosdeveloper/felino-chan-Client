@@ -12,7 +12,7 @@ function Threading(props){
     function countThreadsAdd(){
         countThreads++
     }
-  
+    
     useEffect(() => {
       fetch("https://felino-chan-server.herokuapp.com/api").then(
         response => response.json()
@@ -21,15 +21,24 @@ function Threading(props){
             setBackendData(data)
           }
         )  
-    }, []);
+    }, [a]);
+
+    const [trigger, setTrigger] = useState(false);
+    if (trigger ===false ){
+    setTimeout(()=>{a()},500);
+    }
+    function a(){
+      setTrigger(true);
+    }
 
     return (
         <div>
         
         <Heading boardName="HW - Hello world" />
         <PostCreator sendButton="Novo tópico" replyTo="" isOp={true} board="hw" imgShow={true} catOption={true}/>
-
-        { backendData.map((item, index) => (
+        
+        { backendData === undefined ? null :
+          backendData.map((item, index) => (
         item.op ? 
 
         countThreads >= 150 & countThreads < 165 ?
