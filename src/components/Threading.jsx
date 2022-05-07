@@ -21,15 +21,7 @@ function Threading(props){
             setBackendData(data)
           }
         )  
-    }, [a]);
-
-    const [trigger, setTrigger] = useState(false);
-    if (trigger ===false ){
-    setTimeout(()=>{a()},500);
-    }
-    function a(){
-      setTrigger(true);
-    }
+    }, []);
 
     return (
         <div>
