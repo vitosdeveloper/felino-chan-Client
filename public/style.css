@@ -137,6 +137,7 @@ th {
     display:inline-block;
     padding-top: 0.25rem;
     padding-left: 0.1rem;
+    padding-right: 15px;
     padding-bottom: 0.6rem;
     max-width: 90%!important;
     background-color:rgb(221, 169, 105);
