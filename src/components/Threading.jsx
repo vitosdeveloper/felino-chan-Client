@@ -23,14 +23,17 @@ function Threading(props){
         )  
     }, []);
 
+      
     return (
         <div>
         
         <Heading boardName="HW - Hello world" />
         <PostCreator sendButton="Novo tópico" replyTo="" isOp={true} board="hw" imgShow={true} catOption={true}/>
         
-        { backendData.length === 0 ? <h1 style={{marginLeft: "30px", color: "#77654e"}}>ฅ^•ﻌ•^ฅ Loading...</h1> :
-          backendData.map((item, index) => (
+        {backendData.length === 0 ? 
+        <h1 style={{marginLeft: "30px", color: "#77654e"}}>ฅ^•ﻌ•^ฅ Loading...</h1> 
+        : 
+        backendData.map((item, index) => (
         item.op ? 
 
         countThreads >= 150 & countThreads < 165 ?
@@ -47,7 +50,9 @@ function Threading(props){
           
         :null//se nao for OP
         
-        ))}
+        ) 
+        )
+        }
 
         <Footer pages={true}/>
 

@@ -247,18 +247,38 @@ th {
     margin: 0;
     color: rgb(39, 34, 26);
     padding-right: 0.5rem;
+    font-size: 0.9rem;
+    cursor: initial;
+    font-family: monospace;
+    font-weight: 600;
+    display: unset;
 }
 p.quote{
     color: rgb(0, 77, 0);
+    font-family: fantasy;
+    font-weight: 100;
+    letter-spacing: 1px;
+    display: table;
 }
 .textToRight{
     margin-right: 0.5rem;
 }
 .quotin{
-    color: blue;
+    color: rgb(14, 14, 155);
+    font-size: 14px;
+    cursor: pointer;
+    font-family: fantasy;
+    font-weight: 100;
+    letter-spacing: 1px;
+    text-decoration: underline;
+    display: table;
 }
 .pinkText{
     color: rgb(190, 8, 120);
+    font-family: fantasy;
+    font-weight: 100;
+    letter-spacing: 1px;
+    display: table;
 }
 /* Home */
 
@@ -353,4 +373,18 @@ p.quote{
 .passMessage{
     position: absolute;
     margin-left: 0.7rem;
+}
+.replyDemo {
+	position: absolute;
+	transform: translate(-0%, -100%);
+}
+.replyBoxDemo {
+    display:inline-block;
+    padding-bottom: 0.6rem;
+    max-width: 90%!important;
+    background-color:rgb(221, 169, 105);
+    background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+    margin: 0.5rem 0.5rem 0 1rem;
+    min-width: 18.5rem;
+    border: 8px dashed rgb(202, 137, 52);
 }

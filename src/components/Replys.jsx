@@ -5,7 +5,7 @@ import { Interweave } from 'interweave';
 
 function Replys(props){
     //greentext
-    let wat = props.replyData.postContent.replace(/\n/g, "</a><p class='everyPostP'>");//o resto das propriedades é pego pelo ThreadForReplys
+    let wat = "<p class='everyPostP'>" + props.replyData.postContent.replace(/\n/g, "<p class='everyPostP'>");//o resto das propriedades é pego pelo ThreadForReplys
 
     const [postPassword] = useLocalStorage("postFormPassword", );
 
@@ -64,9 +64,9 @@ function Replys(props){
         
         
         {!props.replyData.imgShow ? <p className="everyPostP textoSemImagem">{
-                    <p className="everyPostP"><Interweave content={wat} /></p>
+                    <Interweave content={wat} />
         }</p> :   
-                    <p className="everyPostP"><Interweave content={wat} /></p>
+                    <Interweave content={wat} />
         }
         
         

@@ -8,19 +8,61 @@ import { Interweave } from 'interweave';
 
 function ThreadForReplys(props){//talvez eu nao precise mais disso, utilizar 
 
-    let wut = props.threads.postContent.replace(/\n/g, "<p class='everyPostP'>")
-    function b(){
+    let wut = "<p class='everyPostP'>" + props.threads.postContent.replace(/\n/g, "<p class='everyPostP'>");
+    function a(){
+
         $("p").each(function(){
             if ($(this).text().indexOf(">>>")===0){
                 $(this).addClass("pinkText everyPostP")
             } else if ($(this).text().indexOf(">>")===0){
-                $(this).addClass("quotin everyPostP")
+                $(this).addClass("quotin")
+                $(this).on("mouseover", (e)=>{
+                        var div = $("<div class='replyDemo'>")
+                        .css({
+                            "left": e.pageX + "px",
+                            "top": e.pageY + "px"
+                        }).append(
+                            props.replys.map((item)=>{
+                                if (item.randomIdGeneratedByMe === $(this).html().slice(8)){
+                                    var watReply = "<p class='everyPostP'>" + item.postContent.replace(/\n/g, "</p><p class='everyPostP'>")
+                                    function b(){
+                                    $("p").each(function applyCollors(){
+                                        if ($(this).text().indexOf(">>>")===0){
+                                            $(this).addClass("pinkText everyPostP")
+                                        } else if ($(this).text().indexOf(">>")===0){
+                                            $(this).addClass("quotin")} else if ($(this).text().indexOf(">")===0){
+                                                $(this).addClass("quote everyPostP")
+                                            }
+                                        })
+                                    }
+                                    setTimeout(()=>{b()},1)
+                                    return (
+                                    `
+                                    <div class="replyBoxDemo">
+                                    <p class="replyNameLine"><span class="anonName" style="margin-left: 10px;"> ${item.assunto} <a class="aTirarSublinhado" style=${"#"+item.email==="#sage" ? {color: "#0F167A"} : null } href=${"#"+item.email}>${"#"+item.email==="#sage" ? "Sage!" : "Anônimo"}</a></span>${item.postDay} No.${item.randomIdGeneratedByMe}</p>
+                                    <div class="detailsDiv">
+                                    <div class="divFloat">
+                                    <i class="paddingPadrao aTirarSublinhado ">
+                                    <img src=${item.catUrl} class="textToRight" alt="gatinho" style="margin-top: 8px; max-width: 255px; maxheight: 255px"/> 
+                                    </i>
+                                    </div>
+                                    <span>${watReply}</span>         
+                                    </div>        
+                                    </div>
+                                    `
+                                    )
+                                }
+                            return null})
+                        )
+                        .appendTo(document.body);
+                        $(this).on("mouseout", ()=>{div.remove()})   
+                })
             } else if ($(this).text().indexOf(">")===0){
                 $(this).addClass("quote everyPostP")
-            } 
+            }
         })
     }
-    setTimeout(()=>{b()},500);
+    setTimeout(()=>{a()},200);
 
     const [postPassword] = useLocalStorage("postFormPassword", );
 
@@ -76,7 +118,7 @@ function ThreadForReplys(props){//talvez eu nao precise mais disso, utilizar
             <p className="anonNameLine"><input onClick={()=>{deletePosts()}} type="checkbox"/><span className="anonName"> {props.threads.assunto} <a className="aTirarSublinhado" href={"#"+props.threads.email}>Anônimo </a>
             </span>{props.threads.postDay} No.{props.threads.randomIdGeneratedByMe} <Link className="linkColor" to="/hw"><span className="linkColor">[Voltar]</span></Link>{deleteBox ? <p className="deleteButton4Threads">Senha: <input type="password" maxLength="6" style={{width: "5rem"}} value={passDaqui} onChange={senhaAtual} />  <button onClick={()=>{deleteThread();}}>Delete</button></p> : null}</p>
             {   
-                <p className="everyPostP"><Interweave content={wut} /></p>
+                <Interweave content={wut} />
             }
             </div>
             
