@@ -143,7 +143,7 @@ th {
     background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
     margin: 0.5rem 0.5rem 0 1rem;
     border-radius: 1%;
-    min-width: 18.5rem;
+    min-width: 400px;
 }
 .divFloat {
     float:left;
@@ -386,7 +386,7 @@ p.quote{
     background-color:rgb(221, 169, 105);
     background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
     margin: 0.5rem 0.5rem 0 1rem;
-    min-width: 18.5rem;
+    min-width: 400px;
     border: 8px dashed rgb(202, 137, 52);
 }
 .noMargin {
