@@ -88,7 +88,7 @@ th {
 .detailsDiv {
     padding: 0 1rem 0 1rem;
     font-size: 0.9rem; 
-    min-width: 18.5rem;
+    min-width: 400px;
 }
 .anonName {
     color: #ce306a;
