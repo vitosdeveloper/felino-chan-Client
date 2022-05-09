@@ -251,7 +251,7 @@ th {
     cursor: initial;
     font-family: monospace;
     font-weight: 600;
-    display: unset;
+    display: -webkit-box;
 }
 p.quote{
     color: rgb(0, 77, 0);
