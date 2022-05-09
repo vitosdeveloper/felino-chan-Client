@@ -15,6 +15,7 @@ function ThreadForReplys(props){//talvez eu nao precise mais disso, utilizar
             if ($(this).text().indexOf(">>>")===0){
                 $(this).addClass("pinkText everyPostP")
             } else if ($(this).text().indexOf(">>")===0){
+                //$(this).after("\n")
                 $(this).addClass("quotin")
                 $(this).on("mouseover", (e)=>{
                         var div = $("<div class='replyDemo'>")
@@ -52,11 +53,16 @@ function ThreadForReplys(props){//talvez eu nao precise mais disso, utilizar
                                     `
                                     )
                                 }
-                            return null})
+                                return null}
+                            )
                         )
                         .appendTo(document.body);
                         $(this).on("mouseout", ()=>{div.remove()})   
+                        $(this).on("click", (e)=>{
+                            window.location.replace("#"+$(this).html().slice(8))
+                        })
                 })
+                
             } else if ($(this).text().indexOf(">")===0){
                 $(this).addClass("quote everyPostP")
             }
@@ -96,7 +102,7 @@ function ThreadForReplys(props){//talvez eu nao precise mais disso, utilizar
 
     return (            
       
-        <div className="threadModel">
+        <div className="threadModel"><i id={props.threads.randomIdGeneratedByMe}></i>
             
             <p className="arquivoDetalhes"> 
             Arquivo <small>(<a className="aTirarSublinhado" onClick={hideImage} href="#esconderImg">{imgHidden ? "mostrar imagem" : "esconder imagem"}</a>): 

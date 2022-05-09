@@ -4,20 +4,22 @@ import { Interweave } from 'interweave';
 
 function CatalogItems(props){
 
-    let wat = props.CatalogContent.replace(/\n/g, "<p class='everyPostP'>");
+    let wat = "<p class='everyPostP'>" + props.CatalogContent.replace(/\n/g, "<p class='everyPostP'>");
 
-    function c(){
+    function a(){
+
         $("p").each(function(){
             if ($(this).text().indexOf(">>>")===0){
                 $(this).addClass("pinkText everyPostP")
             } else if ($(this).text().indexOf(">>")===0){
-                $(this).addClass("quotin everyPostP")
+                $(this).addClass("quotin")
             } else if ($(this).text().indexOf(">")===0){
                 $(this).addClass("quote everyPostP")
-            } 
+            }
         })
     }
-    setTimeout(()=>{c()},500);
+    
+    setTimeout(()=>{a()},200);
 
     return (
         <div className="catalogItemBorder">
@@ -29,7 +31,7 @@ function CatalogItems(props){
         </div>
         <div className="tres">
             {   
-                <p className="everyPostP"><Interweave content={wat} /></p>
+                <Interweave content={wat} />
             }
             
         </div>

@@ -38,7 +38,7 @@ function Replys(props){
 
 
     return (
-        <div className="replyBox">
+        <div className="replyBox" ><i id={props.replyData.randomIdGeneratedByMe}></i>
         <div></div>
         <p className="replyNameLine"><input onClick={()=>{deletePosts()}} type="checkbox"/><span className="anonName"> {props.replyData.assunto} <a className="aTirarSublinhado" style={"#"+props.replyData.email==="#sage" ? {color: "#0F167A"} : null } href={"#"+props.replyData.email}>{"#"+props.replyData.email==="#sage" ? "Sage!" : "Anônimo"}</a></span>{props.replyData.postDay} No.{props.replyData.randomIdGeneratedByMe}</p>
 

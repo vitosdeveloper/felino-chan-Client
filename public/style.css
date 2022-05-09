@@ -179,7 +179,7 @@ th {
     min-width: 15rem;
 }
 .footerSmall{
-    font-size: 0.8rem;
+    font-size: 1rem;
     text-align: center;
     font-family: Calibri,sans-serif;
 }
@@ -272,6 +272,7 @@ p.quote{
     letter-spacing: 1px;
     text-decoration: underline;
     display: table;
+    padding: 3px;
 }
 .pinkText{
     color: rgb(190, 8, 120);
@@ -387,4 +388,7 @@ p.quote{
     margin: 0.5rem 0.5rem 0 1rem;
     min-width: 18.5rem;
     border: 8px dashed rgb(202, 137, 52);
+}
+.noMargin {
+    margin: 0;
 }

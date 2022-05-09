@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, } from "react";
 import Replys from "./Replys.jsx";
 import Axios from "axios";
 import useLocalStorage from "use-local-storage";
@@ -6,7 +6,7 @@ import $ from 'jquery';
 import { Interweave } from 'interweave';
 
 function Thread(props){//talvez eu nao precise mais disso, utilizar 
-    
+
     let wat = "<p class='everyPostP'>" + props.threads.postContent.replace(/\n/g, "<p class='everyPostP'>");
     function a(){
 
@@ -57,11 +57,15 @@ function Thread(props){//talvez eu nao precise mais disso, utilizar
                         .appendTo(document.body);
                         $(this).on("mouseout", ()=>{div.remove()})   
                 })
+                $(this).on("click", (e)=>{
+                    window.location.replace("#"+$(this).html().slice(8))
+                })
             } else if ($(this).text().indexOf(">")===0){
                 $(this).addClass("quote everyPostP")
             }
         })
     }
+    
     setTimeout(()=>{a()},200);
 
     const [postPassword] = useLocalStorage("postFormPassword", );
@@ -110,7 +114,7 @@ function Thread(props){//talvez eu nao precise mais disso, utilizar
 
     return (            
       
-        <div name="total">
+        <div name="total"><i id={props.threads.randomIdGeneratedByMe}></i>
             <div className="hiddenOnes" style={!threadHidden ? {display: "none"} : null}>
             <p className="anonNameLine"><a className="aTirarSublinhado" onClick={()=>{!threadHidden?setThreadHidden(true):setThreadHidden(false)}} href="#hideThread">[+] </a>
             <input type="checkbox"/><span className="anonName"> {props.threads.assunto} <span className="aTirarSublinhado" href="#">Anônimo </span>

@@ -27,7 +27,7 @@ function Catalog(){
         { catalogData.length === 0 ? <h1 style={{marginLeft: "30px", color: "#77654e"}}>ฅ^•ﻌ•^ฅ Loading...</h1> :
           catalogData.map((item, index)=>(
             item.op ?
-                <CatalogItems CatalogContent={item.postContent} CatalogimgContent={item.catUrl} imgUrl={"res/"+item.randomIdGeneratedByMe}/>
+                <CatalogItems allContent={item} CatalogContent={item.postContent} CatalogimgContent={item.catUrl} imgUrl={"res/"+item.randomIdGeneratedByMe}/>
                 : null
             ))
         }
