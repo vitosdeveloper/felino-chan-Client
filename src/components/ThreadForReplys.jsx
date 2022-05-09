@@ -40,11 +40,11 @@ function ThreadForReplys(props){//talvez eu nao precise mais disso, utilizar
                                     return (
                                     `
                                     <div class="replyBoxDemo">
-                                    <p class="replyNameLine"><span class="anonName" style="margin-left: 10px;"> ${item.assunto} <a class="aTirarSublinhado" style=${"#"+item.email==="#sage" ? {color: "#0F167A"} : null } href=${"#"+item.email}>${"#"+item.email==="#sage" ? "Sage!" : "Anônimo"}</a></span>${item.postDay} No.${item.randomIdGeneratedByMe}</p>
+                                    <p class="replyNameLine"><span class="anonName" style="margin-left: 10px;"> ${item.assunto !== undefined ? item.assunto : ""} <a class="aTirarSublinhado" style=${"#"+item.email==="#sage" ? {color: "#0F167A"} : null } href=${"#"+item.email}>${"#"+item.email==="#sage" ? "Sage!" : "Anônimo"}</a></span>${item.postDay} No.${item.randomIdGeneratedByMe}</p>
                                     <div class="detailsDiv">
                                     <div class="divFloat">
                                     <i class="paddingPadrao aTirarSublinhado ">
-                                    <img src=${item.catUrl} class="textToRight" alt="gatinho" style="margin-top: 8px; max-width: 255px; maxheight: 255px"/> 
+                                    ${item.op === true && item.imgShow === undefined ? `<img src=${item.catUrl} class="textToRight" alt="gatinho" style="margin-top: 8px; max-width: 255px; maxheight: 255px"/>` : item.imgShow === true ? `<img src=${item.catUrl} class="textToRight" alt="gatinho" style="margin-top: 8px; max-width: 255px; maxheight: 255px"/>` : `` }
                                     </i>
                                     </div>
                                     <span>${watReply}</span>         

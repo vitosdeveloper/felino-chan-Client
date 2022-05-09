@@ -63,9 +63,9 @@ function Replys(props){
         </div>
         
         
-        {!props.replyData.imgShow ? <p className="everyPostP textoSemImagem">{
+        {!props.replyData.imgShow ? 
                     <Interweave content={wat} />
-        }</p> :   
+        :   
                     <Interweave content={wat} />
         }
         

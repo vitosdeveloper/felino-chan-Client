@@ -42,7 +42,7 @@ function Thread(props){//talvez eu nao precise mais disso, utilizar
                                     <div class="detailsDiv">
                                     <div class="divFloat">
                                     <i class="paddingPadrao aTirarSublinhado ">
-                                    <img src=${item.catUrl} class="textToRight" alt="gatinho" style="margin-top: 8px; max-width: 255px; maxheight: 255px"/> 
+                                    ${item.op === true && item.imgShow === undefined ? `<img src=${item.catUrl} class="textToRight" alt="gatinho" style="margin-top: 8px; max-width: 255px; maxheight: 255px"/>` : item.imgShow === true ? `<img src=${item.catUrl} class="textToRight" alt="gatinho" style="margin-top: 8px; max-width: 255px; maxheight: 255px"/>` : `` }
                                     </i>
                                     </div>
                                     ${watReply}        
