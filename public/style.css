@@ -116,6 +116,7 @@ th {
     width: 99%;
     height: 0.7rem;
     border-style: none none solid none;
+    display: inline-block;
 }
 
 /* Replys */
