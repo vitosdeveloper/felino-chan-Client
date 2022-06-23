@@ -394,3 +394,6 @@ p.quote{
 .noMargin {
     margin: 0;
 }
+.loadMessage {
+    opacity: 0.5;
+}
