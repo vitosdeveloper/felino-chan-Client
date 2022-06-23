@@ -24,8 +24,5 @@ HTML, CSS, Javascript, Jquery, ReactJS, NodeJS, expressJS, MongoDB, Mongoose, Mo
 Para parágrafo verde, inicie o parágrafo com ">".
 Para parágrafo azul, inicie o parágrafo com ">>".
 Para parágrafo rosa, inicie o parágrafo com ">>>".
-<<<<<<< HEAD
 Para responder um tópico sem subí-lo, escreva "sage" no campo de email da sua resposta.
-=======
 Para responder um tópico sem subí-lo, escreva "sage" no campo de email da sua resposta.
->>>>>>> 2827b5c623bb2abf38243211fb3246dc0bf8c90c
