@@ -1,6 +1,6 @@
 # Felino chan
 
-Um app com a funcionalidade de um imageaboard.
+Um app com a funcionalidade de um imageaboard. \
 Esse projeto pode ser acessado através da seguinte url: https://felinochan.netlify.app/
 
 ## Tecnologias/ferramentas utilizadas:
@@ -21,8 +21,8 @@ HTML, CSS, Javascript, Jquery, ReactJS, NodeJS, expressJS, MongoDB, Mongoose, Mo
  
 ## Pequenas funções
 
-Para parágrafo verde, inicie o parágrafo com ">".
-Para parágrafo azul, inicie o parágrafo com ">>".
-Para parágrafo rosa, inicie o parágrafo com ">>>".
-Para responder um tópico sem subí-lo, escreva "sage" no campo de email da sua resposta.
+Para parágrafo verde, inicie o parágrafo com ">". \
+Para parágrafo azul, inicie o parágrafo com ">>". \
+Para parágrafo rosa, inicie o parágrafo com ">>>". \
+Para responder um tópico sem subí-lo, escreva "sage" no campo de email da sua resposta. \
 Para responder um tópico sem subí-lo, escreva "sage" no campo de email da sua resposta.
