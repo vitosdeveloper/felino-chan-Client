@@ -9,11 +9,11 @@ function CatalogItems(props) {
   useEffect(() => {
     setTextoEstilizado(
       props.CatalogContent.replace(
-        /(^>{1}[^>])([\S]+)/gm,
+        /(^>{1}[^>])(\S+)?/gm,
         '<span class="quote">$1$2</span>'
       )
-        .replace(/(^>{2}[^>])([\S]+)/gm, '<span class="quotin">$1$2</span>')
-        .replace(/(^>{3}[^>])([\S]+)/gm, '<span class="pinkText">$1$2</span>')
+        .replace(/(^>{2}[^>])(\S+)?/gm, '<span class="quotin">$1$2</span>')
+        .replace(/(^>{3}[^>])(\S+)?/gm, '<span class="pinkText">$1$2</span>')
     );
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [props.CatalogContent]);

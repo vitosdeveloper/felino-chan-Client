@@ -99,6 +99,7 @@ function PostCreator(props) {
         loadingGif.style.display = 'none';
         setNewPost(initialNewPostObject);
         setRedirectDom(<Navigate to='/hw' />);
+        fetchData();
       } else if (response === 'err') {
         sendButton.style.display = 'initial';
         loadingGif.style.display = 'none';
@@ -180,10 +181,7 @@ function PostCreator(props) {
                           `${dataNumero} ${diaDaSemana} ${horaCompleta}`
                         );
                       }}
-                      onClick={() => {
-                        postToDatabase();
-                        fetchData();
-                      }}
+                      onClick={postToDatabase}
                     >
                       {props.sendButton}
                     </button>

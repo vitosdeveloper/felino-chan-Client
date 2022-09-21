@@ -121,7 +121,8 @@ th {
 
 /* Replys */
 
-.loadingGif {
+.loadingGif,
+[src='/loading.gif'] {
   position: relative;
   top: 5px;
   /* right: 90px; */
@@ -256,7 +257,7 @@ th {
 }
 /* outros */
 .everyPostP {
-  /*word-wrap: break-word;*/
+  word-wrap: break-word;
   white-space: pre-line;
   margin: 0;
   color: rgb(39, 34, 26);

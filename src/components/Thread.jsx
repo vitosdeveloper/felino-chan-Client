@@ -13,9 +13,9 @@ function Thread(props) {
   useEffect(() => {
     setTextoEstilizado(
       props.threads.postContent
-        .replace(/(^>{1}[^>])([\S]+)/gm, '<span class="quote">$1$2</span>')
-        .replace(/(^>{2}[^>])([\S]+)/gm, '<span class="quotin">$1$2</span>')
-        .replace(/(^>{3}[^>])([\S]+)/gm, '<span class="pinkText">$1$2</span>')
+        .replace(/(^>{1}[^>])(\S+)?/gm, '<span class="quote">$1$2</span>')
+        .replace(/(^>{2}[^>])(\S+)?/gm, '<span class="quotin">$1$2</span>')
+        .replace(/(^>{3}[^>])(\S+)?/gm, '<span class="pinkText">$1$2</span>')
     );
   }, [props.threads.postContent]);
 
@@ -69,13 +69,44 @@ function Thread(props) {
   function senhaAtual(event) {
     setPassDaqui(event.target.value);
   }
-  function deleteThread() {
-    Axios.post(serverUrl + '/deletePostButton', {
-      teste: [{ threadsData }, passDaqui],
-    });
-    setTimeout(() => {
-      window.location.replace('/hw');
-    }, 1000);
+
+  async function deleteThread() {
+    const deleteButton = document.querySelector('.deletarThread');
+    const loadingGif = document.querySelector(
+      '.removeLoadingGif' + props.threads.randomIdGeneratedByMe * 2
+    );
+    deleteButton.style.display = 'none';
+    loadingGif.style.display = 'initial';
+
+    const domResponses = (response) => {
+      if (response === 200) {
+        deleteButton.style.display = 'initial';
+        loadingGif.style.display = 'none';
+        fetchData();
+      } else if (response === 'err') {
+        deleteButton.style.display = 'initial';
+        loadingGif.style.display = 'none';
+        deleteButton.style.color = 'red';
+        deleteButton.style.border = '1px solid red';
+        deleteButton.innerText = 'Houve algum erro!';
+        setTimeout(() => {
+          deleteButton.style.color = 'initial';
+          deleteButton.style.border = '1px solid black';
+          deleteButton.innerText = 'Deletar';
+        }, 1500);
+        fetchData();
+      }
+    };
+
+    try {
+      await Axios.post(serverUrl + '/deletePostButton', {
+        teste: [{ threadsData }, passDaqui],
+      });
+      domResponses(200);
+    } catch (err) {
+      console.log(err);
+      domResponses('err');
+    }
   }
 
   return (
@@ -197,7 +228,17 @@ function Thread(props) {
                   maxLength='6'
                   style={{ width: '5rem' }}
                 />{' '}
-                <button onClick={deleteThread}>Delete</button>
+                <img
+                  style={{ display: 'none' }}
+                  className={
+                    'removeLoadingGif' + props.threads.randomIdGeneratedByMe * 2
+                  }
+                  src='/loading.gif'
+                  alt='loading'
+                />
+                <button className='deletarThread' onClick={deleteThread}>
+                  Delete
+                </button>
               </div>
             ) : null}
           </div>

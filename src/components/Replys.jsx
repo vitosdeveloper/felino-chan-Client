@@ -5,16 +5,16 @@ import { Interweave } from 'interweave';
 import { useGlobalContext } from '../GlobalContext.jsx';
 
 function Replys(props) {
-  const serverUrl = useGlobalContext().serverUrl;
+  const { serverUrl, fetchData } = useGlobalContext();
 
   const [textoEstilizado, setTextoEstilizado] = useState();
 
   useEffect(() => {
     setTextoEstilizado(
       props.replyData.postContent
-        .replace(/(^>{3}[^>])([\S]+)/gm, '<span class="pinkText">$1$2</span>')
-        .replace(/(^>{2}[^>])([\S]+)/gm, '<span class="quotin">$1$2</span>')
-        .replace(/(^>{1}[^>])([\S]+)/gm, '<span class="quote">$1$2</span>')
+        .replace(/(^>{1}[^>])(\S+)?/gm, '<span class="quote">$1$2</span>')
+        .replace(/(^>{2}[^>])(\S+)?/gm, '<span class="quotin">$1$2</span>')
+        .replace(/(^>{3}[^>])(\S+)?/gm, '<span class="pinkText">$1$2</span>')
     );
   }, [props.replyData.postContent]);
 
@@ -45,13 +45,43 @@ function Replys(props) {
     setPassDaqui(event.target.value);
   }
 
-  function deleteThread() {
-    Axios.post(serverUrl + '/deleteReplys', {
-      teste: [{ replyData }, passDaqui],
-    });
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+  async function deleteThread() {
+    const deleteButton = document.querySelector('.deletar');
+    const loadingGif = document.querySelector(
+      '.removeLoadingGif' + props.replyData.randomIdGeneratedByMe
+    );
+    deleteButton.style.display = 'none';
+    loadingGif.style.display = 'initial';
+
+    const domResponses = (response) => {
+      if (response === 200) {
+        deleteButton.style.display = 'initial';
+        loadingGif.style.display = 'none';
+        fetchData();
+      } else if (response === 'err') {
+        deleteButton.style.display = 'initial';
+        loadingGif.style.display = 'none';
+        deleteButton.style.color = 'red';
+        deleteButton.style.border = '1px solid red';
+        deleteButton.innerText = 'Houve algum erro!';
+        setTimeout(() => {
+          deleteButton.style.color = 'initial';
+          deleteButton.style.border = '1px solid black';
+          deleteButton.innerText = 'Deletar';
+        }, 1500);
+        fetchData();
+      }
+    };
+
+    try {
+      await Axios.post(serverUrl + '/deleteReplys', {
+        teste: [{ replyData }, passDaqui],
+      });
+      domResponses(200);
+    } catch (err) {
+      console.log(err);
+      domResponses('err');
+    }
   }
 
   return (
@@ -150,7 +180,17 @@ function Replys(props) {
             value={passDaqui}
             onChange={senhaAtual}
           />{' '}
-          <button onClick={deleteThread}>Delete</button>
+          <img
+            style={{ display: 'none' }}
+            className={
+              'removeLoadingGif' + props.replyData.randomIdGeneratedByMe
+            }
+            src='/loading.gif'
+            alt='loading'
+          />
+          <button className='deletar' onClick={deleteThread}>
+            Delete
+          </button>
         </div>
       ) : null}
     </div>
