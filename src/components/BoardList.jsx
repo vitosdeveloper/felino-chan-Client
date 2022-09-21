@@ -1,15 +1,29 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useGlobalContext } from '../GlobalContext.jsx';
 
-function BoardList(){
-    return (
-        <div className="boardList">
-        <i name="top"></i>
-        [ <Link className="boardLinks" to="/">home </Link> /
-            <Link className="boardLinks" to="/hw"> hw</Link> /
-            <Link className="boardLinks" to="/catalog"> catalog</Link> ]
-        </div>
-    )
+function BoardList() {
+  const { fetchData } = useGlobalContext();
+
+  return (
+    <div className='boardList'>
+      <i name='top'></i>[{' '}
+      <Link className='boardLinks' onClick={fetchData} to='/'>
+        home{' '}
+      </Link>{' '}
+      /
+      <Link className='boardLinks' onClick={fetchData} to='/hw'>
+        {' '}
+        hw
+      </Link>{' '}
+      /
+      <Link className='boardLinks' onClick={fetchData} to='/catalog'>
+        {' '}
+        catalog
+      </Link>{' '}
+      ]
+    </div>
+  );
 }
 
 export default BoardList;

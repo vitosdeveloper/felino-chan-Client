@@ -8,7 +8,8 @@ import { useGlobalContext } from '../GlobalContext.jsx';
 
 function ThreadForReplys(props) {
   const postsData = useGlobalContext().dataInvertida;
-  const serverUrl = useGlobalContext().serverUrl;
+  const { fetchData, serverUrl } = useGlobalContext();
+
   const [textoEstilizado, setTextoEstilizado] = useState();
 
   useEffect(() => {
@@ -18,6 +19,7 @@ function ThreadForReplys(props) {
         .replace(/(^>{2}[^>])([\S]+)/gm, '<span class="quotin">$1$2</span>')
         .replace(/(^>{3}[^>])([\S]+)/gm, '<span class="pinkText">$1$2</span>')
     );
+    window.scrollTo({ top: 550, behavior: 'smooth' });
   }, [props.threads.postContent]);
 
   const [postPassword] = useLocalStorage('postFormPassword');
@@ -121,7 +123,7 @@ function ThreadForReplys(props) {
             </a>
           </span>
           {props.threads.postDay} No.{props.threads.randomIdGeneratedByMe}{' '}
-          <Link className='linkColor' to='/hw'>
+          <Link className='linkColor' onClick={fetchData} to='/hw'>
             <span className='linkColor'>[Voltar]</span>
           </Link>
           {deleteBox ? (

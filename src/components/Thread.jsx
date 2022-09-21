@@ -4,6 +4,7 @@ import Axios from 'axios';
 import useLocalStorage from 'use-local-storage';
 import { Interweave } from 'interweave';
 import { useGlobalContext } from '../GlobalContext.jsx';
+import { Link } from 'react-router-dom';
 
 function Thread(props) {
   const { serverUrl, fetchData } = useGlobalContext();
@@ -178,11 +179,13 @@ function Thread(props) {
               </a>
             </span>
             {props.threads.postDay} No.{props.threads.randomIdGeneratedByMe}{' '}
-            <span className='linkColor'>
-              <span className='linkColor' onClick={fetchData}>
-                [Responder]
-              </span>
-            </span>{' '}
+            <Link
+              className='linkColor'
+              onClick={fetchData}
+              to={'/res/' + props.threads.randomIdGeneratedByMe}
+            >
+              <span className='linkColor'>[Responder]</span>
+            </Link>{' '}
             {deleteBox ? (
               <div className='deleteButton4Threads'>
                 Senha:{' '}
