@@ -1,399 +1,407 @@
 body {
-    background-color: #ffe4c4;
-    background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+  background-color: #ffe4c4;
+  background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
 }
-i:hover{
-    color: rgb(59, 50, 38);
+i:hover {
+  color: rgb(59, 50, 38);
 }
 
 /* Heading */
 
 .boardList {
-    background-color:rgb(252, 214, 168);
-    margin-top: 0;
-    text-align: center;
-    opacity: 0.6;
-    position:fixed;
-    width: 100%;
-    top: 0;
+  background-color: rgb(252, 214, 168);
+  margin-top: 0;
+  text-align: center;
+  opacity: 0.6;
+  position: fixed;
+  width: 100%;
+  top: 0;
 }
-.boardListBottom{
-    margin-top: 0;
-    text-align: center;
-    margin-bottom: 1rem;
+.boardListBottom {
+  margin-top: 0;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 .boardName {
-    margin-top: 0.1rem;
-    text-align: center;
-    font-size: 2rem;
-    color: rgb(119, 101, 78);
+  margin-top: 0.1rem;
+  text-align: center;
+  font-size: 2rem;
+  color: rgb(119, 101, 78);
 }
 .boardLinks {
-    text-decoration: none;
-    color: rgb(119, 101, 78);
-    text-align: center;
+  text-decoration: none;
+  color: rgb(119, 101, 78);
+  text-align: center;
 }
 .boardImg {
-    text-align: center;
-    margin-top: 3rem;
+  text-align: center;
+  margin-top: 3rem;
 }
 .boardImgSize {
-    width: 300px;
-    height: 100px;
+  width: 300px;
+  height: 100px;
 }
 hr {
-    border: 0.1rem solid rgb(221, 186, 143);
+  border: 0.1rem solid rgb(221, 186, 143);
 }
 .hrHeading {
-    width: 90%;
+  width: 90%;
 }
 
 /* Post Area */
 
 th {
-    border: 1px solid rgb(221, 186, 143);
-    color: rgb(119, 101, 78);
+  border: 1px solid rgb(221, 186, 143);
+  color: rgb(119, 101, 78);
 }
 .divPost {
-    display: table;
-    margin-left: auto;
-    margin-right: auto;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
 }
 .hrPostCreator {
-    margin-top: 1rem;
-    width: 24%;
+  margin-top: 1rem;
+  width: 24%;
 }
 .ulPost {
-    display: table;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 0.7rem;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 0.7rem;
 }
 .catCheckFont {
-    color: rgb(119, 101, 78);
-    font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-    font-weight: bold;
+  color: rgb(119, 101, 78);
+  font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-weight: bold;
 }
 .aPostCreator {
-    padding-left: 1rem;
-    padding-right: 0.3rem;
+  padding-left: 1rem;
+  padding-right: 0.3rem;
 }
 .hrNoventa {
-    width: 98%;
+  width: 98%;
 }
-
 
 /* Rendered posts */
 
 .detailsDiv {
-    padding: 0 1rem 0 1rem;
-    font-size: 0.9rem; 
-    min-width: 400px;
+  padding: 0 1rem 0 1rem;
+  font-size: 0.9rem;
+  min-width: 400px;
 }
 .anonName {
-    color: #ce306a;
-    font-weight: bold;
-    margin-right: 0.3rem;
+  color: #ce306a;
+  font-weight: bold;
+  margin-right: 0.3rem;
 }
 .postFont {
-    font-size: 0.9rem;
-    margin-top: 0;
+  font-size: 0.9rem;
+  margin-top: 0;
 }
 .anonNameLine {
-    margin-top: 0.5rem;
-    margin-bottom: 0.4rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 .arquivoDetalhes {
-    margin: 0 0.8rem 0 0.6rem;
-    display: inline;
+  margin: 0 0.8rem 0 0.6rem;
+  display: inline;
 }
 .aTirarSublinhado {
-    text-decoration: none;
-    color: rgb(119, 101, 78);
+  text-decoration: none;
+  color: rgb(119, 101, 78);
 }
 .hrWithoutBottomMargin {
-    margin-bottom: 0.4rem;
-    width: 99%;
-    height: 0.7rem;
-    border-style: none none solid none;
-    display: inline-block;
+  margin-bottom: 0.4rem;
+  width: 99%;
+  height: 0.7rem;
+  border-style: none none solid none;
+  display: inline-block;
 }
 
 /* Replys */
 
 .arquivoDetalhesReply {
-    margin: 0 0.8rem 0 0.3rem;
-    display: inline;
+  margin: 0 0.8rem 0 0.3rem;
+  display: inline;
 }
 
 .replyNameLine {
-    margin-top: 0;
-    margin-bottom: 0;
-    display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+  display: inline;
 }
 .arquivO {
-    margin-left: 1.5rem;
+  margin-left: 1.5rem;
 }
 .replyBox {
-    display:inline-block;
-    padding-top: 0.25rem;
-    padding-left: 0.1rem;
-    padding-right: 15px;
-    padding-bottom: 0.6rem;
-    max-width: 90%!important;
-    background-color:rgb(221, 169, 105);
-    background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
-    margin: 0.5rem 0.5rem 0 1rem;
-    border-radius: 1%;
-    min-width: 400px;
+  display: inline-block;
+  padding-top: 0.25rem;
+  padding-left: 0.1rem;
+  padding-right: 15px;
+  padding-bottom: 0.6rem;
+  max-width: 90% !important;
+  background-color: rgb(221, 169, 105);
+  background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+  margin: 0.5rem 0.5rem 0 1rem;
+  border-radius: 1%;
+  min-width: 400px;
 }
 .divFloat {
-    float:left;
+  float: left;
 }
 .voltarBut {
-    display: block;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    text-align: center;
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-align: center;
 }
 .linkColor {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    text-decoration: none;
-    color: rgb(119, 101, 78);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-decoration: none;
+  color: rgb(119, 101, 78);
 }
-.textoSemImagem{
-    padding-left: 0;
-    margin-bottom: 0.4rem;
-    margin-top: 0.4rem;
-    padding-top: 0.2rem;
+.textoSemImagem {
+  padding-left: 0;
+  margin-bottom: 0.4rem;
+  margin-top: 0.4rem;
+  padding-top: 0.2rem;
 }
 
 /* Footer */
 
 .pagesStyle {
-    display: inline-block;
-    margin: 1.5rem 1.5rem 1rem 1.5rem;
-    border: 1px dashed rgb(180, 158, 129);;
-    padding: 0 1rem 0.3rem 1rem;
-    min-width: 15rem;
+  display: inline-block;
+  margin: 1.5rem 1.5rem 1rem 1.5rem;
+  border: 1px dashed rgb(180, 158, 129);
+  padding: 0 1rem 0.3rem 1rem;
+  min-width: 15rem;
 }
-.footerSmall{
-    font-size: 1rem;
-    text-align: center;
-    font-family: Calibri,sans-serif;
+.footerSmall {
+  font-size: 1rem;
+  text-align: center;
+  font-family: Calibri, sans-serif;
 }
-.emotis{
-    margin-left:0.3rem;
-    margin-right:0.3rem;
+.emotis {
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
 }
 
 /* hidden ones */
-.hiddenOnes{
-    margin-left: 0.6rem;
+.hiddenOnes {
+  margin-left: 0.6rem;
 }
-.deleteButton{
-    border: 1px dashed rgb(180, 158, 129);;
-    display:inline-block;
-    margin-left: 34%;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding: 0.3rem;
+.deleteButton {
+  border: 1px dashed rgb(180, 158, 129);
+  display: inline-block;
+  margin-left: 34%;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0.3rem;
 }
-.deleteButton4Threads{
-    display: inline;
-    margin-left: 2rem;
+.deleteButton4Threads {
+  display: inline;
+  margin-left: 2rem;
 }
 .catalog {
-    text-align: center;
-    margin-top: 2rem;
+  text-align: center;
+  margin-top: 2rem;
 }
-.catalogItemBorder{
-    display: inline-block;
-    background-color: rgb(119, 101, 78);
-    margin: 0.1rem;
+.catalogItemBorder {
+  display: inline-block;
+  background-color: rgb(119, 101, 78);
+  margin: 0.1rem;
 }
-.um{
-    background-color: rgb(221, 169, 105);
-    width: 9rem;
-    height: 12rem;
-    margin: 0.15rem;
-    text-align: center;
+.um {
+  background-color: rgb(221, 169, 105);
+  width: 9rem;
+  height: 12rem;
+  margin: 0.15rem;
+  text-align: center;
 }
-.dois{
-    display: inline-block;
-    position: relative;
-    background-color: rgb(119, 101, 78);
-    padding: 1px;
-    margin-top: 0.5rem;
-    max-width: 7.2rem;
-    max-height: 4rem;
-    text-align: center;
+.dois {
+  display: inline-block;
+  position: relative;
+  background-color: rgb(119, 101, 78);
+  padding: 1px;
+  margin-top: 0.5rem;
+  max-width: 7.2rem;
+  max-height: 4rem;
+  text-align: center;
 }
 .tres {
-    padding: 0 12px 0px 8px;
-    white-space: pre-line;
-    font-size: 0.8rem;
-    min-width: 7.2rem;
-    max-width: 7.8rem;
-    max-height: 7rem;
-    overflow-y: auto;
-    height: 7.2rem;
+  padding: 0 12px 0px 8px;
+  white-space: pre-line;
+  font-size: 0.8rem;
+  min-width: 7.2rem;
+  max-width: 7.8rem;
+  max-height: 7rem;
+  overflow-y: auto;
+  height: 7.2rem;
 }
 /* outros */
-.everyPostP{
-    /*word-wrap: break-word;*/
-    white-space: pre-line;
-    margin: 0;
-    color: rgb(39, 34, 26);
-    padding-right: 0.5rem;
-    font-size: 0.9rem;
-    cursor: initial;
-    font-family: monospace;
-    font-weight: 600;
-    display: -webkit-box;
+.everyPostP {
+  /*word-wrap: break-word;*/
+  white-space: pre-line;
+  margin: 0;
+  color: rgb(39, 34, 26);
+  padding-right: 0.5rem;
+  font-size: 0.9rem;
+  cursor: initial;
+  font-family: monospace;
+  font-weight: 600;
+  display: -webkit-box;
 }
-p.quote{
-    color: rgb(0, 77, 0);
-    font-family: fantasy;
-    font-weight: 100;
-    letter-spacing: 1px;
-    display: table;
+span.quote {
+  color: rgb(0, 77, 0);
+  font-family: fantasy;
+  font-weight: 100;
+  letter-spacing: 1px;
 }
-.textToRight{
-    margin-right: 0.5rem;
+.textToRight {
+  margin-right: 0.5rem;
 }
-.quotin{
-    color: rgb(14, 14, 155);
-    font-size: 14px;
-    cursor: pointer;
-    font-family: fantasy;
-    font-weight: 100;
-    letter-spacing: 1px;
-    text-decoration: underline;
-    display: table;
-    padding: 3px;
+.quotin {
+  color: rgb(14, 14, 155);
+  font-size: 14px;
+  cursor: pointer;
+  font-family: fantasy;
+  font-weight: 100;
+  letter-spacing: 1px;
+  text-decoration: underline;
+  padding: 3px;
 }
-.pinkText{
-    color: rgb(190, 8, 120);
-    font-family: fantasy;
-    font-weight: 100;
-    letter-spacing: 1px;
-    display: table;
+.pinkText {
+  color: rgb(190, 8, 120);
+  font-family: fantasy;
+  font-weight: 100;
+  letter-spacing: 1px;
+  display: table;
 }
 /* Home */
 
-.boardLink{
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    text-decoration: none;
-    color: rgb(119, 101, 78);
+.boardLink {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-decoration: none;
+  color: rgb(119, 101, 78);
 }
-.homeBox{
-    text-align: center;
+.homeBox {
+  text-align: center;
 }
-.homeFont{
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-    font-size: 4rem;
-    line-height: 4rem;
-    margin-top: 1rem;
-    margin-bottom: 2.3rem;
+.homeFont {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  font-size: 4rem;
+  line-height: 4rem;
+  margin-top: 1rem;
+  margin-bottom: 2.3rem;
 }
-.homeFontButLesslineHeight{
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-    font-size: 5rem;
-    line-height: 1.4rem;
-    margin-bottom: 1rem;
-    margin-top: 0;
+.homeFontButLesslineHeight {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  font-size: 5rem;
+  line-height: 1.4rem;
+  margin-bottom: 1rem;
+  margin-top: 0;
 }
-.smallFontHome{
-    font-size: 0.6rem;
-    letter-spacing: 0.8rem;
+.smallFontHome {
+  font-size: 0.6rem;
+  letter-spacing: 0.8rem;
 }
-.noItalic{
-    font-style: normal;
+.noItalic {
+  font-style: normal;
 }
-.miniLetter{
-    position:fixed;
-    margin-top: 2rem;
-    font-size: 0.7rem;
-    margin-left: 0.3rem;
-    letter-spacing: 0.8rem;
-    height: 0;
+.miniLetter {
+  position: fixed;
+  margin-top: 2rem;
+  font-size: 0.7rem;
+  margin-left: 0.3rem;
+  letter-spacing: 0.8rem;
+  height: 0;
 }
-.letterDiv{
-    display:inline-block;
+.letterDiv {
+  display: inline-block;
 }
-.divContent{
-    background-color: #ffefdb;
-    display: inline-block;
-    border: 1px solid rgb(148, 127, 122);
-    height: 15rem;
-    width: 25rem;
-    color: rgb(119, 101, 78);
-    padding: 0.5rem;
+.divContent {
+  background-color: #ffefdb;
+  display: inline-block;
+  border: 1px solid rgb(148, 127, 122);
+  height: 15rem;
+  width: 25rem;
+  color: rgb(119, 101, 78);
+  padding: 0.5rem;
 }
-.aboutBox{
-    text-align: left;
-    margin-left: 0.5rem;
-    display: inline;
-    font-style: normal;
+.aboutBox {
+  text-align: left;
+  margin-left: 0.5rem;
+  display: inline;
+  font-style: normal;
 }
-.language{
-    padding-bottom: 0.3rem;
+.language {
+  padding-bottom: 0.3rem;
 }
-.aboutContent{
-    position:relative;
-    bottom: 1rem;
+.aboutContent {
+  position: relative;
+  bottom: 1rem;
 }
-.mOverOnePosition{ 
-    opacity: 0.3;
-    color: rgb(119, 101, 78);
-    position: relative;
-    top: 4.8rem;
-    right: 21rem;
+.mOverOnePosition {
+  opacity: 0.3;
+  color: rgb(119, 101, 78);
+  position: relative;
+  top: 4.8rem;
+  right: 21rem;
 }
-.mOverTwoPosition{
-    opacity: 0.5;
-    color: rgb(119, 101, 78);
-    position: relative;
-    top: 1.9rem;
-    right: 9rem;
+.mOverTwoPosition {
+  opacity: 0.5;
+  color: rgb(119, 101, 78);
+  position: relative;
+  top: 1.9rem;
+  right: 9rem;
 }
-.emotis{
-    display: inline-block;
-    margin-top: 0.5rem;
+.emotis {
+  display: inline-block;
+  margin-top: 0.5rem;
 }
-.mOverThreePosition{ 
-    opacity: 0.3;
-    color: rgb(119, 101, 78);
-    position: relative;
-    top: 1.8rem;
-    right: 11.5rem;
+.mOverThreePosition {
+  opacity: 0.3;
+  color: rgb(119, 101, 78);
+  position: relative;
+  top: 1.8rem;
+  right: 11.5rem;
 }
-.passMessage{
-    position: absolute;
-    margin-left: 0.7rem;
+.passMessage {
+  position: absolute;
+  margin-left: 0.7rem;
 }
 .replyDemo {
-	position: absolute;
-	transform: translate(-0%, -100%);
+  position: absolute;
+  transform: translate(-0%, -100%);
 }
 .replyBoxDemo {
-    display:inline-block;
-    padding-bottom: 0.6rem;
-    max-width: 90%!important;
-    background-color:rgb(221, 169, 105);
-    background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
-    margin: 0.5rem 0.5rem 0 1rem;
-    min-width: 400px;
-    border: 8px dashed rgb(202, 137, 52);
+  display: inline-block;
+  padding-bottom: 0.6rem;
+  max-width: 90% !important;
+  background-color: rgb(221, 169, 105);
+  background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+  margin: 0.5rem 0.5rem 0 1rem;
+  min-width: 400px;
+  border: 8px dashed rgb(202, 137, 52);
 }
 .noMargin {
-    margin: 0;
+  margin: 0;
 }
 .loadMessage {
-    opacity: 0.5;
+  opacity: 0.5;
 }

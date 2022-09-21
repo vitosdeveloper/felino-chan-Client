@@ -1,43 +1,35 @@
-import React from "react";
-import $ from 'jquery';
+import React from 'react';
 import { Interweave } from 'interweave';
+import { useEffect, useState } from 'react';
 
-function CatalogItems(props){
+function CatalogItems(props) {
+  //  transformar textos com >, >>, >>>
+  const [textoEstilizado, setTextoEstilizado] = useState();
 
-    let wat = "<p class='everyPostP'>" + props.CatalogContent.replace(/\n/g, "<p class='everyPostP'>");
+  useEffect(() => {
+    setTextoEstilizado(
+      props.CatalogContent.replace(
+        /(^>{1}[^>])([\S]+)/gm,
+        '<span class="quote">$1$2</span>'
+      )
+        .replace(/(^>{2}[^>])([\S]+)/gm, '<span class="quotin">$1$2</span>')
+        .replace(/(^>{3}[^>])([\S]+)/gm, '<span class="pinkText">$1$2</span>')
+    );
+    console.log('lol');
+  }, []);
 
-    function a(){
-
-        $("p").each(function(){
-            if ($(this).text().indexOf(">>>")===0){
-                $(this).addClass("pinkText everyPostP")
-            } else if ($(this).text().indexOf(">>")===0){
-                $(this).addClass("quotin")
-            } else if ($(this).text().indexOf(">")===0){
-                $(this).addClass("quote everyPostP")
-            }
-        })
-    }
-    
-    setTimeout(()=>{a()},200);
-
-    return (
-        <div className="catalogItemBorder">
-        <div className="um">
+  return (
+    <div className='catalogItemBorder'>
+      <div className='um'>
         <div>
-        <a href={props.imgUrl}>
-        <img className="dois" src={props.CatalogimgContent} alt="gatinho" />
-        </a>
+          <a href={props.imgUrl}>
+            <img className='dois' src={props.CatalogimgContent} alt='gatinho' />
+          </a>
         </div>
-        <div className="tres">
-            {   
-                <Interweave content={wat} />
-            }
-            
-        </div>
-        </div>
-        </div>
-    )
+        <div className='tres'>{<Interweave content={textoEstilizado} />}</div>
+      </div>
+    </div>
+  );
 }
 
 export default CatalogItems;
