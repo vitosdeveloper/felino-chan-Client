@@ -15,8 +15,7 @@ function CatalogItems(props) {
         .replace(/(^>{2}[^>])([\S]+)/gm, '<span class="quotin">$1$2</span>')
         .replace(/(^>{3}[^>])([\S]+)/gm, '<span class="pinkText">$1$2</span>')
     );
-    console.log('lol');
-  }, []);
+  }, [props.CatalogContent]);
 
   return (
     <div className='catalogItemBorder'>
