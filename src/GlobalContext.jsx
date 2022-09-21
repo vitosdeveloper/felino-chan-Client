@@ -16,6 +16,7 @@ export function GlobalProvider({ children }) {
         dataInvertida: dataJson.reverse(),
       };
     });
+    console.log('fetchadolol');
     return dbData;
   };
 

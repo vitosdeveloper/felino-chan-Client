@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useLocalStorage from 'use-local-storage';
 import Axios from 'axios';
 import { Interweave } from 'interweave';
@@ -7,10 +7,16 @@ import { useGlobalContext } from '../GlobalContext.jsx';
 function Replys(props) {
   const serverUrl = useGlobalContext().serverUrl;
 
-  //greentext
-  let wat =
-    "<p class='everyPostP'>" +
-    props.replyData.postContent.replace(/\n/g, "<p class='everyPostP'>"); //o resto das propriedades é pego pelo ThreadForReplys
+  const [textoEstilizado, setTextoEstilizado] = useState();
+
+  useEffect(() => {
+    setTextoEstilizado(
+      props.replyData.postContent
+        .replace(/(^>{3}[^>])([\S]+)/gm, '<span class="pinkText">$1$2</span>')
+        .replace(/(^>{2}[^>])([\S]+)/gm, '<span class="quotin">$1$2</span>')
+        .replace(/(^>{1}[^>])([\S]+)/gm, '<span class="quote">$1$2</span>')
+    );
+  }, [props.replyData.postContent]);
 
   const [postPassword] = useLocalStorage('postFormPassword');
 
@@ -129,9 +135,9 @@ function Replys(props) {
         </div>
 
         {!props.replyData.imgShow ? (
-          <Interweave content={wat} />
+          <Interweave content={textoEstilizado} />
         ) : (
-          <Interweave content={wat} />
+          <Interweave content={textoEstilizado} />
         )}
       </div>
       {deleteBox ? (

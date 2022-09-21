@@ -1,105 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Replys from './Replys.jsx';
 import { Link } from 'react-router-dom';
 import useLocalStorage from 'use-local-storage';
 import Axios from 'axios';
-import $ from 'jquery';
 import { Interweave } from 'interweave';
 import { useGlobalContext } from '../GlobalContext.jsx';
 
 function ThreadForReplys(props) {
   const postsData = useGlobalContext().dataInvertida;
   const serverUrl = useGlobalContext().serverUrl;
+  const [textoEstilizado, setTextoEstilizado] = useState();
 
-  let wut =
-    "<p class='everyPostP'>" +
-    props.threads.postContent.replace(/\n/g, "<p class='everyPostP'>");
-  function a() {
-    $('p').each(function () {
-      if ($(this).text().indexOf('>>>') === 0) {
-        $(this).addClass('pinkText everyPostP');
-      } else if ($(this).text().indexOf('>>') === 0) {
-        //$(this).after("\n")
-        $(this).addClass('quotin');
-        $(this).on('mouseover', (e) => {
-          const div = $("<div class='replyDemo'>")
-            .css({
-              left: e.pageX + 'px',
-              top: e.pageY + 'px',
-            })
-            .append(
-              postsData.map((item) => {
-                if (item.randomIdGeneratedByMe === $(this).html().slice(8)) {
-                  const watReply =
-                    "<p class='everyPostP'>" +
-                    item.postContent.replace(
-                      /\n/g,
-                      "</p><p class='everyPostP'>"
-                    );
-                  function b() {
-                    $('p').each(function applyCollors() {
-                      if ($(this).text().indexOf('>>>') === 0) {
-                        $(this).addClass('pinkText everyPostP');
-                      } else if ($(this).text().indexOf('>>') === 0) {
-                        $(this).addClass('quotin');
-                      } else if ($(this).text().indexOf('>') === 0) {
-                        $(this).addClass('quote everyPostP');
-                      }
-                    });
-                  }
-                  setTimeout(() => {
-                    b();
-                  }, 1);
-                  return `
-                                    <div class="replyBoxDemo">
-                                    <p class="replyNameLine"><span class="anonName" style="margin-left: 10px;"> ${
-                                      item.assunto !== undefined
-                                        ? item.assunto
-                                        : ''
-                                    } <a class="aTirarSublinhado" style=${
-                    '#' + item.email === '#sage' ? { color: '#0F167A' } : null
-                  } href=${'#' + item.email}>${
-                    '#' + item.email === '#sage' ? 'Sage!' : 'Anônimo'
-                  }</a></span>${item.postDay} No.${
-                    item.randomIdGeneratedByMe
-                  }</p>
-                                    <div class="detailsDiv">
-                                    <div class="divFloat">
-                                    <i class="paddingPadrao aTirarSublinhado ">
-                                    ${
-                                      item.op === true &&
-                                      item.imgShow === undefined
-                                        ? `<img src=${item.catUrl} class="textToRight" alt="gatinho" style="margin-top: 8px; max-width: 255px; maxheight: 255px"/>`
-                                        : item.imgShow === true
-                                        ? `<img src=${item.catUrl} class="textToRight" alt="gatinho" style="margin-top: 8px; max-width: 255px; maxheight: 255px"/>`
-                                        : ``
-                                    }
-                                    </i>
-                                    </div>
-                                    <span>${watReply}</span>         
-                                    </div>        
-                                    </div>
-                                    `;
-                }
-                return null;
-              })
-            )
-            .appendTo(document.body);
-          $(this).on('mouseout', () => {
-            div.remove();
-          });
-          $(this).on('click', (e) => {
-            window.location.replace('#' + $(this).html().slice(8));
-          });
-        });
-      } else if ($(this).text().indexOf('>') === 0) {
-        $(this).addClass('quote everyPostP');
-      }
-    });
-  }
-  setTimeout(() => {
-    a();
-  }, 200);
+  useEffect(() => {
+    setTextoEstilizado(
+      props.threads.postContent
+        .replace(/(^>{1}[^>])([\S]+)/gm, '<span class="quote">$1$2</span>')
+        .replace(/(^>{2}[^>])([\S]+)/gm, '<span class="quotin">$1$2</span>')
+        .replace(/(^>{3}[^>])([\S]+)/gm, '<span class="pinkText">$1$2</span>')
+    );
+  }, [props.threads.postContent]);
 
   const [postPassword] = useLocalStorage('postFormPassword');
 
@@ -225,7 +144,7 @@ function ThreadForReplys(props) {
             </div>
           ) : null}
         </div>
-        {<Interweave content={wut} />}
+        {<Interweave content={textoEstilizado} />}
       </div>
 
       {postsData
