@@ -44,7 +44,7 @@ function Threading(props) {
           {backendData.map(
             (item, index) =>
               item.op ? (
-                (countThreads >= 150) & (countThreads < 165) ? (
+                countThreads >= 150 && countThreads < 165 ? (
                   <Thread
                     key={index}
                     id={index}
@@ -54,7 +54,7 @@ function Threading(props) {
                   />
                 ) : countThreads >= props.pageFrom &&
                   countThreads < props.pageTo ? (
-                  <div key={index}>
+                  <div className='everyThread' key={index}>
                     {countThreadsAdd()}
                     <Thread
                       delete={false}

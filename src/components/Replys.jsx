@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import useLocalStorage from 'use-local-storage';
 import Axios from 'axios';
 import { Interweave } from 'interweave';
@@ -6,17 +6,6 @@ import { useGlobalContext } from '../GlobalContext.jsx';
 
 function Replys(props) {
   const { serverUrl, fetchData } = useGlobalContext();
-
-  const [textoEstilizado, setTextoEstilizado] = useState();
-
-  useEffect(() => {
-    setTextoEstilizado(
-      props.replyData.postContent
-        .replace(/(^>{1}[^>])(\S+)?/gm, '<span class="quote">$1$2</span>')
-        .replace(/(^>{2}[^>])(\S+)?/gm, '<span class="quotin">$1$2</span>')
-        .replace(/(^>{3}[^>])(\S+)?/gm, '<span class="pinkText">$1$2</span>')
-    );
-  }, [props.replyData.postContent]);
 
   const [postPassword] = useLocalStorage('postFormPassword');
 
@@ -165,9 +154,9 @@ function Replys(props) {
         </div>
 
         {!props.replyData.imgShow ? (
-          <Interweave content={textoEstilizado} />
+          <Interweave content={props.replyData.postContent} />
         ) : (
-          <Interweave content={textoEstilizado} />
+          <Interweave content={props.replyData.postContent} />
         )}
       </div>
       {deleteBox ? (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Replys from './Replys.jsx';
 import { Link } from 'react-router-dom';
 import useLocalStorage from 'use-local-storage';
@@ -10,18 +10,6 @@ import { Navigate } from 'react-router-dom';
 function ThreadForReplys(props) {
   const postsData = useGlobalContext().dataInvertida;
   const { fetchData, serverUrl } = useGlobalContext();
-
-  const [textoEstilizado, setTextoEstilizado] = useState();
-
-  useEffect(() => {
-    setTextoEstilizado(
-      props.threads.postContent
-        .replace(/(^>{1}[^>])(\S+)?/gm, '<span class="quote">$1$2</span>')
-        .replace(/(^>{2}[^>])(\S+)?/gm, '<span class="quotin">$1$2</span>')
-        .replace(/(^>{3}[^>])(\S+)?/gm, '<span class="pinkText">$1$2</span>')
-    );
-    window.scrollTo({ top: 550, behavior: 'smooth' });
-  }, [props.threads.postContent]);
 
   const [postPassword] = useLocalStorage('postFormPassword');
 
@@ -190,7 +178,7 @@ function ThreadForReplys(props) {
             </div>
           ) : null}
         </div>
-        {<Interweave content={textoEstilizado} />}
+        {<Interweave content={props.threads.postContent} />}
       </div>
 
       {postsData
