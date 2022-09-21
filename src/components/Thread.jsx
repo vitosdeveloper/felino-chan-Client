@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Replys from './Replys.jsx';
 import Axios from 'axios';
 import useLocalStorage from 'use-local-storage';
@@ -8,16 +8,6 @@ import { Link } from 'react-router-dom';
 
 function Thread(props) {
   const { serverUrl, fetchData } = useGlobalContext();
-  const [textoEstilizado, setTextoEstilizado] = useState();
-
-  useEffect(() => {
-    setTextoEstilizado(
-      props.threads.postContent
-        .replace(/(^>{1}[^>])(\S+)?/gm, '<span class="quote">$1$2</span>')
-        .replace(/(^>{2}[^>])(\S+)?/gm, '<span class="quotin">$1$2</span>')
-        .replace(/(^>{3}[^>])(\S+)?/gm, '<span class="pinkText">$1$2</span>')
-    );
-  }, [props.threads.postContent]);
 
   const [postPassword] = useLocalStorage('postFormPassword');
 
@@ -242,7 +232,7 @@ function Thread(props) {
               </div>
             ) : null}
           </div>
-          {<Interweave content={textoEstilizado} />}
+          {<Interweave content={props.threads.postContent} />}
         </div>
 
         {
