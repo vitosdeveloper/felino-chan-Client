@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Heading from './components/Heading.jsx';
 import PostCreator from './components/PostCreator.jsx';
 import { Routes, Route } from 'react-router-dom';
@@ -8,9 +8,10 @@ import Voltar from './components/Voltar.jsx';
 import Footer from './components/Footer.jsx';
 import Catalog from './components/Catalog.jsx';
 import Homepage from './components/Homepage.jsx';
+import { useGlobalContext } from './GlobalContext.jsx';
 
 function App() {
-  const [backendData, setBackendData] = useState([]);
+  const fetchedData = useGlobalContext().dataInvertida;
 
   const pages = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
   let threadsRange = [-15, 0];
@@ -18,14 +19,6 @@ function App() {
   function nextPage() {
     threadsRange = [threadsRange[0] + 15, threadsRange[1] + 15];
   }
-
-  useEffect(() => {
-    fetch('https://felino-chan-server.onrender.com/api')
-      .then((response) => response.json())
-      .then((data) => {
-        setBackendData(data);
-      });
-  }, []);
 
   return (
     <div>
@@ -36,14 +29,13 @@ function App() {
       {/* Outras páginas */}
       <Routes>
         <Route path={'/Catalog'} element={<Catalog />} />
-        {pages.map((index, item) => (
+        {pages.map((item, index) => (
           <Route
             key={index}
             path={'/hw/' + item}
             element={
-              <div key={index}>
+              <div>
                 <Threading
-                  key={index}
                   pageFrom={threadsRange[0]}
                   pageTo={threadsRange[1]}
                 />
@@ -57,29 +49,27 @@ function App() {
       <Routes>
         <Route path='hw' element={<Threading pageFrom='0' pageTo='15' />} />
         {/* threads por dentro com PostCreator modificado */}
-        {backendData.map((item, index) =>
+        {fetchedData.map((item, index) =>
           item.op ? (
             <Route
               key={index}
               path={'/res/' + item.randomIdGeneratedByMe}
               element={
-                <div key={index}>
-                  <Heading key={index} boardName='HW - Hello world' />
+                <div>
+                  <Heading boardName='HW - Hello world' />
                   <PostCreator
-                    key={index}
                     replyTo={item.randomIdGeneratedByMe}
                     isOp={false}
                     sendButton='Responder'
                     board='hw'
                   />
                   <ThreadForReplys
-                    key={index}
                     id={index}
                     threads={item}
-                    replys={backendData}
+                    replys={fetchedData}
                   />
-                  <Voltar key={index} url='hw' />
-                  <Footer key={index} />
+                  <Voltar url='hw' />
+                  <Footer />
                 </div>
               }
             />

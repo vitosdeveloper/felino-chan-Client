@@ -1,18 +1,11 @@
 import BoardList from './BoardList.jsx';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import CatalogItems from './CatalogItems.jsx';
 import Footer from './Footer.jsx';
+import { useGlobalContext } from '../GlobalContext.jsx';
 
 function Catalog() {
-  const [catalogData, setCatalogData] = useState([]);
-
-  useEffect(() => {
-    fetch('https://felino-chan-server.onrender.com/api')
-      .then((response) => response.json())
-      .then((data) => {
-        setCatalogData(data);
-      });
-  }, []);
+  const fetchedData = useGlobalContext().data;
 
   return (
     <div>
@@ -21,14 +14,15 @@ function Catalog() {
 
         <h1 href='#top'>"Catalog (/hw/)"</h1>
 
-        {catalogData.length === 0 ? (
+        {fetchedData.length === 0 ? (
           <h1 style={{ marginLeft: '30px', color: '#77654e' }}>
             ฅ^•ﻌ•^ฅ Loading...
           </h1>
         ) : (
-          catalogData.map((item, index) =>
+          fetchedData.map((item, index) =>
             item.op ? (
               <CatalogItems
+                key={index}
                 allContent={item}
                 CatalogContent={item.postContent}
                 CatalogimgContent={item.catUrl}

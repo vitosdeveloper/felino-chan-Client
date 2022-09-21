@@ -1,24 +1,16 @@
-import React, { useEffect, useState } from 'react';
 import Heading from './Heading.jsx';
 import PostCreator from './PostCreator.jsx';
 import Thread from './Thread.jsx';
 import Footer from './Footer.jsx';
+import { useGlobalContext } from '../GlobalContext.jsx';
 
 function Threading(props) {
-  const [backendData, setBackendData] = useState([]);
+  const backendData = useGlobalContext().data;
 
   let countThreads = 0;
   function countThreadsAdd() {
     countThreads++;
   }
-
-  useEffect(() => {
-    fetch('https://felino-chan-server.onrender.com/api')
-      .then((response) => response.json())
-      .then((data) => {
-        setBackendData(data);
-      });
-  }, []);
 
   return (
     <div>
@@ -60,7 +52,6 @@ function Threading(props) {
                   <div key={index}>
                     {countThreadsAdd()}
                     <Thread
-                      key={index}
                       delete={false}
                       id={index}
                       threads={item}

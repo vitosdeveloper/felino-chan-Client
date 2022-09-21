@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import useLocalStorage from 'use-local-storage';
 import Axios from 'axios';
 import { Interweave } from 'interweave';
+import { useGlobalContext } from '../GlobalContext.jsx';
 
 function Replys(props) {
+  const serverUrl = useGlobalContext().serverUrl;
+
   //greentext
   let wat =
     "<p class='everyPostP'>" +
@@ -37,7 +40,7 @@ function Replys(props) {
   }
 
   function deleteThread() {
-    Axios.post('https://felino-chan-server.onrender.com/deleteReplys', {
+    Axios.post(serverUrl + '/deleteReplys', {
       teste: [{ replyData }, passDaqui],
     });
     setTimeout(() => {
@@ -48,8 +51,7 @@ function Replys(props) {
   return (
     <div className='replyBox'>
       <i id={props.replyData.randomIdGeneratedByMe}></i>
-      <div></div>
-      <p className='replyNameLine'>
+      <div className='replyNameLine'>
         <input
           onClick={() => {
             deletePosts();
@@ -72,9 +74,9 @@ function Replys(props) {
           </a>
         </span>
         {props.replyData.postDay} No.{props.replyData.randomIdGeneratedByMe}
-      </p>
+      </div>
 
-      <p className='arquivoDetalhes'>
+      <div className='arquivoDetalhes'>
         <br />
 
         {
@@ -97,7 +99,7 @@ function Replys(props) {
             </small>
           ) : null
         }
-      </p>
+      </div>
 
       <div className='detailsDiv'>
         <div className='divFloat'>
@@ -133,7 +135,7 @@ function Replys(props) {
         )}
       </div>
       {deleteBox ? (
-        <p className='deleteButton'>
+        <div className='deleteButton'>
           Senha:{' '}
           <input
             type='password'
@@ -143,7 +145,7 @@ function Replys(props) {
             onChange={senhaAtual}
           />{' '}
           <button onClick={deleteThread}>Delete</button>
-        </p>
+        </div>
       ) : null}
     </div>
   );

@@ -5,9 +5,11 @@ import useLocalStorage from 'use-local-storage';
 import Axios from 'axios';
 import $ from 'jquery';
 import { Interweave } from 'interweave';
+import { useGlobalContext } from '../GlobalContext.jsx';
 
 function ThreadForReplys(props) {
-  //talvez eu nao precise mais disso, utilizar
+  const postsData = useGlobalContext().dataInvertida;
+  const serverUrl = useGlobalContext().serverUrl;
 
   let wut =
     "<p class='everyPostP'>" +
@@ -20,15 +22,15 @@ function ThreadForReplys(props) {
         //$(this).after("\n")
         $(this).addClass('quotin');
         $(this).on('mouseover', (e) => {
-          var div = $("<div class='replyDemo'>")
+          const div = $("<div class='replyDemo'>")
             .css({
               left: e.pageX + 'px',
               top: e.pageY + 'px',
             })
             .append(
-              props.replys.map((item) => {
+              postsData.map((item) => {
                 if (item.randomIdGeneratedByMe === $(this).html().slice(8)) {
-                  var watReply =
+                  const watReply =
                     "<p class='everyPostP'>" +
                     item.postContent.replace(
                       /\n/g,
@@ -128,7 +130,7 @@ function ThreadForReplys(props) {
   }
 
   function deleteThread() {
-    Axios.post('https://felino-chan-server.onrender.com/deletePostButton', {
+    Axios.post(serverUrl + '/deletePostButton', {
       teste: [{ threadsData }, passDaqui],
     });
     setTimeout(() => {
@@ -140,7 +142,7 @@ function ThreadForReplys(props) {
     <div className='threadModel'>
       <i id={props.threads.randomIdGeneratedByMe}></i>
 
-      <p className='arquivoDetalhes'>
+      <div className='arquivoDetalhes'>
         Arquivo{' '}
         <small>
           (
@@ -158,7 +160,7 @@ function ThreadForReplys(props) {
           </a>
           (???? KB, {props.threads.catWidth}x{props.threads.catHeight})
         </small>
-      </p>
+      </div>
 
       <div className='detailsDiv'>
         <div className='divFloat'>
@@ -185,7 +187,7 @@ function ThreadForReplys(props) {
           </i>
         </div>
 
-        <p className='anonNameLine'>
+        <div className='anonNameLine'>
           <input
             onClick={() => {
               deletePosts();
@@ -204,7 +206,7 @@ function ThreadForReplys(props) {
             <span className='linkColor'>[Voltar]</span>
           </Link>
           {deleteBox ? (
-            <p className='deleteButton4Threads'>
+            <div className='deleteButton4Threads'>
               Senha:{' '}
               <input
                 type='password'
@@ -220,18 +222,17 @@ function ThreadForReplys(props) {
               >
                 Delete
               </button>
-            </p>
+            </div>
           ) : null}
-        </p>
+        </div>
         {<Interweave content={wut} />}
       </div>
 
-      {props.replys
+      {postsData
         .map((item, index) =>
           props.threads.randomIdGeneratedByMe === item.reply ? (
             <div key={index}>
-              <Replys key={index} index={index} replyData={item} />
-              <br />
+              <Replys replyData={item} />
             </div>
           ) : null
         )

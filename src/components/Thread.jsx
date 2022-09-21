@@ -4,9 +4,10 @@ import Axios from 'axios';
 import useLocalStorage from 'use-local-storage';
 import $ from 'jquery';
 import { Interweave } from 'interweave';
+import { useGlobalContext } from '../GlobalContext.jsx';
 
 function Thread(props) {
-  //talvez eu nao precise mais disso, utilizar
+  const { serverUrl } = useGlobalContext;
 
   let wat =
     "<p class='everyPostP'>" +
@@ -129,7 +130,7 @@ function Thread(props) {
   }
 
   if (props.delete === true) {
-    Axios.post('https://felino-chan-server.onrender.com/deletePost', {
+    Axios.post(serverUrl + '/deletePost', {
       idDaqui,
     });
     setTimeout(() => {
@@ -149,7 +150,7 @@ function Thread(props) {
     setPassDaqui(event.target.value);
   }
   function deleteThread() {
-    Axios.post('https://felino-chan-server.onrender.com/deletePostButton', {
+    Axios.post(serverUrl + '/deletePostButton', {
       teste: [{ threadsData }, passDaqui],
     });
     setTimeout(() => {
@@ -164,7 +165,7 @@ function Thread(props) {
         className='hiddenOnes'
         style={!threadHidden ? { display: 'none' } : null}
       >
-        <p className='anonNameLine'>
+        <div className='anonNameLine'>
           <a
             className='aTirarSublinhado'
             onClick={() => {
@@ -183,14 +184,14 @@ function Thread(props) {
             </span>
           </span>
           {props.threads.postDay} No.{props.threads.randomIdGeneratedByMe}
-        </p>
+        </div>
       </div>
 
       <div
         className='threadModel'
         style={threadHidden ? { display: 'none' } : null}
       >
-        <p className='arquivoDetalhes'>
+        <div className='arquivoDetalhes'>
           <a
             className='aTirarSublinhado'
             onClick={() => {
@@ -217,7 +218,7 @@ function Thread(props) {
             </a>
             (???? KB, {props.threads.catWidth}x{props.threads.catHeight})
           </small>
-        </p>
+        </div>
 
         <div className='detailsDiv'>
           <div className='divFloat'>
@@ -244,7 +245,7 @@ function Thread(props) {
             </i>
           </div>
 
-          <p className='anonNameLine'>
+          <div className='anonNameLine'>
             <input
               type='checkbox'
               onClick={() => {
@@ -266,7 +267,7 @@ function Thread(props) {
               <span className='linkColor'>[Responder]</span>
             </a>{' '}
             {deleteBox ? (
-              <p className='deleteButton4Threads'>
+              <div className='deleteButton4Threads'>
                 Senha:{' '}
                 <input
                   name='inputForDeleting'
@@ -277,9 +278,9 @@ function Thread(props) {
                   style={{ width: '5rem' }}
                 />{' '}
                 <button onClick={deleteThread}>Delete</button>
-              </p>
+              </div>
             ) : null}
-          </p>
+          </div>
           {<Interweave content={wat} />}
         </div>
 
@@ -290,8 +291,7 @@ function Thread(props) {
                 count < 5 ? (
                   <div key={index}>
                     {countAdd()}
-                    <Replys key={index} index={index} replyData={item} />
-                    <br />
+                    <Replys replyData={item} />
                   </div>
                 ) : null
               ) : null

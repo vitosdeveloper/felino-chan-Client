@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import useLocalStorage from 'use-local-storage';
+import { useGlobalContext } from '../GlobalContext.jsx';
 
 function PostCreator(props) {
-  const [postCount, setPostCount] = useState(''); //talvez a contagem só deva atualizar/dar get no momento em que se passa o botão em cima do "responder/criarthread", assim evita de duas pessoas postarem com o mesmo id
+  const postCount = useGlobalContext().data.length;
+  const serverUrl = useGlobalContext().serverUrl;
+
   const dayName = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab'];
   const diaDaSemana = dayName[new Date().getDay()];
   const dataNumero = new Date().toISOString().slice(0, 10);
@@ -17,14 +20,6 @@ function PostCreator(props) {
     `${dataNumero} ${diaDaSemana} ${horaCompleta}`
   );
   const [passMessage, setPassMessage] = useState('');
-
-  useEffect(() => {
-    fetch('https://felino-chan-server.onrender.com/getId')
-      .then((response) => response.json())
-      .then((data) => {
-        setPostCount(data);
-      });
-  }, []);
 
   const [newCat, setNewCat] = useState([{}]);
 
@@ -74,7 +69,6 @@ function PostCreator(props) {
       return {
         ...lastValues,
         [name]: value,
-        randomIdGeneratedByMe: postCount[0].postNumberIs,
         reply: props.replyTo,
         op: props.isOp,
         board: props.board,
@@ -86,25 +80,15 @@ function PostCreator(props) {
   }
 
   //Post request
-  function postToDatabase() {
+  async function postToDatabase() {
     if (newPost.email !== 'sage') {
-      Axios.all([
-        Axios.post('https://felino-chan-server.onrender.com/setNewId', {
-          newPost,
-        }),
-        Axios.post('https://felino-chan-server.onrender.com/newpost', {
-          newPost,
-        }),
-      ]);
+      Axios.post(serverUrl + '/newpost', {
+        newPost,
+      });
     } else {
-      Axios.all([
-        Axios.post('https://felino-chan-server.onrender.com/setNewId', {
-          newPost,
-        }),
-        Axios.post('https://felino-chan-server.onrender.com/replySage', {
-          newPost,
-        }),
-      ]);
+      Axios.post(serverUrl + '/replySage', {
+        newPost,
+      });
     }
     setTimeout(() => {
       window.location.replace('/hw');
