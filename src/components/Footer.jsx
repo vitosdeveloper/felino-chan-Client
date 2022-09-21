@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; //routing
+import { useGlobalContext } from '../GlobalContext.jsx';
 
 function Footer(props) {
+  const { fetchData } = useGlobalContext();
   const pagesLinks = [2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
     <div>
@@ -11,12 +13,17 @@ function Footer(props) {
       <br />
       {props.pages === true ? (
         <div className='pagesStyle'>
-          <Link className='boardLinks' to='/hw'>
+          <Link onClick={fetchData} className='boardLinks' to='/hw'>
             [1]{' '}
           </Link>
           {pagesLinks.map((item, index) => {
             return (
-              <Link key={index} className='boardLinks' to={'/hw/' + item}>
+              <Link
+                onClick={fetchData}
+                key={index}
+                className='boardLinks'
+                to={'/hw/' + item}
+              >
                 [{item}]{' '}
               </Link>
             );
@@ -26,16 +33,16 @@ function Footer(props) {
       <i id='bottom'></i>
       <div className='boardListBottom'>
         [{' '}
-        <Link className='boardLinks' to='/'>
+        <Link onClick={fetchData} className='boardLinks' to='/'>
           home{' '}
         </Link>{' '}
         /
-        <Link className='boardLinks' to='/hw'>
+        <Link onClick={fetchData} className='boardLinks' to='/hw'>
           {' '}
           hw
         </Link>{' '}
         /
-        <Link className='boardLinks' to='/catalog'>
+        <Link onClick={fetchData} className='boardLinks' to='/catalog'>
           {' '}
           catalog
         </Link>{' '}

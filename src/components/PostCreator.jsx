@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import useLocalStorage from 'use-local-storage';
 import { useGlobalContext } from '../GlobalContext.jsx';
+import { Navigate } from 'react-router-dom';
 
 function PostCreator(props) {
   const postCount = useGlobalContext().data.length;
-  const serverUrl = useGlobalContext().serverUrl;
+  const { serverUrl, fetchData } = useGlobalContext();
 
   const dayName = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab'];
   const diaDaSemana = dayName[new Date().getDay()];
@@ -42,11 +43,7 @@ function PostCreator(props) {
     setIsPasswordSetOrWhat(true);
   }
 
-  function editLocalPassword(event) {
-    setPostPassword(event.target.value);
-  }
-
-  const [newPost, setNewPost] = useState({
+  const initialNewPostObject = {
     op: '',
     board: 'hw',
     email: '',
@@ -60,7 +57,13 @@ function PostCreator(props) {
     catWidth: '',
     catHeight: '',
     postDay: finalHours,
-  });
+  };
+
+  const [newPost, setNewPost] = useState(initialNewPostObject);
+
+  function editLocalPassword(event) {
+    setPostPassword(event.target.value);
+  }
 
   function editPost(event) {
     const { name, value } = event.target;
@@ -79,20 +82,58 @@ function PostCreator(props) {
     });
   }
 
-  //Post request
+  //  redirect após envio de mensagem
+  const [redirectDom, setRedirectDom] = useState('');
+
+  //  post request
   async function postToDatabase() {
+    //  efeitos iniciais
+    const sendButton = document.querySelector('[data-send]');
+    const loadingGif = document.querySelector('.loadingGif');
+    sendButton.style.display = 'none';
+    loadingGif.style.display = 'initial';
+    //  efeitos dom pro botao
+    const domResponses = (response) => {
+      if (response === 200) {
+        sendButton.style.display = 'initial';
+        loadingGif.style.display = 'none';
+        setNewPost(initialNewPostObject);
+        setRedirectDom(<Navigate to='/hw' />);
+      } else if (response === 'err') {
+        sendButton.style.display = 'initial';
+        loadingGif.style.display = 'none';
+        sendButton.style.color = 'red';
+        sendButton.style.border = '1px solid red';
+        sendButton.innerText = 'Houve algum erro!';
+        setTimeout(() => {
+          sendButton.style.color = 'initial';
+          sendButton.style.border = '1px solid black';
+          sendButton.innerText = props.sendButton;
+        }, 1500);
+      }
+    };
+
     if (newPost.email !== 'sage') {
-      Axios.post(serverUrl + '/newpost', {
-        newPost,
-      });
+      try {
+        await Axios.post(serverUrl + '/newpost', {
+          newPost,
+        });
+        domResponses(200);
+      } catch (err) {
+        console.log(err);
+        domResponses('err');
+      }
     } else {
-      Axios.post(serverUrl + '/replySage', {
-        newPost,
-      });
+      try {
+        await Axios.post(serverUrl + '/replySage', {
+          newPost,
+        });
+        domResponses(200);
+      } catch (err) {
+        console.log(err);
+        domResponses('err');
+      }
     }
-    setTimeout(() => {
-      window.location.replace('/hw');
-    }, 1000);
   }
 
   return (
@@ -132,6 +173,7 @@ function PostCreator(props) {
                     </button>
                   ) : (
                     <button
+                      data-send
                       type='button'
                       onMouseOver={() => {
                         setFinalHour(
@@ -140,11 +182,19 @@ function PostCreator(props) {
                       }}
                       onClick={() => {
                         postToDatabase();
+                        fetchData();
                       }}
                     >
                       {props.sendButton}
                     </button>
                   )}
+                  <img
+                    style={{ display: 'none' }}
+                    className='loadingGif'
+                    src='/loading.gif'
+                    alt='loading'
+                  />
+                  {redirectDom}
                 </td>
               </tr>
               <tr>

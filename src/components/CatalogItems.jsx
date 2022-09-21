@@ -15,6 +15,7 @@ function CatalogItems(props) {
         .replace(/(^>{2}[^>])([\S]+)/gm, '<span class="quotin">$1$2</span>')
         .replace(/(^>{3}[^>])([\S]+)/gm, '<span class="pinkText">$1$2</span>')
     );
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [props.CatalogContent]);
 
   return (

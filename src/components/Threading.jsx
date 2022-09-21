@@ -3,6 +3,7 @@ import PostCreator from './PostCreator.jsx';
 import Thread from './Thread.jsx';
 import Footer from './Footer.jsx';
 import { useGlobalContext } from '../GlobalContext.jsx';
+import { useEffect } from 'react';
 
 function Threading(props) {
   const backendData = useGlobalContext().data;
@@ -11,6 +12,10 @@ function Threading(props) {
   function countThreadsAdd() {
     countThreads++;
   }
+
+  useEffect(() => {
+    window.scrollTo({ top: 199, behavior: 'smooth' });
+  }, []);
 
   return (
     <div>
