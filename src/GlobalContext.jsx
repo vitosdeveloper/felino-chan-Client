@@ -23,7 +23,6 @@ export function GlobalProvider({ children }) {
         dataInvertida: dataJson.reverse(),
       };
     });
-    return dbData;
   };
 
   const [dbData, setDbData] = useState({

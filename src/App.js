@@ -1,4 +1,3 @@
-import React from 'react';
 import Heading from './components/Heading.jsx';
 import PostCreator from './components/PostCreator.jsx';
 import { Routes, Route } from 'react-router-dom';
@@ -12,15 +11,7 @@ import { useGlobalContext } from './GlobalContext.jsx';
 
 function App() {
   const fetchedData = useGlobalContext().dataInvertida;
-
-  const pages = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-  let threadsRange = [-15, 0];
-
-  function nextPage() {
-    threadsRange[0] += 15;
-    threadsRange[1] += 15;
-    console.log(threadsRange);
-  }
+  const pages = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
   return (
     <div>
@@ -37,19 +28,16 @@ function App() {
             path={'/hw/' + item}
             element={
               <div>
-                <Threading
-                  pageFrom={threadsRange[0]}
-                  pageTo={threadsRange[1]}
-                />
-                {nextPage()}
+                <Threading page={item - 1} />
               </div>
             }
           />
         ))}
       </Routes>
       {/* pag 1/home */}
+
       <Routes>
-        <Route path='hw' element={<Threading pageFrom='0' pageTo='15' />} />
+        <Route path='hw' element={<Threading page='0' />} />
         {/* threads por dentro com PostCreator modificado */}
         {fetchedData.map((item, index) =>
           item.op ? (
