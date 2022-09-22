@@ -24,13 +24,11 @@ function PostCreator(props) {
 
   const [newCat, setNewCat] = useState([{}]);
 
-  useEffect(() => {
-    fetch('https://api.thecatapi.com/v1/images/search')
-      .then((response) => response.json())
-      .then((data) => {
-        setNewCat(data);
-      });
-  }, []);
+  const fetchCat = async () => {
+    const response = await fetch('https://api.thecatapi.com/v1/images/search');
+    const responseJSON = await response.json();
+    setNewCat(responseJSON);
+  };
 
   const [password, setPostPassword] = useLocalStorage('postFormPassword', '');
   const [isPasswordSetOrWhat, setIsPasswordSetOrWhat] = useLocalStorage(
@@ -43,7 +41,7 @@ function PostCreator(props) {
     setIsPasswordSetOrWhat(true);
   }
 
-  const initialNewPostObject = {
+  const [newPost, setNewPost] = useState({
     op: '',
     board: 'hw',
     email: '',
@@ -57,9 +55,7 @@ function PostCreator(props) {
     catWidth: '',
     catHeight: '',
     postDay: finalHours,
-  };
-
-  const [newPost, setNewPost] = useState(initialNewPostObject);
+  });
 
   function editLocalPassword(event) {
     setPostPassword(event.target.value);
@@ -97,9 +93,25 @@ function PostCreator(props) {
       if (response === 200) {
         sendButton.style.display = 'initial';
         loadingGif.style.display = 'none';
-        setNewPost(initialNewPostObject);
-        setRedirectDom(<Navigate to='/hw' />);
+        setNewPost({
+          op: '',
+          board: 'hw',
+          email: '',
+          assunto: '',
+          postContent: '',
+          inserir: '',
+          password: password,
+          reply: '',
+          randomIdGeneratedByMe: 0,
+          catUrl: '',
+          catWidth: '',
+          catHeight: '',
+          postDay: finalHours,
+        });
         fetchData();
+        if (window.location.pathname !== '/hw') {
+          setRedirectDom(<Navigate to='/hw' />);
+        }
       } else if (response === 'err') {
         sendButton.style.display = 'initial';
         loadingGif.style.display = 'none';
@@ -136,6 +148,10 @@ function PostCreator(props) {
       }
     }
   }
+
+  useEffect(() => {
+    fetchCat();
+  }, []);
 
   return (
     <div>

@@ -3,24 +3,32 @@ import PostCreator from './PostCreator.jsx';
 import Thread from './Thread.jsx';
 import Footer from './Footer.jsx';
 import { useGlobalContext } from '../GlobalContext.jsx';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 function Threading(props) {
   const backendData = useGlobalContext().data;
+  const threadPorPage = 8;
+  const limiteDeThreads = threadPorPage * 10;
+  const pageNumber = props.page;
+  const threadLimit = [
+    pageNumber * threadPorPage,
+    pageNumber * threadPorPage + threadPorPage,
+  ];
 
-  let countThreads = 0;
-  function countThreadsAdd() {
-    countThreads++;
-  }
+  const [threads, setThreads] = useState([]);
 
   useEffect(() => {
+    const filtered = backendData.filter((item) => {
+      return item.op === true;
+    });
+    setThreads(filtered);
     window.scrollTo({ top: 199, behavior: 'smooth' });
-  }, []);
+  }, [backendData]);
 
   return (
     <div>
       <Heading boardName='HW - Hello world' />
-      {backendData.length === 0 ? (
+      {threads.length === 0 ? (
         <h1
           style={{ marginLeft: '30px', color: '#77654e', textAlign: 'center' }}
         >
@@ -41,32 +49,24 @@ function Threading(props) {
             catOption={true}
           />
 
-          {backendData.map(
-            (item, index) =>
-              item.op ? (
-                countThreads >= 150 && countThreads < 165 ? (
-                  <Thread
-                    key={index}
-                    id={index}
-                    threads={item}
-                    replys={backendData}
-                    delete={true}
-                  />
-                ) : countThreads >= props.pageFrom &&
-                  countThreads < props.pageTo ? (
-                  <div className='everyThread' key={index}>
-                    {countThreadsAdd()}
-                    <Thread
-                      delete={false}
-                      id={index}
-                      threads={item}
-                      replys={backendData}
-                    />
-                  </div>
-                ) : (
-                  countThreadsAdd()
-                )
-              ) : null //se nao for OP
+          {threads.map((item, index) =>
+            index >= threadLimit[0] && index < threadLimit[1] ? (
+              <div className='everyThread' key={index}>
+                <Thread
+                  delete={false}
+                  id={index}
+                  threads={item}
+                  replys={backendData}
+                />
+              </div>
+            ) : index > limiteDeThreads ? (
+              <Thread
+                delete={true}
+                id={index}
+                threads={item}
+                replys={backendData}
+              />
+            ) : null
           )}
 
           <Footer pages={true} />
