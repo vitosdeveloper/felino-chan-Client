@@ -17,7 +17,9 @@ function App() {
   let threadsRange = [-15, 0];
 
   function nextPage() {
-    threadsRange = [threadsRange[0] + 15, threadsRange[1] + 15];
+    threadsRange[0] += 15;
+    threadsRange[1] += 15;
+    console.log(threadsRange);
   }
 
   return (
