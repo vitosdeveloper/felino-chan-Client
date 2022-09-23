@@ -152,12 +152,13 @@ function Replys(props) {
             ) : null}
           </i>
         </div>
-
-        {!props.replyData.imgShow ? (
-          <Interweave content={props.replyData.postContent} />
-        ) : (
-          <Interweave content={props.replyData.postContent} />
-        )}
+        <span className='texto'>
+          {!props.replyData.imgShow ? (
+            <Interweave content={props.replyData.postContent} />
+          ) : (
+            <Interweave content={props.replyData.postContent} />
+          )}
+        </span>
       </div>
       {deleteBox ? (
         <div className='deleteButton'>

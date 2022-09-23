@@ -178,7 +178,9 @@ function ThreadForReplys(props) {
             </div>
           ) : null}
         </div>
-        {<Interweave content={props.threads.postContent} />}
+        <span className='texto'>
+          {<Interweave content={props.threads.postContent} />}
+        </span>
       </div>
 
       {postsData

@@ -256,7 +256,7 @@ th {
   text-align: left;
 }
 /* outros */
-.everyPostP {
+.texto {
   word-wrap: break-word;
   white-space: pre-line;
   margin: 0;
@@ -269,32 +269,22 @@ th {
   display: -webkit-box;
 }
 .quote {
-  display: table;
   color: rgb(0, 77, 0);
-  font-family: fantasy;
-  font-weight: 100;
   letter-spacing: 1px;
 }
 .textToRight {
   margin-right: 0.5rem;
 }
 .quotin {
-  display: table;
   color: rgb(14, 14, 155);
   font-size: 14px;
   cursor: pointer;
-  font-family: fantasy;
-  font-weight: 100;
   letter-spacing: 1px;
-  text-decoration: underline;
   padding: 3px;
 }
 .pinkText {
   color: rgb(190, 8, 120);
-  font-family: fantasy;
-  font-weight: 100;
   letter-spacing: 1px;
-  display: table;
 }
 
 /* Home */
@@ -399,17 +389,20 @@ th {
 }
 .replyDemo {
   position: absolute;
-  transform: translate(-0%, -100%);
+  transform: translate(5%, -105%);
+  z-index: 1;
 }
 .replyBoxDemo {
   display: inline-block;
   padding-bottom: 0.6rem;
-  max-width: 90% !important;
+  max-width: 65% !important;
   background-color: rgb(221, 169, 105);
   background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
-  margin: 0.5rem 0.5rem 0 1rem;
   min-width: 400px;
   border: 8px dashed rgb(202, 137, 52);
+}
+.replyBoxDemo .replyNameLine {
+  margin-left: 15px;
 }
 .noMargin {
   margin: 0;

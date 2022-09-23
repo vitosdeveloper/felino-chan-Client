@@ -17,13 +17,15 @@ function Threading(props) {
 
   const [threads, setThreads] = useState([]);
 
+  let count = 0;
   useEffect(() => {
+    //  apenas threads
     const filtered = backendData.filter((item) => {
       return item.op === true;
     });
     setThreads(filtered);
-    window.scrollTo({ top: 199, behavior: 'smooth' });
-  }, [backendData]);
+    // window.scrollTo({ top: 199, behavior: 'smooth' });
+  }, [backendData, count]);
 
   return (
     <div>
