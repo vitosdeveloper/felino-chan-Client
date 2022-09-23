@@ -7,6 +7,7 @@ import Voltar from './components/Voltar.jsx';
 import Footer from './components/Footer.jsx';
 import Catalog from './components/Catalog.jsx';
 import Homepage from './components/Homepage.jsx';
+import ReplyDemo from './components/ReplyDemo.jsx';
 import { useGlobalContext } from './GlobalContext.jsx';
 
 function App() {
@@ -16,12 +17,30 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path='/' element={<Homepage />} />
+        <Route path='/replyDemo' element={<ReplyDemo />} />
+        <Route
+          path='/'
+          element={
+            <Homepage
+              data={{
+                email: 'vito',
+                assunto: 'ta',
+                postDay: 's',
+                randomIdGeneratedByMe: '123123',
+                catUrl: 'https://images6.alphacoders.com/337/337780.jpg',
+                catWidth: '100px',
+                catHeight: '100px',
+                postContent: 'ablalbal',
+                imgShow: true,
+              }}
+            />
+          }
+        />
       </Routes>
 
       {/* Outras páginas */}
       <Routes>
-        <Route path={'/Catalog'} element={<Catalog />} />
+        <Route path='/Catalog' element={<Catalog />} />
         {pages.map((item, index) => (
           <Route
             key={index}
