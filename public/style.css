@@ -256,7 +256,11 @@ th {
   text-align: left;
 }
 /* outros */
-.texto {
+.textToRight {
+  margin-right: 0.5rem;
+}
+
+.texto:not(.quotin) {
   word-wrap: break-word;
   white-space: pre-line;
   margin: 0;
@@ -265,28 +269,19 @@ th {
   font-size: 0.9rem;
   cursor: initial;
   font-family: monospace;
-  font-weight: 600;
-  display: -webkit-box;
 }
 .quote {
   color: rgb(0, 77, 0);
-  letter-spacing: 1px;
-}
-.textToRight {
-  margin-right: 0.5rem;
 }
 .quotin {
   color: rgb(14, 14, 155);
   font-size: 14px;
   cursor: pointer;
-  letter-spacing: 1px;
   padding: 3px;
 }
 .pinkText {
   color: rgb(190, 8, 120);
-  letter-spacing: 1px;
 }
-
 /* Home */
 
 .boardLink {
