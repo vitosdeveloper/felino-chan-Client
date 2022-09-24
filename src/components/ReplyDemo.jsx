@@ -23,17 +23,16 @@ function ReplyDemo(props) {
 
       <div className='detailsDiv'>
         <div className='divFloat'>
-          <i className='paddingPadrao aTirarSublinhado '>
-            {' '}
+          {props.data.imgShow || props.data.op ? (
             <img
               src={props.data.catUrl}
               className='textToRight'
               alt='gatinho'
               style={{ maxWidth: '255px', maxHeight: '255px' }}
             />
-          </i>
+          ) : null}
         </div>
-        <span>
+        <span className='texto'>
           {!props.data.imgShow ? (
             <Interweave content={props.data.postContent} />
           ) : (
