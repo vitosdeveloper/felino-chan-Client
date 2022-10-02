@@ -12,9 +12,12 @@ export function GlobalProvider({ children }) {
     //transformação de texto mt importante
     dataJson.forEach((item, index) => {
       dataJson[index].postContent = item.postContent
-        .replace(/(^>{1}[^>])(\S+)?/gm, '<span class="quote">$1$2</span>')
+        .replace(/(^>{1}[^>])([^\r^\n]+)?/gm, '<span class="quote">$1$2</span>')
         .replace(/(^>{2}[^>])(\S+)?/gm, '<span class="quotin">$1$2</span>')
-        .replace(/(^>{3}[^>])(\S+)?/gm, '<span class="pinkText">$1$2</span>');
+        .replace(
+          /(^>{3}[^>])([^\r^\n]+)?/gm,
+          '<span class="pinkText">$1$2</span>'
+        );
     });
     setDbData((prev) => {
       return {

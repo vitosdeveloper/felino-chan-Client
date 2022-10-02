@@ -3,6 +3,7 @@ import useLocalStorage from 'use-local-storage';
 import Axios from 'axios';
 import { Interweave } from 'interweave';
 import { useGlobalContext } from '../GlobalContext.jsx';
+import '../styles/reply.css';
 
 function Replys(props) {
   const { serverUrl, fetchData } = useGlobalContext();
@@ -74,115 +75,111 @@ function Replys(props) {
   }
 
   return (
-    <div className='replyBox'>
-      <i id={props.replyData.randomIdGeneratedByMe}></i>
-      <div className='replyNameLine'>
-        <input
-          onClick={() => {
-            deletePosts();
-          }}
-          type='checkbox'
-        />
-        <span className='anonName'>
-          {' '}
-          {props.replyData.assunto}{' '}
+    <div className='reply'>
+      <input
+        onClick={() => {
+          deletePosts();
+        }}
+        type='checkbox'
+      />
+
+      <div className='post'>
+        <div className='replyDetails'>
+          {props.replyData.assunto ? (
+            <span className='anon'>{props.replyData.assunto}</span>
+          ) : null}
           <a
-            className='aTirarSublinhado'
+            className='linkStyle'
             style={
               '#' + props.replyData.email === '#sage'
                 ? { color: '#0F167A' }
                 : null
             }
-            href={'#' + props.replyData.email}
+            href={'mailto:' + props.replyData.email}
           >
             {'#' + props.replyData.email === '#sage' ? 'Sage!' : 'Anônimo'}
           </a>
-        </span>
-        {props.replyData.postDay} No.{props.replyData.randomIdGeneratedByMe}
-      </div>
+          <p>
+            {props.replyData.postDay} No.{props.replyData.randomIdGeneratedByMe}
+          </p>
+        </div>
 
-      <div className='arquivoDetalhes'>
-        <br />
-
-        {
-          /*  */ props.replyData.imgShow === true ? (
+        <div className='imageDetails'>
+          {props.replyData.imgShow === true ? (
             <small>
-              <span className='arquivO'>Arquivo</span> (
-              <a
-                className='aTirarSublinhado'
-                onClick={hideImage}
-                href='#esonderImg'
-              >
+              Arquivo (
+              <a className='linkStyle' onClick={hideImage} href='#esonderImg'>
                 {imgHidden ? 'mostrar imagem' : 'esconder imagem'}
               </a>
               ):
-              <a className='aTirarSublinhado' href={props.replyData.catUrl}>
-                {' '}
+              <a className='linkStyle' href={props.replyData.catUrl}>
                 gatinho :3
               </a>
               (???? KB, {props.replyData.catWidth}x{props.replyData.catHeight})
             </small>
-          ) : null
-        }
-      </div>
+          ) : null}
+        </div>
 
-      <div className='detailsDiv'>
-        <div className='divFloat'>
-          <i
-            className='paddingPadrao aTirarSublinhado '
+        <div className='content'>
+          <div
+            className='replyImage'
             onClick={imgSizeUp}
             style={imgHidden ? { display: 'none' } : null}
           >
             {props.replyData.imgShow ? (
-              !imgBig ? (
-                <img
-                  src={props.replyData.catUrl}
-                  className='textToRight'
-                  alt='gatinho'
-                  style={{ maxWidth: '255px', maxHeight: '255px' }}
-                />
-              ) : (
-                <img
-                  src={props.replyData.catUrl}
-                  className='textToRight'
-                  alt='gatinho'
-                  style={{ maxWidth: '1000px', maxHeight: '1000px' }}
-                />
-              )
+              <img
+                src={props.replyData.catUrl}
+                alt='gatinho'
+                style={
+                  !imgBig
+                    ? { maxWidth: '255px', maxHeight: '255px' }
+                    : { maxWidth: '1000px', maxHeight: '1000px' }
+                }
+              />
             ) : null}
-          </i>
-        </div>
-        <span className='texto'>
+          </div>
+
           {!props.replyData.imgShow ? (
-            <Interweave content={props.replyData.postContent} />
+            <Interweave
+              className='replyText'
+              content={props.replyData.postContent}
+            />
           ) : (
-            <Interweave content={props.replyData.postContent} />
+            <Interweave
+              className='replyText'
+              content={props.replyData.postContent}
+            />
           )}
-        </span>
-      </div>
-      {deleteBox ? (
-        <div className='deleteButton'>
-          Senha:{' '}
-          <input
-            type='password'
-            maxLength='6'
-            style={{ width: '5rem' }}
-            value={passDaqui}
-            onChange={senhaAtual}
-          />{' '}
-          <img
-            style={{ display: 'none' }}
-            className={
-              'removeLoadingGif' + props.replyData.randomIdGeneratedByMe
-            }
-            src='/loading.gif'
-            alt='loading'
-          />
-          <button className='deletar' onClick={deleteThread}>
-            Delete
-          </button>
         </div>
-      ) : null}
+
+        {deleteBox ? (
+          <div className='deleteDiv'>
+            <label className='linkStyle' htmlFor='senha'>
+              Senha:
+            </label>
+            <input
+              name='senha'
+              className='linkStyle'
+              type='password'
+              maxLength='6'
+              style={{ width: '5rem' }}
+              value={passDaqui}
+              onChange={senhaAtual}
+            />
+            <img
+              style={{ display: 'none' }}
+              className={
+                'removeLoadingGif' + props.replyData.randomIdGeneratedByMe
+              }
+              src='/loading.gif'
+              alt='loading'
+            />
+            <button className='deletar' onClick={deleteThread}>
+              Delete
+            </button>
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 }
