@@ -1,0 +1,96 @@
+.reply {
+  display: inline-flex;
+  align-items: flex-start;
+  background-color: rgb(221, 169, 105);
+  background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+  border-radius: 5px;
+  margin: 5px 15px;
+  padding: 5px 15px 5px 5px;
+  box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.4);
+}
+
+.reply:hover {
+  scale: 1.007;
+  transition: 0.01s;
+}
+
+.reply input {
+  margin-top: 5px;
+}
+
+.replyDetails {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.replyDetails p {
+  margin: 0;
+}
+
+.anon,
+.imageDetails .linkStyle {
+  margin-right: 5px;
+}
+
+.anon {
+  color: #ce306a;
+  font-weight: bold;
+}
+
+.linkStyle {
+  text-decoration: none;
+  font-weight: bold;
+  color: rgb(119, 101, 78);
+}
+
+.imageDetails {
+  display: flex;
+}
+
+.imageDetails .linkStyle {
+  margin-left: 5px;
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  padding: 5px 0;
+}
+
+.replyImage {
+  float: left;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.replyImage img {
+  margin-right: 8px;
+}
+
+.replyText {
+  white-space: pre-line;
+  color: rgb(39, 34, 26);
+  font-size: 0.9rem;
+  cursor: initial;
+  font-family: monospace;
+  position: relative;
+  bottom: 6px;
+}
+
+.deleteDiv {
+  align-self: flex-end;
+}
+
+.deleteDiv button {
+  font-weight: bold;
+  color: rgb(92, 88, 88);
+}
+
+.deleteDiv label,
+.deleteDiv input {
+  margin-right: 3px;
+}

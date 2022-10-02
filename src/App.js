@@ -7,7 +7,6 @@ import Voltar from './components/Voltar.jsx';
 import Footer from './components/Footer.jsx';
 import Catalog from './components/Catalog.jsx';
 import Homepage from './components/Homepage.jsx';
-import ReplyDemo from './components/ReplyDemo.jsx';
 import { useGlobalContext } from './GlobalContext.jsx';
 
 function App() {
