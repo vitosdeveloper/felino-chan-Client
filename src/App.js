@@ -17,7 +17,6 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path='/replyDemo' element={<ReplyDemo />} />
         <Route
           path='/'
           element={
