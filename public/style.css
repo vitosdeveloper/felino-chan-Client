@@ -31,7 +31,6 @@ i:hover {
 .boardLinks {
   text-decoration: none;
   color: rgb(119, 101, 78);
-  text-align: center;
 }
 .boardImg {
   text-align: center;
@@ -159,14 +158,10 @@ th {
   float: left;
 }
 .voltarBut {
-  display: block;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
-  text-align: center;
 }
 .linkColor {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
