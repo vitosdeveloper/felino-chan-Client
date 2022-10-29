@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import useLocalStorage from 'use-local-storage';
 import { useGlobalContext } from '../GlobalContext.jsx';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 
 function PostCreator(props) {
   const postCount = useGlobalContext().data.length;
@@ -355,9 +355,9 @@ function PostCreator(props) {
       <a className='boardLinks aPostCreator' href='#bottom'>
         [Go to bottom]{' '}
       </a>
-      <a className='boardLinks' href='/Catalog'>
+      <Link className='boardLinks' to='/Catalog'>
         [Catálogo]
-      </a>
+      </Link>
       <hr className='hrNoventa' />
     </div>
   );

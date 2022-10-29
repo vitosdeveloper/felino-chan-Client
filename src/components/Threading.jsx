@@ -24,7 +24,6 @@ function Threading(props) {
       return item.op === true;
     });
     setThreads(filtered);
-    // window.scrollTo({ top: 199, behavior: 'smooth' });
   }, [backendData, count]);
 
   return (
