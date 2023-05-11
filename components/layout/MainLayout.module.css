@@ -1,0 +1,9 @@
+.mainLayout {
+  padding: 2rem 0.25rem 2rem 0.25rem;
+}
+
+@media (max-width: 450px) {
+  .mainLayout {
+    padding: 1rem 1.25rem 1rem 1.25rem;
+  }
+}

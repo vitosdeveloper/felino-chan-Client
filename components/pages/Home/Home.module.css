@@ -1,0 +1,21 @@
+.cuteLittleLetter {
+  font-size: 0.6rem;
+  letter-spacing: 0.8rem;
+}
+
+.about {
+  color: var(--linkHoverColor);
+  text-align: left;
+  padding: 2rem;
+  border: 2px solid var(--linkColor);
+  background: var(--headerBgColor);
+  border-radius: 0.75rem;
+  margin-top: 2rem;
+  max-width: 450px;
+  line-height: 1.25rem;
+}
+
+.social {
+  display: flex;
+  gap: 0.5rem;
+}
