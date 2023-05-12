@@ -1,0 +1,15 @@
+.button {
+  padding: 0.5rem;
+  background: var(--inputBgColor);
+  border: 1px solid var(--linkHoverColor);
+  font-family: 'Roboto', sans-serif;
+  border-radius: 5px;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.button:active {
+  background: var(--headerBgColor);
+}

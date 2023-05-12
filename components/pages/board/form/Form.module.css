@@ -1,0 +1,22 @@
+.form {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.form label:hover,
+.form input[type='checkbox']:hover {
+  cursor: pointer;
+  user-select: none;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.checkboxContainer {
+  align-self: start;
+  display: flex;
+  gap: 0.25rem;
+}

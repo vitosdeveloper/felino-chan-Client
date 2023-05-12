@@ -1,9 +1,12 @@
 :root {
+  --bodyBgTexture: url(https://www.transparenttextures.com/patterns/cubes.png);
   --bodyBgColor: #ffe4c4;
-  --bodyBgImage: url(https://www.transparenttextures.com/patterns/cubes.png);
   --headerBgColor: rgb(252, 214, 168);
+  --hrColor: rgb(214, 182, 143);
   --linkColor: rgb(119, 101, 78);
   --linkHoverColor: rgb(59, 50, 38);
+  --inputBgColor: rgb(255, 241, 223);
+  --assuntoColor: #ce306a;
 }
 
 * {
@@ -20,7 +23,7 @@ body {
 
 body {
   background-color: var(--bodyBgColor);
-  background-image: var(--bodyBgImage);
+  background-image: var(--bodyBgTexture);
 }
 
 a {
@@ -30,4 +33,8 @@ a {
 
 a:hover {
   color: var(--linkHoverColor);
+}
+
+img {
+  border-radius: 5px;
 }

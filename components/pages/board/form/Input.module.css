@@ -1,0 +1,11 @@
+.input {
+  border-radius: 5px;
+  padding: 0.5rem;
+  background: var(--inputBgColor);
+  border: 1px solid var(--linkHoverColor);
+  font-family: 'Roboto', sans-serif;
+}
+
+.input:focus {
+  background: var(--headerBgColor);
+}

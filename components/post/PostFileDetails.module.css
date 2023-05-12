@@ -1,0 +1,9 @@
+.pointer {
+  cursor: pointer;
+}
+
+.detailsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}

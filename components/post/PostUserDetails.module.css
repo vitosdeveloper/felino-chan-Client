@@ -1,0 +1,25 @@
+.details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.anon,
+.assunto {
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1rem;
+}
+
+.assunto {
+  color: var(--assuntoColor);
+}
+
+.anon {
+  color: var(--linkColor);
+}
+
+.date {
+  align-self: flex-end;
+}

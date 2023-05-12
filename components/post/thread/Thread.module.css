@@ -1,0 +1,9 @@
+.UserDetailsAndText {
+  white-space: pre-line;
+  word-wrap: break-word;
+  font-size: 0.9rem;
+}
+
+.thread p {
+  margin-bottom: 0.25rem;
+}

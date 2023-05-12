@@ -15,6 +15,13 @@
   line-height: 1.25rem;
 }
 
+.pSpacing {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
 .social {
   display: flex;
   gap: 0.5rem;
