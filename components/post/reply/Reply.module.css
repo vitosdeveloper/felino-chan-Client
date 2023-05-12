@@ -1,9 +1,13 @@
 .reply {
   display: table;
-  padding: 0.5rem 0.75rem;
+  padding: 0 0.75rem 0.5rem 0.75rem;
   border-radius: 5px;
-  background: var(--headerBgColor);
+  background: var(--replyBgColor);
   background-image: var(--bodyBgTexture);
   margin-top: 0.5rem;
   box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.4);
+}
+
+.reply div {
+  margin-top: 0.25rem;
 }
