@@ -6,6 +6,7 @@ import PostImage from '../PostImage';
 import PostUserDetails from '../PostUserDetails';
 import classes from './Thread.module.css';
 import Hr from '@/components/layout/Hr';
+import { serialize } from 'mongodb';
 
 type Props = { from: 'outside' | 'inside'; thread: Post; children: ReactNode };
 
@@ -34,10 +35,10 @@ const Thread = ({ from, thread, children }: Props) => {
           height={catHeight}
           catUrl={catUrl}
         />
+        {catUrl && showImage && (
+          <PostImage src={catUrl} width={catWidth} height={catHeight} />
+        )}
         <div>
-          {catUrl && showImage && (
-            <PostImage src={catUrl} width={catWidth} height={catHeight} />
-          )}
           <div className={classes.UserDetailsAndText}>
             <PostUserDetails
               assunto={assunto}
@@ -48,7 +49,11 @@ const Thread = ({ from, thread, children }: Props) => {
               from={from}
               op={op}
             />
-            <p>{postContent}</p>
+            <p
+              dangerouslySetInnerHTML={{
+                __html: postContent,
+              }}
+            />
           </div>
         </div>
       </div>

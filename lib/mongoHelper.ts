@@ -1,5 +1,6 @@
 import { Post } from '@/types/generalTypes';
 import { MongoClient, ObjectId } from 'mongodb';
+import sanitizeHtml from 'sanitize-html';
 
 const getCollectionAndConnection = async (collectionName: string) => {
   try {
@@ -35,15 +36,36 @@ export const isPost = (post: unknown): post is Post => {
   return false;
 };
 
-const idToStringAndRemovePass = (data: {
-  _id: ObjectId;
-  password?: string;
-}) => {
-  delete data.password;
-  return {
-    ...data,
-    _id: data._id.toString(),
-  };
+const processData = (data: { _id: ObjectId; password?: string }) => {
+  if (isPost(data)) {
+    delete data.password;
+
+    return {
+      ...data,
+      _id: data._id.toString(),
+      postContent: sanitizeHtml(
+        data.postContent
+          //  greentext
+          .replace(
+            /(^>{1}[^>])([^\r^\n]+)?/gm,
+            '<span class="greenText">$1$2</span>'
+          )
+          //  quote
+          .replace(
+            /(^>{2}[^>])(\S+)?/gm,
+            '<a class="quote" href="/res/$1$2">$1$2</a>'
+          )
+          //  quote href fix
+          .replace('href="/res/>>', 'href="/res/')
+          //  pinktext
+          .replace(
+            /(^>{3}[^>])([^\r^\n]+)?/gm,
+            '<span class="pinkText">$1$2</span>'
+          ),
+        { allowedAttributes: { span: ['class'], a: ['class', 'href'] } }
+      ),
+    };
+  }
 };
 
 export const getThreadsByPage = async (page: number) => {
@@ -53,7 +75,6 @@ export const getThreadsByPage = async (page: number) => {
     page * postsPerPage - postsPerPage,
     page * postsPerPage,
   ];
-
   const findThreadsByPage = await collection
     .find({ op: true })
     .sort({ $natural: -1 })
@@ -61,8 +82,7 @@ export const getThreadsByPage = async (page: number) => {
     .limit(stopOn)
     .toArray();
   await connection.close();
-
-  return findThreadsByPage.map(idToStringAndRemovePass);
+  return findThreadsByPage.map(processData);
 };
 
 export const getLastFiveReplys = async (threadId: number) => {
@@ -74,6 +94,5 @@ export const getLastFiveReplys = async (threadId: number) => {
     .limit(5)
     .toArray();
   await connection.close();
-
-  return fiveLastReplys.map(idToStringAndRemovePass).reverse();
+  return fiveLastReplys.map(processData).reverse();
 };

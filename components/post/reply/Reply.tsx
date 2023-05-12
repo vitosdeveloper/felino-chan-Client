@@ -53,7 +53,11 @@ const Reply = ({ reply }: Props) => {
         {catUrl && showImage && (
           <PostImage src={catUrl} width={catWidth} height={catHeight} />
         )}
-        <p>{postContent}</p>
+        <p
+          dangerouslySetInnerHTML={{
+            __html: postContent,
+          }}
+        />
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
-import Linkedin from '@/components/SocialsIcons/Linkedin';
+import Linkedin from '@/components/socialsIcons/Linkedin';
 import classes from './Home.module.css';
-import Github from '@/components/SocialsIcons/Github';
+import Github from '@/components/socialsIcons/Github';
 
 const About = () => {
   return (

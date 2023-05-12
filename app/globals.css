@@ -39,3 +39,20 @@ a:hover {
 img {
   border-radius: 5px;
 }
+
+p {
+  white-space: pre-line;
+}
+
+.greenText {
+  color: green;
+}
+
+.quote {
+  color: blue;
+  font-weight: bold;
+}
+
+.pinkText {
+  color: rgb(201, 38, 138);
+}

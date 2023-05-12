@@ -19,6 +19,11 @@ const nextConfig = {
         destination: '/hw/1',
         permanent: false,
       },
+      {
+        source: '/res',
+        destination: '/hw/1',
+        permanent: false,
+      },
     ];
   },
 };

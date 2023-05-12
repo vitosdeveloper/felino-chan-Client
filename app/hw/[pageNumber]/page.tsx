@@ -8,6 +8,8 @@ export const metadata: Metadata = {
 
 export const dynamicParams = false;
 
+// export const revalidate = 0;
+
 export const generateStaticParams = async () => {
   const pages = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
   return pages.map((page) => ({ pageNumber: page }));

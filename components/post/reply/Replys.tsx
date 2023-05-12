@@ -1,9 +1,10 @@
 import React from 'react';
 import Reply from './Reply';
 import { isPost } from '@/lib/mongoHelper';
+import { Post } from '@/types/generalTypes';
 
 type Props = {
-  replys: Promise<{ _id: string; password?: string | undefined }[]>;
+  replys: Promise<(Post | undefined)[]>;
 };
 
 const Replys = ({ replys }: Props) => {
