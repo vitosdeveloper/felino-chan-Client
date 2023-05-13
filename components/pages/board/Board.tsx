@@ -7,6 +7,7 @@ import Hr from '@/components/layout/Hr';
 import Links from './Links';
 import Pagination from './Pagination';
 import PostsFromThisPage from './PostsFromThisPage';
+import Footer from '@/components/layout/Footer';
 
 type Props = { page: number };
 
@@ -30,7 +31,7 @@ const Board = ({ page }: Props) => {
       <PostsFromThisPage page={page} />
       <Links destination='top' />
       <Pagination currentPage={page} />
-      <footer id='bottom'>footer</footer>
+      <Footer />
     </>
   );
 };

@@ -3,12 +3,8 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        //cdn2.thecatapi.com
-        //https://cdn2.thecatapi.com/images/ZVPEkT4Ix.jpg
         protocol: 'https',
-        hostname: 'cdn2.thecatapi.com',
-        port: '',
-        pathname: '/images/**',
+        hostname: '**',
       },
     ],
   },

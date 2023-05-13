@@ -1,0 +1,16 @@
+.footer {
+  padding: 2rem 0 0 0;
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+  align-items: center;
+}
+
+.socials {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.socials svg {
+  fill: green;
+}

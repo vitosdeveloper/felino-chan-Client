@@ -36,7 +36,7 @@ export const isPost = (post: unknown): post is Post => {
   return false;
 };
 
-const processData = (data: { _id: ObjectId; password?: string }) => {
+const processData = (data: unknown) => {
   if (isPost(data)) {
     delete data.password;
 
@@ -56,7 +56,7 @@ const processData = (data: { _id: ObjectId; password?: string }) => {
             '<a class="quote" href="/res/$1$2">$1$2</a>'
           )
           //  quote href fix
-          .replace('href="/res/>>', 'href="/res/')
+          .replace(/href="\/res\/>>/g, 'href="/res/')
           //  pinktext
           .replace(
             /(^>{3}[^>])([^\r^\n]+)?/gm,
@@ -95,4 +95,23 @@ export const getLastFiveReplys = async (threadId: number) => {
     .toArray();
   await connection.close();
   return fiveLastReplys.map(processData).reverse();
+};
+
+export const getThreadById = async (threadId: number) => {
+  const { collection, connection } = await getCollectionAndConnection('posts');
+  const threadQuery = await collection.findOne({
+    randomIdGeneratedByMe: threadId,
+  });
+  await connection.close();
+  return processData(threadQuery);
+};
+
+export const getAllReplysFor = async (threadId: number) => {
+  const { collection, connection } = await getCollectionAndConnection('posts');
+  const replys = await collection
+    .find({ reply: threadId })
+    .sort({ $natural: -1 })
+    .toArray();
+  await connection.close();
+  return replys.map(processData).reverse();
 };

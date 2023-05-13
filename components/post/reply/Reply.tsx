@@ -27,7 +27,7 @@ const Reply = ({ reply }: Props) => {
   } = reply;
 
   return (
-    <div className={classes.reply}>
+    <div className={classes.reply} id={String(randomIdGeneratedByMe)}>
       <div>
         <PostUserDetails
           assunto={assunto}

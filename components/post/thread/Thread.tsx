@@ -6,7 +6,7 @@ import PostImage from '../PostImage';
 import PostUserDetails from '../PostUserDetails';
 import classes from './Thread.module.css';
 import Hr from '@/components/layout/Hr';
-import { serialize } from 'mongodb';
+import Link from 'next/link';
 
 type Props = { from: 'outside' | 'inside'; thread: Post; children: ReactNode };
 
@@ -27,7 +27,7 @@ const Thread = ({ from, thread, children }: Props) => {
 
   return (
     <div>
-      <div>
+      <div id={String(randomIdGeneratedByMe)}>
         <PostFileDetails
           showImage={showImage}
           hideImage={() => setShowImage((prev) => !prev)}
@@ -59,6 +59,11 @@ const Thread = ({ from, thread, children }: Props) => {
       </div>
       {children}
       <Hr />
+      {from === 'inside' && (
+        <span>
+          [<Link href='/hw/1'>Voltar</Link>]
+        </span>
+      )}
     </div>
   );
 };
