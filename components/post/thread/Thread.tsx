@@ -7,6 +7,7 @@ import PostUserDetails from '../PostUserDetails';
 import classes from './Thread.module.css';
 import Hr from '@/components/layout/Hr';
 import Link from 'next/link';
+import parseHtmlString from '@/lib/parseStringToJsx';
 
 type Props = { from: 'outside' | 'inside'; thread: Post; children: ReactNode };
 
@@ -49,11 +50,12 @@ const Thread = ({ from, thread, children }: Props) => {
               from={from}
               op={op}
             />
-            <p
+            {/* <p
               dangerouslySetInnerHTML={{
                 __html: postContent,
               }}
-            />
+            /> */}
+            {parseHtmlString(postContent)}
           </div>
         </div>
       </div>

@@ -7,8 +7,8 @@ type Props = { src: string; width: number; height: number };
 const PostImage = ({ src, width, height }: Props) => {
   const [big, setBig] = useState(false);
   const sizes = {
-    width: big ? width : width / 3.5,
-    height: big ? height : height / 3.5,
+    width: big ? width : 150,
+    height: big ? height : 150,
   };
   return (
     <Image

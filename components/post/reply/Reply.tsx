@@ -5,6 +5,7 @@ import PostUserDetails from '../PostUserDetails';
 import PostFileDetails from '../PostFileDetails';
 import PostImage from '../PostImage';
 import classes from './Reply.module.css';
+import parseHtmlString from '@/lib/parseStringToJsx';
 
 type Props = { reply: Post };
 
@@ -53,11 +54,7 @@ const Reply = ({ reply }: Props) => {
         {catUrl && showImage && (
           <PostImage src={catUrl} width={catWidth} height={catHeight} />
         )}
-        <p
-          dangerouslySetInnerHTML={{
-            __html: postContent,
-          }}
-        />
+        {parseHtmlString(postContent)}
       </div>
     </div>
   );

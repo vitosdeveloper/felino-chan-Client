@@ -56,3 +56,9 @@ p {
 .pinkText {
   color: rgb(201, 38, 138);
 }
+
+.greenText,
+.quote,
+.pinkText {
+  display: table;
+}

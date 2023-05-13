@@ -1,5 +1,5 @@
 import { Post } from '@/types/generalTypes';
-import { MongoClient, ObjectId } from 'mongodb';
+import { MongoClient } from 'mongodb';
 import sanitizeHtml from 'sanitize-html';
 
 const getCollectionAndConnection = async (collectionName: string) => {
@@ -53,7 +53,7 @@ const processData = (data: unknown) => {
           //  quote
           .replace(
             /(^>{2}[^>])(\S+)?/gm,
-            '<a class="quote" href="/res/$1$2">$1$2</a>'
+            '<a on-click class="quote" href="/res/$1$2">$1$2</a>'
           )
           //  quote href fix
           .replace(/href="\/res\/>>/g, 'href="/res/')
