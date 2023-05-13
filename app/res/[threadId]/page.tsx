@@ -35,7 +35,7 @@ const page = async ({ params }: { params: { threadId: string } }) => {
             priority
           />
           <MediumTitle>HW - Hello World</MediumTitle>
-          <Form op={false} />
+          <Form op={false} threadNumber={thread.randomIdGeneratedByMe} />
         </Centralizer>
         <Hr />
         <Links destination='bottom' />

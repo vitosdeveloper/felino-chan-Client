@@ -5,7 +5,7 @@ export interface Post {
   op: boolean;
   _id: string;
   board: string;
-  email: string;
+  email: string | 'sage';
   assunto: string;
   postContent: string;
   postDay: string;

@@ -5,7 +5,7 @@ type Props = { destination: string };
 
 const Links = ({ destination }: Props) => {
   return (
-    <div className={classes.links}>
+    <div className={classes.links} id='top'>
       <span>[</span>
       <a href={`#${destination}`}>Go to {destination}</a>
       <span>]</span> <span>[</span>

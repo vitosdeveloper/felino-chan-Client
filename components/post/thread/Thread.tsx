@@ -50,11 +50,6 @@ const Thread = ({ from, thread, children }: Props) => {
               from={from}
               op={op}
             />
-            {/* <p
-              dangerouslySetInnerHTML={{
-                __html: postContent,
-              }}
-            /> */}
             {parseHtmlString(postContent)}
           </div>
         </div>

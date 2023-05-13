@@ -2,7 +2,7 @@ import { Post } from '@/types/generalTypes';
 import { MongoClient } from 'mongodb';
 import sanitizeHtml from 'sanitize-html';
 
-const getCollectionAndConnection = async (collectionName: string) => {
+export const getCollectionAndConnection = async (collectionName: string) => {
   try {
     const url = process.env.MONGO_URL;
     if (!url) throw new Error('Check the .env.local');
@@ -45,19 +45,15 @@ const processData = (data: unknown) => {
       _id: data._id.toString(),
       postContent: sanitizeHtml(
         data.postContent
-          //  greentext
           .replace(
             /(^>{1}[^>])([^\r^\n]+)?/gm,
             '<span class="greenText">$1$2</span>'
           )
-          //  quote
           .replace(
             /(^>{2}[^>])(\S+)?/gm,
             '<a on-click class="quote" href="/res/$1$2">$1$2</a>'
           )
-          //  quote href fix
           .replace(/href="\/res\/>>/g, 'href="/res/')
-          //  pinktext
           .replace(
             /(^>{3}[^>])([^\r^\n]+)?/gm,
             '<span class="pinkText">$1$2</span>'

@@ -3,32 +3,34 @@ import classes from './Input.module.css';
 
 type Props = {
   type: string;
-  refProp: RefObject<HTMLInputElement>;
+  refProp?: RefObject<HTMLInputElement>;
   placeholder: string;
-  id?: string;
   disabled: boolean;
   checked?: boolean;
   required?: boolean;
+  name: string;
 };
 
 const Input = ({
   type,
   refProp,
   placeholder,
-  id,
+  name,
   disabled,
   checked,
   ...props
 }: Props) => {
   return (
     <input
-      id={id}
+      id={name}
+      name={name}
       className={classes.input}
       type={type}
       ref={refProp}
       placeholder={placeholder}
       disabled={disabled}
       checked={checked}
+      defaultChecked={true}
       readOnly={checked}
       {...props}
     />
