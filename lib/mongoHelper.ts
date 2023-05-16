@@ -90,11 +90,12 @@ export const getThreadsByPageAndItsReplys = async (threadId: number) => {
     .toArray();
   const processedResult = processData(result) as Post[];
   await connection.close();
-  const [thread, replys] = [
+  const [thread, replys, redirectTo] = [
     processedResult.find((p) => p.op),
     processedResult.filter((p) => p.reply === threadId),
+    processedResult.find((p) => p.randomIdGeneratedByMe === threadId),
   ];
-  return { thread, replys };
+  return { thread, replys, redirectTo };
 };
 
 export const getThreadsAndItsReplysByPage = async (page: number) => {
@@ -110,10 +111,14 @@ export const getThreadsAndItsReplysByPage = async (page: number) => {
     .skip(startFrom)
     .limit(stopOn)
     .toArray();
+
+  if (!findThreadsByPage.length) return;
   const processedTreads = findThreadsByPage.map(processData);
+  if (!processedTreads.length) return;
   const replysQuery = processedTreads.map((thread) => {
     return { reply: (thread as Post).randomIdGeneratedByMe };
   });
+  if (!replysQuery.length) return;
   const findAllReplys = await collection.find({ $or: replysQuery }).toArray();
   findAllReplys.reverse();
   await connection.close();
@@ -121,19 +126,28 @@ export const getThreadsAndItsReplysByPage = async (page: number) => {
 };
 
 export const removeOldThreadsAndItsReplys = async () => {
-  const { collection, connection } = await getCollectionAndConnection('posts');
-  const res = await collection
-    .find({ op: true })
-    .sort({ $natural: -1 })
-    .skip(80)
-    .toArray();
-  if (res.length) {
+  try {
+    const { collection, connection } = await getCollectionAndConnection(
+      'posts'
+    );
+    const res = await collection
+      .find({ op: true })
+      .sort({ $natural: -1 })
+      .skip(80)
+      .toArray();
+    if (!res.length) {
+      return;
+    }
     const query = res.map((r) => [
       { randomIdGeneratedByMe: r.randomIdGeneratedByMe },
       { reply: r.randomIdGeneratedByMe },
     ]);
     const flatQuery = query.flat();
-    await collection.deleteMany({ $or: flatQuery });
+    if (!flatQuery.length) {
+      throw new Error('Something went wrong.');
+    }
+    await collection.deleteMany({ $or: flatQuery as any[] });
     await connection.close();
-  }
+    return;
+  } catch (error) {}
 };

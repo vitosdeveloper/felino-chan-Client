@@ -1,17 +1,23 @@
+'use client';
 import Image from 'next/image';
 import React from 'react';
 import { Post } from '@/types/generalTypes';
 import parseHtmlString from '@/lib/parseStringToJsx';
 import classes from './ThreadCell.module.css';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 type Props = { thread: Post };
 
 const ThreadCell = ({ thread }: Props) => {
   const { catUrl, catWidth, catHeight, postContent, randomIdGeneratedByMe } =
     thread;
+  const route = useRouter();
+
+  const handleClick = () => {
+    route.push(`/res/${randomIdGeneratedByMe}`);
+  };
   return (
-    <Link href={`/res/${randomIdGeneratedByMe}`} className={classes.cell}>
+    <div onClick={handleClick} className={classes.cell}>
       <Image
         className={classes.image}
         src={catUrl!}
@@ -20,7 +26,7 @@ const ThreadCell = ({ thread }: Props) => {
         alt=''
       />
       <p>{parseHtmlString(postContent)}</p>
-    </Link>
+    </div>
   );
 };
 

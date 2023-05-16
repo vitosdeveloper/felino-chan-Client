@@ -13,7 +13,7 @@ const page = async ({ params }: { params: { threadId: string } }) => {
   metadata.description = 'Thread page including all replys';
   metadata.title = `Thread #${params.threadId}`;
 
-  const { thread, replys } = await getThreadsByPageAndItsReplys(
+  const { thread, replys, redirectTo } = await getThreadsByPageAndItsReplys(
     Number(params.threadId)
   );
 
@@ -30,9 +30,9 @@ const page = async ({ params }: { params: { threadId: string } }) => {
       </>
     );
   }
-  if (thread && !thread.op) {
+  if (!thread && redirectTo) {
     return redirect(
-      '/res/' + thread.reply + '#' + thread.randomIdGeneratedByMe
+      '/res/' + redirectTo.reply + '#' + redirectTo.randomIdGeneratedByMe
     );
   }
 

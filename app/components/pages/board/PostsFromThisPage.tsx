@@ -6,7 +6,9 @@ import { Post } from '@/types/generalTypes';
 type Props = { page: number };
 
 const PostsFromThisPage = async ({ page }: Props) => {
-  const { threads, replys } = await getThreadsAndItsReplysByPage(page);
+  const { threads, replys } = (await getThreadsAndItsReplysByPage(page)) || {
+    threads: [],
+  };
   return (
     <div>
       {(threads as Post[]).map((thread) => {
