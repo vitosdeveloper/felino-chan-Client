@@ -16,7 +16,7 @@ export const metadata = {
   description: 'Imageboard that uses cat pictures.',
 };
 
-function RootLayout({ children }: { children: React.ReactNode }) {
+function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang='br'>
       <body className={roboto.className}>

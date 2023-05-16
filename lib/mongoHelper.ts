@@ -76,7 +76,10 @@ const processData = (data: unknown) => {
 
 export const getAllThreads = async () => {
   const { collection, connection } = await getCollectionAndConnection('posts');
-  const threads = await collection.find({ op: true }).toArray();
+  const threads = await collection
+    .find({ op: true })
+    .sort({ $natural: -1 })
+    .toArray();
   await connection.close();
   return processData(threads);
 };

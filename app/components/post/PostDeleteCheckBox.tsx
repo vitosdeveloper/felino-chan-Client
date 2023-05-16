@@ -24,6 +24,11 @@ const PostDeleteCheckBox = ({ id }: Props) => {
   };
   return (
     <div className={classes.removePost}>
+      <input
+        className={classes.test}
+        type='checkbox'
+        onChange={(e) => setShowDeleteInput(e.target.checked)}
+      />
       {showDeleteInput && (
         <form
           className={classes.form}
@@ -41,10 +46,6 @@ const PostDeleteCheckBox = ({ id }: Props) => {
           <Button disabled={loading}>Deletar</Button>
         </form>
       )}
-      <input
-        type='checkbox'
-        onChange={(e) => setShowDeleteInput(e.target.checked)}
-      />
     </div>
   );
 };

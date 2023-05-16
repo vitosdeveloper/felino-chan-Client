@@ -21,10 +21,13 @@
   .imageContainer {
     margin-bottom: 0.5rem;
     float: initial;
+    height: auto;
+    width: 100%;
   }
   .bigImage {
-    max-width: 100%;
+    margin-bottom: 0.5rem;
+    float: initial;
     height: auto;
-    margin-right: 0;
+    width: 100%;
   }
 }

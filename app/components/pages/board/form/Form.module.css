@@ -13,10 +13,17 @@
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  width: 340px;
 }
 
 .checkboxContainer {
   align-self: start;
   display: flex;
   gap: 0.25rem;
+}
+
+@media (max-width: 450px) {
+  .inputs {
+    width: auto;
+  }
 }

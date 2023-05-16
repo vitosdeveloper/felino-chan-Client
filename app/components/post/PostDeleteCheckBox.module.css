@@ -1,7 +1,6 @@
 .removePost {
   display: flex;
-  flex-direction: row-reverse;
-  justify-items: start;
+  justify-items: center;
   gap: 0.25rem;
 }
 
@@ -9,4 +8,13 @@
   display: flex;
   gap: 0.25rem;
   flex-wrap: wrap;
+}
+
+.removePost input[type='checkbox'] {
+  width: 1rem;
+}
+
+.removePost input[type='checkbox']:checked {
+  accent-color: var(--assuntoColor);
+  width: 1rem;
 }

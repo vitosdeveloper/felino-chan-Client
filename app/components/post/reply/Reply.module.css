@@ -11,3 +11,9 @@
 .reply div {
   margin-top: 0.25rem;
 }
+
+@media (max-width: 450px) {
+  .reply {
+    width: 100%;
+  }
+}

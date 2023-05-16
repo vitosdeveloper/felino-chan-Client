@@ -25,3 +25,9 @@
 .cell p {
   text-align: left;
 }
+
+@media (max-width: 450px) {
+  .cell {
+    width: 100%;
+  }
+}
