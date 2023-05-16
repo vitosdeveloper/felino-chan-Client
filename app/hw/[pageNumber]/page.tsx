@@ -1,4 +1,4 @@
-import Board from '@/components/pages/board/Board';
+import PostsFromThisPage from '@/app/components/pages/board/PostsFromThisPage';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -6,21 +6,16 @@ export const metadata: Metadata = {
     'A board that contains a list of threads with random content and cat images',
 };
 
-// export const dynamicParams = false;
+const pages = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 
-// export const generateStaticParams = async () => {
-//   const pages = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
-//   return pages.map((page) => ({ pageNumber: page }));
-// };
+export const revalidate = 10;
 
 const HelloWorldPage = ({ params }: { params: { pageNumber: string } }) => {
-  const pages = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
   if (pages.includes(params.pageNumber)) {
     const page = Number(params.pageNumber);
     metadata.title = `Hello, World! Página ${page}`;
-    return <Board page={page} />;
+    return <PostsFromThisPage page={page} />;
   }
-  return <>404 boy......</>;
 };
 
 export default HelloWorldPage;

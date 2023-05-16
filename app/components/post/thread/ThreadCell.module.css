@@ -1,0 +1,23 @@
+.cell {
+  overflow-y: auto;
+  height: 320px;
+  width: 280px;
+  padding: 1rem;
+  border-radius: 5px;
+  background: var(--replyBgColor);
+  background-image: var(--bodyBgTexture);
+  box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  word-break: break-word;
+  gap: 1rem;
+}
+
+.image {
+  width: auto;
+  height: auto;
+}
+
+.cell p {
+  text-align: left;
+}

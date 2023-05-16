@@ -36,15 +36,14 @@ export const isPost = (post: unknown): post is Post => {
   return false;
 };
 
-const processData = (data: unknown) => {
-  if (isPost(data)) {
-    delete data.password;
-
+const processPost = (data: Post | Post[]) => {
+  const process = (dataToProcess: Post) => {
+    delete dataToProcess.password;
     return {
-      ...data,
-      _id: data._id.toString(),
+      ...dataToProcess,
+      _id: dataToProcess._id.toString(),
       postContent: sanitizeHtml(
-        data.postContent
+        dataToProcess.postContent
           .replace(
             /(^>{1}[^>])([^\r^\n]+)?/gm,
             '<span class="greenText">$1$2</span>'
@@ -61,15 +60,49 @@ const processData = (data: unknown) => {
         { allowedAttributes: { span: ['class'], a: ['class', 'href'] } }
       ),
     };
+  };
+  if (Array.isArray(data)) {
+    return data.map(process);
   }
+  return process(data);
 };
 
-export const getThreadsByPage = async (page: number) => {
+const processData = (data: unknown) => {
+  if (Array.isArray(data)) {
+    return processPost(data.filter(isPost));
+  }
+  if (isPost(data)) return processPost(data);
+};
+
+export const getAllThreads = async () => {
+  const { collection, connection } = await getCollectionAndConnection('posts');
+  const threads = await collection.find({ op: true }).toArray();
+  await connection.close();
+  return processData(threads);
+};
+
+export const getThreadsByPageAndItsReplys = async (threadId: number) => {
+  const { collection, connection } = await getCollectionAndConnection('posts');
+  const result = await collection
+    .find({
+      $or: [{ randomIdGeneratedByMe: threadId }, { reply: threadId }],
+    })
+    .toArray();
+  const processedResult = processData(result) as Post[];
+  await connection.close();
+  const [thread, replys] = [
+    processedResult.find((p) => p.op),
+    processedResult.filter((p) => p.reply === threadId),
+  ];
+  return { thread, replys };
+};
+
+export const getThreadsAndItsReplysByPage = async (page: number) => {
   const { collection, connection } = await getCollectionAndConnection('posts');
   const postsPerPage = 8;
   const [startFrom, stopOn] = [
     page * postsPerPage - postsPerPage,
-    page * postsPerPage,
+    postsPerPage,
   ];
   const findThreadsByPage = await collection
     .find({ op: true })
@@ -77,37 +110,30 @@ export const getThreadsByPage = async (page: number) => {
     .skip(startFrom)
     .limit(stopOn)
     .toArray();
-  await connection.close();
-  return findThreadsByPage.map(processData);
-};
-
-export const getLastFiveReplys = async (threadId: number) => {
-  const { collection, connection } = await getCollectionAndConnection('posts');
-  const fiveLastReplys = await collection
-    .find({ reply: threadId })
-    .sort({ $natural: -1 })
-    .skip(0)
-    .limit(5)
-    .toArray();
-  await connection.close();
-  return fiveLastReplys.map(processData).reverse();
-};
-
-export const getThreadById = async (threadId: number) => {
-  const { collection, connection } = await getCollectionAndConnection('posts');
-  const threadQuery = await collection.findOne({
-    randomIdGeneratedByMe: threadId,
+  const processedTreads = findThreadsByPage.map(processData);
+  const replysQuery = processedTreads.map((thread) => {
+    return { reply: (thread as Post).randomIdGeneratedByMe };
   });
+  const findAllReplys = await collection.find({ $or: replysQuery }).toArray();
+  findAllReplys.reverse();
   await connection.close();
-  return processData(threadQuery);
+  return { threads: processedTreads, replys: findAllReplys.map(processData) };
 };
 
-export const getAllReplysFor = async (threadId: number) => {
+export const removeOldThreadsAndItsReplys = async () => {
   const { collection, connection } = await getCollectionAndConnection('posts');
-  const replys = await collection
-    .find({ reply: threadId })
+  const res = await collection
+    .find({ op: true })
     .sort({ $natural: -1 })
+    .skip(80)
     .toArray();
-  await connection.close();
-  return replys.map(processData).reverse();
+  if (res.length) {
+    const query = res.map((r) => [
+      { randomIdGeneratedByMe: r.randomIdGeneratedByMe },
+      { reply: r.randomIdGeneratedByMe },
+    ]);
+    const flatQuery = query.flat();
+    await collection.deleteMany({ $or: flatQuery });
+    await connection.close();
+  }
 };

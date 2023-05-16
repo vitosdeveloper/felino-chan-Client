@@ -1,0 +1,30 @@
+.imageContainer {
+  float: left;
+  margin-bottom: 1.5rem;
+  margin-right: 0.75rem;
+  box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.4);
+  width: 250px;
+  height: auto;
+}
+
+.bigImage {
+  margin-bottom: 0.5rem;
+  margin-right: 0.75rem;
+  box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.4);
+}
+
+.imageContainer:hover {
+  cursor: pointer;
+}
+
+@media (max-width: 450px) {
+  .imageContainer {
+    margin-bottom: 0.5rem;
+    float: initial;
+  }
+  .bigImage {
+    max-width: 100%;
+    height: auto;
+    margin-right: 0;
+  }
+}

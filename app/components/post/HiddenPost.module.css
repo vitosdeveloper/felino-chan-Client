@@ -1,0 +1,9 @@
+.hiddenPost {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.show:hover {
+  cursor: pointer;
+}

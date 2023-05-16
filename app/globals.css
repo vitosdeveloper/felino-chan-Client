@@ -1,13 +1,13 @@
 :root {
   --bodyBgTexture: url(https://www.transparenttextures.com/patterns/cubes.png);
-  --bodyBgColor: #ffe4c4;
-  --headerBgColor: rgb(252, 214, 168);
-  --hrColor: rgb(214, 182, 143);
-  --linkColor: rgb(119, 101, 78);
   --linkHoverColor: rgb(59, 50, 38);
-  --inputBgColor: rgb(255, 241, 223);
-  --assuntoColor: #ce306a;
-  --replyBgColor: #e9b577;
+  --linkColor: rgb(78, 79, 119);
+  --replyBgColor: #8277e9;
+  --hrColor: rgb(143, 143, 214);
+  --headerBgColor: rgb(168, 168, 252);
+  --bodyBgColor: #c9c4ff;
+  --inputBgColor: rgb(223, 223, 255);
+  --assuntoColor: #3b30ce;
 }
 
 * {
@@ -25,6 +25,25 @@ body {
 body {
   background-color: var(--bodyBgColor);
   background-image: var(--bodyBgTexture);
+}
+
+* {
+  scrollbar-width: auto;
+  scrollbar-color: var(--replyBgColor) var(--headerBgColor);
+}
+
+*::-webkit-scrollbar {
+  width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--headerBgColor);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--replyBgColor);
+  border-radius: 10px;
+  border: 3px solid var(--headerBgColor);
 }
 
 a {

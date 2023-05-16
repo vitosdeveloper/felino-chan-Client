@@ -1,0 +1,12 @@
+.removePost {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-items: start;
+  gap: 0.25rem;
+}
+
+.form {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}

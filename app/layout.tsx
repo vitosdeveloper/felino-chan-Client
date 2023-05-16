@@ -1,7 +1,10 @@
 import './globals.css';
-import Header from '@/components/layout/Header';
+import Header from '@/app/components/layout/Header';
 import { Roboto } from 'next/font/google';
-import MainLayout from '@/components/layout/MainLayout';
+import MainLayout from '@/app/components/layout/MainLayout';
+import { ReactNode } from 'react';
+
+export const dynamic = 'force-static';
 
 const roboto = Roboto({
   weight: ['100', '300', '400', '500', '700', '900'],
@@ -13,11 +16,7 @@ export const metadata = {
   description: 'Imageboard that uses cat pictures.',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='br'>
       <body className={roboto.className}>
@@ -27,3 +26,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+export default RootLayout;
