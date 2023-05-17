@@ -2,7 +2,7 @@
 
 Um app com a funcionalidade de um imageaboard.
 
-Live URL: https://felinochan.netlify.app/ \
+Live URL: https://felinochan.vercel.app/ \
 Repositório: https://github.com/vitosnatios/felino-chan-Client
 
 ## Tecnologias/ferramentas utilizadas:
