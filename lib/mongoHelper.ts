@@ -57,7 +57,11 @@ const processPost = (data: Post | Post[]) => {
             /(^>{3}[^>])([^\r^\n]+)?/gm,
             '<span class="pinkText">$1$2</span>'
           )
-          .replace(/\s{2,}/g, '\n'),
+          .replace(/\s{2,}/g, '\n')
+          .replace(
+            /(https?:\/\/\S+|www\.\S+)/gi,
+            '<a target="_blank" href="$&">$&</a>'
+          ),
         { allowedAttributes: { span: ['class'], a: ['class', 'href'] } }
       ),
     };
