@@ -3,18 +3,18 @@ import { useEffect, useState } from 'react';
 
 const usePassword = () => {
   const [password, setPassword] = useState<string>('');
+
   useEffect(() => {
-    if (!password) {
-      const storagePassword = getPassword('felinoChanPassword');
-      if (!storagePassword) {
-        const newGeneratedPassword = String(Math.floor(Math.random() * 100000));
-        setStoragePassword('felinoChanPassword', String(newGeneratedPassword));
-        setPassword(newGeneratedPassword);
-      } else {
-        setPassword(storagePassword as string);
-      }
+    const localStoragePassword = getPassword('felinoChanPassword');
+    if (!localStoragePassword) {
+      const newGeneratedPassword = String(Math.floor(Math.random() * 100000));
+      setStoragePassword('felinoChanPassword', String(newGeneratedPassword));
+      setPassword(newGeneratedPassword);
+    } else {
+      setPassword(localStoragePassword as string);
     }
-  }, [password]);
+  }, []);
+
   return { password, setPassword };
 };
 

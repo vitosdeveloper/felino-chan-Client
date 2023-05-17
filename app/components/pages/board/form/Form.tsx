@@ -5,15 +5,13 @@ import classes from './Form.module.css';
 import Button from './Button';
 import Reminder from './Reminder';
 import Centralizer from '@/app/components/layout/Centralizer';
-import { ChangeEventHandler, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { addReply, addThread } from '@/helpers/serverActions';
 import usePassword from '@/custom-hooks/usePassword';
 import { setStoragePassword } from '@/utils/handleLocalStorage';
 
 type Props = { op: boolean; threadNumber?: number };
-
-export const dynamic = 'force-dynamic';
 
 const Form = ({ op, threadNumber }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
