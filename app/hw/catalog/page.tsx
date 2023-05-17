@@ -3,6 +3,8 @@ import ThreadCell from '@/app/components/post/thread/ThreadCell';
 import { getAllThreads } from '@/lib/mongoHelper';
 import { Post } from '@/types/generalTypes';
 
+export const revalidate = 0;
+
 const Catalog = async () => {
   const threads = await getAllThreads();
   return (
