@@ -31,3 +31,15 @@ Para parágrafo azul, inicie o parágrafo com ">>". \
 Para parágrafo rosa, inicie o parágrafo com ">>>". \
 Para responder um tópico sem subí-lo, escreva "sage" no campo de email da sua resposta. \
 Para responder um tópico sem subí-lo, escreva "sage" no campo de email da sua resposta.
+
+## Para instalar localmente
+
+- Clone o repositório.
+- Instale as dependências com npm i --force.
+- Crie um arquivo .env.local na raiz do diretório desse projeto:
+
+```env
+MONGO_URL=
+```
+
+- Npm run dev ou Npm run build.
