@@ -56,7 +56,8 @@ const processPost = (data: Post | Post[]) => {
           .replace(
             /(^>{3}[^>])([^\r^\n]+)?/gm,
             '<span class="pinkText">$1$2</span>'
-          ),
+          )
+          .replace(/\s{2,}/g, '\n'),
         { allowedAttributes: { span: ['class'], a: ['class', 'href'] } }
       ),
     };
