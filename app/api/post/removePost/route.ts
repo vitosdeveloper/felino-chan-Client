@@ -24,10 +24,6 @@ export const POST = async (request: Request) => {
       $or: [{ _id: new ObjectId(id) }, { reply: Number(postNumber) }],
     });
     await connection.close();
-    revalidatePath('/hw/[pageNumber]');
-    return NextResponse.json({
-      message: 'Successfully deleted the post #' + id,
-    });
   } catch (error) {
     throw new Error((error as Error).message || 'Something went wrong.');
   }
