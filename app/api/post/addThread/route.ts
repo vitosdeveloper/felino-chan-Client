@@ -42,6 +42,7 @@ export const POST = async (request: Request) => {
     };
     if (isPost(mountedThread)) {
       const newPost = await addPost(mountedThread);
+      revalidatePath('/hw/[pageNumber]');
       await removeOldThreadsAndItsReplys();
       return NextResponse.json({ newPost });
     }

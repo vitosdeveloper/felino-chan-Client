@@ -6,6 +6,7 @@ import {
   getPostHour,
 } from '@/helpers/serverActionsHelper';
 import { isPost } from '@/lib/mongoHelper';
+import { revalidatePath } from 'next/cache';
 import { NextResponse } from 'next/server';
 
 export const POST = async (request: Request) => {
@@ -76,6 +77,7 @@ export const POST = async (request: Request) => {
         await addReplyAndBump(mountedReply, threadNumber!);
       }
     }
+    revalidatePath('/hw/[pageNumber]');
     return NextResponse.json({ message: 'success!!!' });
   } catch (error) {
     console.log(error);
