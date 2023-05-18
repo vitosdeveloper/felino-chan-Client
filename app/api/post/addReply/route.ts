@@ -77,7 +77,6 @@ export const POST = async (request: Request) => {
         await addReplyAndBump(mountedReply, threadNumber!);
       }
     }
-    revalidatePath('/hw/[pageNumber]');
     return NextResponse.json({ message: 'success!!!' });
   } catch (error) {
     console.log(error);

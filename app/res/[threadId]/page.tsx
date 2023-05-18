@@ -9,6 +9,8 @@ import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {};
 
+export const revalidate = 0;
+
 const page = async ({ params }: { params: { threadId: string } }) => {
   metadata.description = 'Thread page including all replys';
   metadata.title = `Thread #${params.threadId}`;
