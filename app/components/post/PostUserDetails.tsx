@@ -27,8 +27,7 @@ const PostUserDetails = ({
 
   return (
     <div className={classes.details}>
-      <PostDeleteCheckBox id={id} />
-      {/* <p className={classes.details}> */}
+      <PostDeleteCheckBox id={id} postNumber={postNumber} />
       {assunto && <span className={classes.assunto}>{assunto}</span>}
       <Link
         href={email ? 'mailto:' + email : '/res/' + postNumber}
@@ -36,10 +35,9 @@ const PostUserDetails = ({
       >
         Anônimo
       </Link>
-      <span className={classes.date}>{postDay}</span>
+      <span>{postDay}</span>
       <span className={classes.anon}>No.</span>
       <span className={classes.date}>{postNumber}</span>
-      {/* </p> */}
       {op && (
         <span>
           [<Link href={linkHref}>{linkText}</Link>]

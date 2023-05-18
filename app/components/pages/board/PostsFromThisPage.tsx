@@ -2,6 +2,7 @@ import Replys from '@/app/components/post/reply/Replys';
 import Thread from '@/app/components/post/thread/Thread';
 import { getThreadsAndItsReplysByPage } from '@/lib/mongoHelper';
 import { Post } from '@/types/generalTypes';
+import Pagination from './Pagination';
 
 type Props = { page: number };
 
@@ -24,6 +25,7 @@ const PostsFromThisPage = async ({ page }: Props) => {
           </Thread>
         );
       })}
+      <Pagination currentPage={page} />
     </div>
   );
 };

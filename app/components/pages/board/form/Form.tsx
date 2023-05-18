@@ -5,11 +5,10 @@ import classes from './Form.module.css';
 import Button from './Button';
 import Reminder from './Reminder';
 import Centralizer from '@/app/components/layout/Centralizer';
-import { useRef, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { addReply, addThread } from '@/helpers/serverActions';
+import { FormEvent, useRef, useState } from 'react';
 import usePassword from '@/custom-hooks/usePassword';
 import { setStoragePassword } from '@/utils/handleLocalStorage';
+import { useRouter } from 'next/navigation';
 
 type Props = { op: boolean; threadNumber?: number };
 
@@ -19,6 +18,7 @@ const Form = ({ op, threadNumber }: Props) => {
   const assuntoRef = useRef<HTMLInputElement>(null);
   const postContentRef = useRef<HTMLTextAreaElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const allowCatImageRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const { password, setPassword } = usePassword();
 
@@ -46,38 +46,79 @@ const Form = ({ op, threadNumber }: Props) => {
     return false;
   };
 
-  const finishPosting = () => {
-    clearInputs();
-    router.replace('/hw/1');
-    router.refresh();
-    setLoading(false);
-  };
-
-  const handleReply = async (formData: FormData) => {
-    if (userHasFilledRequiredInputs()) {
-      setLoading(true);
-      await addReply(formData, threadNumber as number);
-      finishPosting();
-    }
-  };
-
-  const handleAddThread = async (formData: FormData) => {
-    if (userHasFilledRequiredInputs()) {
-      await addThread(formData);
-      finishPosting();
-    }
-  };
-
   const handlePasswordChange = (value: string) => {
     setPassword(value);
     setStoragePassword('felinoChanPassword', value);
   };
 
+  const finishPosting = async () => {
+    const pages = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+    setLoading(false);
+    clearInputs();
+    threadNumber && router.prefetch('res/' + threadNumber);
+    pages.forEach((page) => router.prefetch('hw/' + page));
+    router.push('hw/1#top');
+    router.refresh();
+  };
+
+  const handleReply = async (e: FormEvent) => {
+    e.preventDefault();
+    if (userHasFilledRequiredInputs()) {
+      try {
+        setLoading(true);
+        const email = emailRef.current?.value;
+        const assunto = assuntoRef.current?.value;
+        const postContent = postContentRef.current?.value;
+        const password = passwordRef.current?.value;
+        const allowCatImage = allowCatImageRef.current?.checked;
+
+        const res = await fetch('/api/post/addReply', {
+          method: 'POST',
+          body: JSON.stringify({
+            email,
+            assunto,
+            postContent,
+            password,
+            allowCatImage,
+            threadNumber,
+          }),
+        });
+        if (!res.ok) throw new Error('Error creating new Reply.');
+        finishPosting();
+        return;
+      } catch (error) {
+        throw new Error((error as Error).message);
+      }
+    }
+  };
+
+  const handleAddThread = async (e: FormEvent) => {
+    e.preventDefault();
+    if (userHasFilledRequiredInputs()) {
+      try {
+        setLoading(true);
+        const email = emailRef.current?.value;
+        const assunto = assuntoRef.current?.value;
+        const postContent = postContentRef.current?.value;
+        const password = passwordRef.current?.value;
+
+        const res = await fetch('/api/post/addThread', {
+          method: 'POST',
+          body: JSON.stringify({ email, assunto, postContent, password }),
+        });
+        if (!res.ok) throw new Error('Error creating new Thread.');
+        finishPosting();
+      } catch (error) {
+        throw new Error((error as Error).message);
+      }
+    }
+  };
+
   return (
     <Centralizer>
       <form
-        action={op ? handleAddThread : handleReply}
-        onSubmit={() => setLoading(true)}
+        // action={op ? handleAddThread : handleReply}
+        onSubmit={op ? handleAddThread : handleReply}
         className={classes.form}
       >
         <div className={classes.inputs}>
@@ -114,6 +155,7 @@ const Form = ({ op, threadNumber }: Props) => {
           />
           <div className={classes.checkboxContainer}>
             <input
+              ref={allowCatImageRef}
               id='allowCatImage'
               name='allowCatImage'
               type='checkbox'

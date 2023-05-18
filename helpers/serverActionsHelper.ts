@@ -1,5 +1,3 @@
-'use server';
-
 import { getCollectionAndConnection } from '@/lib/mongoHelper';
 
 export const getPostHour = () => {
@@ -18,9 +16,12 @@ export const getPostHour = () => {
 
 export const getCat = async () => {
   try {
-    const res = await fetch('https://api.thecatapi.com/v1/images/search', {
-      cache: 'no-store',
-    });
+    const res = await fetch(
+      'https://api.thecatapi.com/v1/images/search?mime_types=jpg,png',
+      {
+        cache: 'no-store',
+      }
+    );
     if (!res.ok) throw new Error();
     const cat = await res.json();
     return cat;
@@ -51,9 +52,10 @@ export const addPost = async (mountedPost: any) => {
       'posts'
     );
     const res = await collection.insertOne(mountedPost);
-    if (!res) throw new Error('Error adding post.');
+    if (!res || !res.acknowledged) throw new Error('Error adding post.');
     await connection.close();
-    return true;
+    delete mountedPost.password;
+    return { ...mountedPost, _id: res.insertedId };
   } catch (error) {
     throw new Error('Error adding new post to Database.');
   }

@@ -11,7 +11,7 @@ const Pagination = ({ currentPage }: Props) => {
         <Link
           className={page === currentPage ? pagClasses.bold : pagClasses.normal}
           key={page}
-          href={`/hw/${page}#top`}
+          href={`/hw/${page}`}
         >
           [ {page} ]
         </Link>

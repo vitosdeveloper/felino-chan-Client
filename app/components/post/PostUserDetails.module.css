@@ -20,7 +20,3 @@
 .anon {
   color: var(--linkColor);
 }
-
-.date {
-  align-self: flex-end;
-}

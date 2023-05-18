@@ -89,6 +89,13 @@ export const getAllThreads = async () => {
   return processData(threads);
 };
 
+export const getAllPosts = async () => {
+  const { collection, connection } = await getCollectionAndConnection('posts');
+  const posts = await collection.find().toArray();
+  await connection.close();
+  return processData(posts);
+};
+
 export const getThreadsByPageAndItsReplys = async (threadId: number) => {
   const { collection, connection } = await getCollectionAndConnection('posts');
   const result = await collection
