@@ -7,7 +7,7 @@ import Reminder from './Reminder';
 import Centralizer from '@/app/components/layout/Centralizer';
 import { FormEvent, useRef, useState } from 'react';
 import usePassword from '@/custom-hooks/usePassword';
-import { setStoragePassword } from '@/utils/handleLocalStorage';
+import { setOneStorage } from '@/utils/handleLocalStorage';
 import { useRouter } from 'next/navigation';
 
 type Props = { op: boolean; threadNumber?: number };
@@ -48,7 +48,7 @@ const Form = ({ op, threadNumber }: Props) => {
 
   const handlePasswordChange = (value: string) => {
     setPassword(value);
-    setStoragePassword('felinoChanPassword', value);
+    setOneStorage('felinoChanPassword', value);
   };
 
   const finishPosting = async () => {

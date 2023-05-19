@@ -1,19 +1,40 @@
 :root {
-  --bodyBgTexture: url(https://www.transparenttextures.com/patterns/cubes.png);
-  --linkHoverColor: rgb(59, 50, 38);
-  --linkColor: rgb(78, 79, 119);
-  --replyBgColor: #8277e9;
-  --hrColor: rgb(143, 143, 214);
-  --headerBgColor: rgb(168, 168, 252);
-  --bodyBgColor: #c9c4ff;
-  --inputBgColor: rgb(223, 223, 255);
-  --assuntoColor: #3b30ce;
+  --bodyBgTexture: none;
+  --replyBgTexture: none;
+  --linkHoverColor: #9b9ea2;
+  --linkColor: #dbdee1;
+  --assuntoColor: #9bb5d0;
+  --replyBgColor: #383a40;
+  --hrColor: rgb(103, 103, 103);
+  --headerBgColor: #1e1f22;
+  --bodyBgColor: #2b2d31;
+  --inputBgColor: #383a40;
+  --textColor: #dbdee1;
 }
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+p,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+small,
+select,
+option,
+label,
+input,
+textarea,
+button,
+i {
+  color: var(--textColor);
 }
 
 html,
@@ -23,8 +44,9 @@ body {
 }
 
 body {
-  background-color: var(--bodyBgColor);
   background-image: var(--bodyBgTexture);
+  background-color: var(--bodyBgColor);
+  background-attachment: scroll, scroll;
 }
 
 * {

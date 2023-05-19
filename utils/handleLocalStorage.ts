@@ -23,11 +23,11 @@ export const removeItemFromStorage = (itemId: number, storageName: string) => {
   }
 };
 
-export const getPassword = (storageName: string) => {
+export const getOneStorage = (storageName: string) => {
   if (typeof window === 'undefined') return [];
   return window.localStorage.getItem(storageName);
 };
 
-export const setStoragePassword = (storageName: string, password: string) => {
+export const setOneStorage = (storageName: string, password: string) => {
   window.localStorage.setItem(storageName, password);
 };

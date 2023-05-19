@@ -3,9 +3,9 @@
   padding: 0 0.75rem 0.5rem 0.75rem;
   border-radius: 5px;
   background: var(--replyBgColor);
-  background-image: var(--bodyBgTexture);
+  background-image: var(--replyBgTexture);
   margin-top: 0.5rem;
-  box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.4);
+  box-shadow: 6px 6px 6px rgb(50, 50, 50);
 }
 
 .reply div {

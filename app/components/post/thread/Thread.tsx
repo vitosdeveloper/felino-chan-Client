@@ -84,7 +84,7 @@ const Thread = ({ from, thread, children }: Props) => {
             from={from}
             op={op}
           />
-          <div>{parseHtmlString(postContent)}</div>
+          <p>{parseHtmlString(postContent)}</p>
         </div>
       </div>
       {children}

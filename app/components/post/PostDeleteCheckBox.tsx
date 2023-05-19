@@ -27,8 +27,6 @@ const PostDeleteCheckBox = ({ id, postNumber }: Props) => {
             postNumber,
           }),
         });
-        console.log(res);
-
         if (!res.ok)
           throw new Error(
             'Wrong password or something went wrong deleting the post #' +

@@ -2,10 +2,36 @@
   background-color: var(--headerBgColor);
   width: 100%;
   padding: 0.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  justify-items: center;
+  gap: 1rem;
 }
 
 .nav {
   display: flex;
   gap: 0.25rem;
   justify-content: center;
+}
+
+.theme {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.theme select {
+  background: var(--bodyBgColor);
+  margin: 0;
+  border-radius: 5px;
+}
+
+@media (max-width: 450px) {
+  .header {
+    gap: 0.25rem;
+    flex-direction: column;
+  }
+  .theme {
+    align-self: center;
+  }
 }
