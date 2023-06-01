@@ -7,7 +7,7 @@ Repositório: https://github.com/vitosnatios/felino-chan-Client
 
 ## Tecnologias/ferramentas utilizadas:
 
-MextJS 13 (e ReactJS), Typescript/Javascript, css, mongoDB, MongoDB Atlas (como host da database), Vercel como host do website, thecatapi (como API da qual o site gera as imagens de gatinhos).
+NextJS 13 (e ReactJS), Typescript/Javascript, css, mongoDB, MongoDB Atlas (como host da database), Vercel como host do website, thecatapi (como API da qual o site gera as imagens de gatinhos).
 
 ps: Esse projeto foi originalmente feito com MERN stack e foi recentemente migrado com tecnologias mais modernas e código mais limpo.
 
