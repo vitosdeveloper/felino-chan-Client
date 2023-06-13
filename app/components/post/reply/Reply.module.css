@@ -5,7 +5,7 @@
   background: var(--replyBgColor);
   background-image: var(--replyBgTexture);
   margin-top: 0.5rem;
-  box-shadow: 6px 6px 6px rgb(50, 50, 50);
+  box-shadow: 6px 6px 6px rgba(50, 50, 50, 0.4);
 }
 
 .reply div {

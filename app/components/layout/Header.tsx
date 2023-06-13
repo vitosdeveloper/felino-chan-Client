@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import classes from './Header.module.css';
 import { Themes } from '@/app/layout';
-import { ChangeEvent, Dispatch, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { getOneStorage, setOneStorage } from '@/utils/handleLocalStorage';
 
 const Header = () => {

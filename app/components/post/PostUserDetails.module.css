@@ -2,8 +2,12 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.25rem;
-  align-items: center;
+  align-items: flex-end;
   font-weight: 300;
+}
+
+.details :first-child {
+  align-self: center;
 }
 
 .anon,

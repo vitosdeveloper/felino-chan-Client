@@ -2,6 +2,10 @@
   font-size: 4.5rem;
 }
 
+a .bigTitle:hover {
+  color: var(--linkHoverColor);
+}
+
 @media (max-width: 450px) {
   .bigTitle {
     font-size: 3rem;
