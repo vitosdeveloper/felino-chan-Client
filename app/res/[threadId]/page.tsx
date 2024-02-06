@@ -18,11 +18,6 @@ const page = async ({ params }: { params: { threadId: string } }) => {
   const { thread, replys, redirectTo } = await getThreadsByPageAndItsReplys(
     Number(params.threadId)
   );
-  await new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(true);
-    }, 2000);
-  });
   if (thread && thread.op) {
     return (
       <>
