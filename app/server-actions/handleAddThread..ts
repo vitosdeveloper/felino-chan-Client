@@ -7,9 +7,14 @@ import {
   getPostHour,
 } from '@/helpers/serverActionsHelper';
 import { isPost, removeOldThreadsAndItsReplys } from '@/lib/mongoHelper';
+import { IBoards } from '@/utils/boards';
 import { revalidatePath } from 'next/cache';
 
-export const handleAddThread = async (formData: FormData) => {
+export const handleAddThread = async (
+  state: { error: string },
+  formData: FormData,
+  board: IBoards
+) => {
   try {
     const thread = {
       email: formData.get('email'),
@@ -40,7 +45,7 @@ export const handleAddThread = async (formData: FormData) => {
     const randomIdGeneratedByMe = await getIdCountAndIncrementByOne();
     const mountedThread = {
       ...form,
-      board: 'hw',
+      board,
       reply: null,
       op: true,
       postDay: getPostHour(),
@@ -50,13 +55,21 @@ export const handleAddThread = async (formData: FormData) => {
       randomIdGeneratedByMe,
     };
     if (isPost(mountedThread)) {
-      const newPost = await addPost(mountedThread);
+      await addPost(mountedThread);
       await removeOldThreadsAndItsReplys();
-      revalidatePath('/hw/[pageNumber]', 'page');
-      revalidatePath('/hw/catalog', 'page');
-      revalidatePath('/res/[threadId]', 'page');
+      revalidatePath(`/[board]/[pageNumber]`, 'page');
+      revalidatePath(`/[board]/catalog`, 'page');
+      revalidatePath(`/[board]/res/[threadId]`, 'page');
+      return { error: '' };
     }
+    return { error: '' };
   } catch (error) {
     console.log(error);
+    return {
+      error:
+        error instanceof Error
+          ? error.message
+          : 'Erro ao responder essa thread',
+    };
   }
 };

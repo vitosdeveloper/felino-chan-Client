@@ -4,8 +4,10 @@ import classes from './Header.module.css';
 import { Themes } from '@/app/layout';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { getOneStorage, setOneStorage } from '@/utils/handleLocalStorage';
+import { visibleBoards } from '@/utils/boardsTitle';
+import { IBoards } from '@/utils/boards';
 
-const Header = () => {
+const Header = ({ board }: { board?: IBoards }) => {
   const [theme, setTheme] = useState<Themes>('dark');
 
   const updateCSSVariables = (
@@ -118,10 +120,18 @@ const Header = () => {
       <nav className={classes.nav}>
         <span>[</span>
         <Link href='/'>home</Link>
-        <span>/</span>
-        <Link href='/hw/1'>hw</Link>
-        <span>/</span>
-        <Link href='/hw/catalog'>catalog</Link>
+        {visibleBoards.map((b) => (
+          <div key={b}>
+            <span>/ </span>
+            <Link href={`/${b}/1`}>{b}</Link>
+          </div>
+        ))}
+        {board && (
+          <>
+            <span>/</span>
+            <Link href={`/${board}/catalog`}>catalog</Link>
+          </>
+        )}
         <span>]</span>
       </nav>
       <div className={classes.theme}>

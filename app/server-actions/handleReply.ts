@@ -1,5 +1,4 @@
 'use server';
-
 import {
   addPost,
   addReplyAndBump,
@@ -8,9 +7,15 @@ import {
   getPostHour,
 } from '@/helpers/serverActionsHelper';
 import { isPost } from '@/lib/mongoHelper';
+import { IBoards } from '@/utils/boards';
 import { revalidatePath } from 'next/cache';
 
-export const handleReply = async (formData: FormData, threadNumber: any) => {
+export const handleReply = async (
+  state: { error: string },
+  formData: FormData,
+  threadNumber: any,
+  board: IBoards
+) => {
   try {
     const reply = {
       email: formData.get('email'),
@@ -36,53 +41,42 @@ export const handleReply = async (formData: FormData, threadNumber: any) => {
     ) {
       throw new Error('Password or main content are missing.');
     }
+    const randomIdGeneratedByMe = await getIdCountAndIncrementByOne();
+    const newReply = {
+      ...form,
+      board,
+      reply: threadNumber,
+      op: false,
+      postDay: getPostHour(),
+      randomIdGeneratedByMe,
+      catUrl: null,
+      catWidth: null,
+      catHeight: null,
+    };
     if (form.allowCatImage) {
       const [cat] = await getCat();
       const { url: catUrl, width: catWidth, height: catHeight } = cat;
-      const randomIdGeneratedByMe = await getIdCountAndIncrementByOne();
-      const mountedReply = {
-        ...form,
-        board: 'hw',
-        reply: threadNumber,
-        op: false,
-        postDay: getPostHour(),
-        catUrl,
-        catWidth,
-        catHeight,
-        randomIdGeneratedByMe,
-      };
-
-      if (isPost(mountedReply)) {
-        if (mountedReply.email === 'sage' || mountedReply.email === 'SAGE') {
-          await addPost(mountedReply);
-        } else {
-          await addReplyAndBump(mountedReply, threadNumber!);
-        }
-      }
+      newReply.catUrl = catUrl;
+      newReply.catWidth = catWidth;
+      newReply.catHeight = catHeight;
+    }
+    if (newReply.email === 'sage' || newReply.email === 'SAGE') {
+      await addPost(newReply);
     } else {
-      const randomIdGeneratedByMe = await getIdCountAndIncrementByOne();
-      const mountedReply = {
-        ...form,
-        board: 'hw',
-        reply: threadNumber,
-        op: false,
-        postDay: getPostHour(),
-        catUrl: null,
-        catWidth: null,
-        catHeight: null,
-        randomIdGeneratedByMe,
-      };
-      if (mountedReply.email === 'sage' || mountedReply.email === 'SAGE') {
-        await addPost(mountedReply);
-      } else {
-        await addReplyAndBump(mountedReply, threadNumber!);
-      }
+      await addReplyAndBump(newReply, threadNumber!);
     }
 
-    revalidatePath('/hw/[pageNumber]', 'page');
-    revalidatePath('/hw/catalog', 'page');
-    revalidatePath('/res/[threadId]', 'page');
+    revalidatePath(`/[board]/[pageNumber]`, 'page');
+    revalidatePath(`/[board]/catalog`, 'page');
+    revalidatePath(`/[board]/res/[threadId]`, 'page');
+    return { error: '' };
   } catch (error) {
     console.log(error);
+    return {
+      error:
+        error instanceof Error
+          ? error.message
+          : 'Erro ao responder essa thread',
+    };
   }
 };

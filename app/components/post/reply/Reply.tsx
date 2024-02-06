@@ -8,10 +8,11 @@ import parseHtmlString from '@/lib/parseStringToJsx';
 import generalClasses from '../General.module.css';
 import HiddenPost from '../HiddenPost';
 import useHidden from '@/custom-hooks/useHidden';
+import { IBoards } from '@/utils/boards';
 
-type Props = { reply: Post };
+type Props = { reply: Post; board: IBoards };
 
-const Reply = ({ reply }: Props) => {
+const Reply = ({ reply, board }: Props) => {
   const {
     _id,
     email,
@@ -40,6 +41,7 @@ const Reply = ({ reply }: Props) => {
   if (!showPost) {
     return (
       <HiddenPost
+        board={board}
         from='inside'
         assunto={assunto}
         email={email}
@@ -56,6 +58,7 @@ const Reply = ({ reply }: Props) => {
     <div className={classes.reply} id={String(randomIdGeneratedByMe)}>
       <div className={generalClasses.fileOrUserDetails}>
         <PostUserDetails
+          board={board}
           assunto={assunto}
           email={email}
           id={_id}

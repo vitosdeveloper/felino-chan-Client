@@ -1,12 +1,15 @@
 import { ReactNode } from 'react';
 import classes from './Button.module.css';
+import { useFormStatus } from 'react-dom';
 
-type Props = { children: ReactNode; disabled?: boolean };
+type Props = { children: ReactNode };
 
-const Button = ({ children, disabled }: Props) => {
+const Button = ({ children }: Props) => {
+  const { pending } = useFormStatus();
+
   return (
-    <button className={classes.button} disabled={disabled}>
-      {children}
+    <button className={classes.button} disabled={pending}>
+      {pending ? 'Enviando...' : children}
     </button>
   );
 };

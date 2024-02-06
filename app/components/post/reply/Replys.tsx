@@ -1,16 +1,17 @@
 import { Post } from '@/types/generalTypes';
 import Reply from './Reply';
-import { isPost } from '@/lib/mongoHelper';
+import { IBoards } from '@/utils/boards';
 
 type Props = {
   replys: Post[];
+  board: IBoards;
 };
 
-const Replys = ({ replys }: Props) => {
+const Replys = ({ replys, board }: Props) => {
   return (
     <>
       {replys?.map((reply) => {
-        return <Reply key={reply._id} reply={reply} />;
+        return <Reply key={reply._id} reply={reply} board={board} />;
       })}
     </>
   );

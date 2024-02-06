@@ -1,21 +1,17 @@
 import { RefObject } from 'react';
 import classes from './Input.module.css';
+import { useFormStatus } from 'react-dom';
 
 type Props = {
   refProp?: RefObject<HTMLTextAreaElement>;
   placeholder: string;
-  disabled?: boolean;
   name: string;
   required?: boolean;
 };
 
-const FormTextarea = ({
-  refProp,
-  placeholder,
-  disabled,
-  name,
-  required,
-}: Props) => {
+const FormTextarea = ({ refProp, placeholder, name, required }: Props) => {
+  const { pending } = useFormStatus();
+
   return (
     <>
       <textarea
@@ -24,7 +20,7 @@ const FormTextarea = ({
         rows={5}
         ref={refProp}
         placeholder={placeholder}
-        disabled={disabled}
+        disabled={pending}
         required={required}
       ></textarea>
     </>

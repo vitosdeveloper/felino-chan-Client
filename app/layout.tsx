@@ -1,7 +1,5 @@
 import './globals.css';
-import Header from '@/app/components/layout/Header';
 import { Roboto } from 'next/font/google';
-import MainLayout from '@/app/components/layout/MainLayout';
 import { ReactNode } from 'react';
 
 export const dynamic = 'force-static';
@@ -18,13 +16,10 @@ export const metadata = {
 
 export type Themes = 'default' | 'dark' | 'brazil';
 
-function RootLayout({ children }: { children: ReactNode }) {
+function RootLayout({ children, ...props }: { children: ReactNode }) {
   return (
     <html lang='br'>
-      <body className={roboto.className}>
-        <Header />
-        <MainLayout>{children}</MainLayout>
-      </body>
+      <body className={roboto.className}>{children}</body>
     </html>
   );
 }

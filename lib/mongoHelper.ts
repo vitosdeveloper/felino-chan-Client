@@ -1,4 +1,5 @@
 import { Post } from '@/types/generalTypes';
+import { IBoards } from '@/utils/boards';
 import { MongoClient } from 'mongodb';
 import sanitizeHtml from 'sanitize-html';
 
@@ -89,6 +90,19 @@ export const getAllThreads = async () => {
   return processData(threads);
 };
 
+export const getAllThreadsFromSomeBoard = async (
+  board: IBoards
+  // projection: { [key: string]: boolean }
+) => {
+  const { collection, connection } = await getCollectionAndConnection('posts');
+  const threads = await collection
+    .find({ op: true, board })
+    .sort({ $natural: -1 })
+    .toArray();
+  await connection.close();
+  return processData(threads);
+};
+
 export const getAllPosts = async () => {
   const { collection, connection } = await getCollectionAndConnection('posts');
   const posts = await collection.find().toArray();
@@ -113,7 +127,10 @@ export const getThreadsByPageAndItsReplys = async (threadId: number) => {
   return { thread, replys, redirectTo };
 };
 
-export const getThreadsAndItsReplysByPage = async (page: number) => {
+export const getThreadsAndItsReplysByPage = async (
+  page: number,
+  board: IBoards
+) => {
   const { collection, connection } = await getCollectionAndConnection('posts');
   const postsPerPage = 8;
   const [startFrom, stopOn] = [
@@ -121,7 +138,7 @@ export const getThreadsAndItsReplysByPage = async (page: number) => {
     postsPerPage,
   ];
   const findThreadsByPage = await collection
-    .find({ op: true })
+    .find({ op: true, board })
     .sort({ $natural: -1 })
     .skip(startFrom)
     .limit(stopOn)

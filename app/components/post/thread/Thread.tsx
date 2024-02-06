@@ -10,14 +10,19 @@ import Link from 'next/link';
 import parseHtmlString from '@/lib/parseStringToJsx';
 import HiddenPost from '../HiddenPost';
 import useHidden from '@/custom-hooks/useHidden';
+import { IBoards } from '@/utils/boards';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   from: 'outside' | 'inside';
   thread: Post;
   children: ReactNode;
+  board: IBoards;
 };
 
-const Thread = ({ from, thread, children }: Props) => {
+const Thread = ({ from, thread, children, board }: Props) => {
+  const route = useRouter();
+
   const {
     _id,
     email,
@@ -46,6 +51,7 @@ const Thread = ({ from, thread, children }: Props) => {
   if (!showPost) {
     return (
       <HiddenPost
+        board={board}
         assunto={assunto}
         email={email}
         id={_id}
@@ -83,6 +89,7 @@ const Thread = ({ from, thread, children }: Props) => {
             postNumber={String(randomIdGeneratedByMe)}
             from={from}
             op={op}
+            board={board}
           />
           <p>{parseHtmlString(postContent)}</p>
         </div>
@@ -91,7 +98,25 @@ const Thread = ({ from, thread, children }: Props) => {
       <Hr />
       {from === 'inside' && (
         <span>
-          [<Link href='/hw/1'>Voltar</Link>]
+          [
+          <Link
+            onClick={async (e) => {
+              e.preventDefault();
+              route.push(`/${board}/1`);
+              await new Promise((resolve) => {
+                setTimeout(() => {
+                  document
+                    .querySelector(`#top`)
+                    ?.scrollIntoView({ behavior: 'smooth' });
+                  resolve('');
+                }, 200);
+              });
+            }}
+            href={`/${board}/1`}
+          >
+            Voltar
+          </Link>
+          ]
         </span>
       )}
     </div>

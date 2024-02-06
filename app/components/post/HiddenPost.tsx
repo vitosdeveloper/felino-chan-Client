@@ -1,6 +1,7 @@
 import PostUserDetails from './PostUserDetails';
 import classes from './HiddenPost.module.css';
 import Hr from '../layout/Hr';
+import { IBoards } from '@/utils/boards';
 
 type Props = {
   assunto: string;
@@ -11,6 +12,7 @@ type Props = {
   op: boolean;
   handleShowPost: () => void;
   from: 'inside' | 'outside';
+  board: IBoards;
 };
 
 const HiddenPost = ({
@@ -22,6 +24,7 @@ const HiddenPost = ({
   op,
   handleShowPost,
   from,
+  board,
 }: Props) => {
   return (
     <div className={classes.hiddenPost}>
@@ -29,6 +32,7 @@ const HiddenPost = ({
         <small onClick={handleShowPost}>[ + ]</small>
       </p>
       <PostUserDetails
+        board={board}
         assunto={assunto}
         email={email}
         id={id}

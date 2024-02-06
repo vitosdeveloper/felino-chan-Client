@@ -13,9 +13,9 @@ type Props = {};
 const Loading = (props: Props) => {
   return (
     <>
-      <Form op={false} threadNumber={666} />
+      <Form op={false} threadNumber={666} board={'s'} />
       <Hr />
-      <Links destination='bottom' />
+      <Links destination='bottom' board={'s'} />
       <Hr />
       <ThreadSkeletonUnity>
         <ReplySkeletonUnity />
