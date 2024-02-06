@@ -35,8 +35,14 @@ export const getIdCountAndIncrementByOne = async () => {
     const { collection, connection } = await getCollectionAndConnection(
       'postcounts'
     );
-    const { postNumberIs }: any = await collection.findOne();
-    if (!postNumberIs) throw new Error('Error connecting to the DB');
+    const postNumberQuery: any = await collection.findOne();
+
+    if (!postNumberQuery) {
+      await collection.insertOne({ postNumberIs: 0 });
+      await connection.close();
+      return 0;
+    }
+    const { postNumberIs } = postNumberQuery;
     const randomIdGeneratedByMe = postNumberIs + 1;
     await collection.updateOne({ postNumberIs }, { $inc: { postNumberIs: 1 } });
     await connection.close();

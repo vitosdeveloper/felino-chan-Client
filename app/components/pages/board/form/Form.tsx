@@ -57,7 +57,7 @@ const Form = ({ op, threadNumber }: Props) => {
     clearInputs();
     threadNumber && router.prefetch('res/' + threadNumber);
     pages.forEach((page) => router.prefetch('hw/' + page));
-    router.push('hw/1#top');
+    router.push('/hw/1#top');
     router.refresh();
   };
 
