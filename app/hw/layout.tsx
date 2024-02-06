@@ -5,12 +5,10 @@ import Image from 'next/image';
 
 export default async function RootLayout({
   children,
-  params,
 }: {
   children: React.ReactNode;
   params: { pageNumber: string };
 }) {
-  const page = Number(params.pageNumber);
   return (
     <>
       <Centralizer>

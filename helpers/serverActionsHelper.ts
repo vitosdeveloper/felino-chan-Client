@@ -44,6 +44,7 @@ export const getIdCountAndIncrementByOne = async () => {
     }
     const { postNumberIs } = postNumberQuery;
     const randomIdGeneratedByMe = postNumberIs + 1;
+
     await collection.updateOne({ postNumberIs }, { $inc: { postNumberIs: 1 } });
     await connection.close();
     return randomIdGeneratedByMe;

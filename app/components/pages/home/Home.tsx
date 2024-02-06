@@ -10,7 +10,6 @@ const HomePage = () => {
       <BigTitle>NEXT.JS</BigTitle>
       <BigTitle>Imageboard</BigTitle>
       <BigTitle>with cute cats</BigTitle>
-
       <Link href='/hw/1'>
         <BigTitle>/HW/</BigTitle>
       </Link>

@@ -1,5 +1,5 @@
 import PostsFromThisPage from '@/app/components/pages/board/PostsFromThisPage';
-import { Metadata } from 'next';
+import { GetStaticPaths, Metadata } from 'next';
 
 export const metadata: Metadata = {
   description:
@@ -8,14 +8,18 @@ export const metadata: Metadata = {
 
 const pages = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 
-export const revalidate = 0;
-
-const HelloWorldPage = ({ params }: { params: { pageNumber: string } }) => {
-  if (pages.includes(params.pageNumber)) {
-    const page = Number(params.pageNumber);
-    metadata.title = `Hello, World! Página ${page}`;
-    return <PostsFromThisPage page={page} />;
-  }
+const HelloWorldPage = async ({
+  params,
+}: {
+  params: { pageNumber: string };
+}) => {
+  const page = Number(params.pageNumber);
+  metadata.title = `Hello, World! Página ${page}`;
+  return <PostsFromThisPage page={page} />;
 };
 
 export default HelloWorldPage;
+
+export async function generateStaticParams() {
+  return pages.map((pageNumber) => ({ pageNumber }));
+}
