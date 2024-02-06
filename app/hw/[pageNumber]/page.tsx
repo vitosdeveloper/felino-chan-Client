@@ -1,5 +1,5 @@
 import PostsFromThisPage from '@/app/components/pages/board/PostsFromThisPage';
-import { GetStaticPaths, Metadata } from 'next';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   description:
