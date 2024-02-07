@@ -21,9 +21,9 @@ const PostsFromThisPage = async ({ page, board }: Props) => {
         const replysFromThisThread = (replys as Post[]).filter(
           (reply) => reply.reply === thread.randomIdGeneratedByMe
         );
-        const lastFiveReplys = replysFromThisThread
-          .filter((r, i) => i <= 4)
-          .reverse();
+        const lastFiveReplys = replysFromThisThread;
+        // .filter((r, i) => i <= 4)
+        // .reverse();
         return (
           <Thread key={thread._id} thread={thread} from='outside' board={board}>
             <Replys replys={lastFiveReplys} board={board} />

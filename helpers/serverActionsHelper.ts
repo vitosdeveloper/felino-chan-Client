@@ -1,4 +1,5 @@
 import { getCollectionAndConnection } from '@/lib/mongoHelper';
+import { ObjectId } from 'mongodb';
 
 export const getPostHour = () => {
   const dayName = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab'];
@@ -35,19 +36,16 @@ export const getIdCountAndIncrementByOne = async () => {
     const { collection, connection } = await getCollectionAndConnection(
       'postcounts'
     );
-    const postNumberQuery: any = await collection.findOne();
-
-    if (!postNumberQuery) {
+    const number = await collection.findOneAndUpdate(
+      {},
+      { $inc: { postNumberIs: 1 } }
+    );
+    if (!number) {
       await collection.insertOne({ postNumberIs: 0 });
       await connection.close();
       return 0;
     }
-    const { postNumberIs } = postNumberQuery;
-    const randomIdGeneratedByMe = postNumberIs + 1;
-
-    await collection.updateOne({ postNumberIs }, { $inc: { postNumberIs: 1 } });
-    await connection.close();
-    return randomIdGeneratedByMe;
+    return number.postNumberIs + 1;
   } catch (error) {
     throw new Error('Error getting post Id counting.');
   }
@@ -70,12 +68,10 @@ export const addPost = async (mountedPost: any) => {
 
 export const bump = async (threadId: number) => {
   const { collection, connection } = await getCollectionAndConnection('posts');
-  const threadQuery = await collection.findOne({
+  const threadToBump: any = await collection.findOneAndDelete({
     randomIdGeneratedByMe: threadId,
   });
-  const threadToBump: any = threadQuery;
   delete threadToBump._id;
-  await collection.deleteOne({ randomIdGeneratedByMe: threadId });
   await collection.insertOne(threadToBump);
   await connection.close();
 };

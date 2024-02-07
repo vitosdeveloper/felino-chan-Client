@@ -3,8 +3,7 @@ import Links from '@/app/components/pages/board/Links';
 import Form from '@/app/components/pages/board/form/Form';
 import Replys from '@/app/components/post/reply/Replys';
 import Thread from '@/app/components/post/thread/Thread';
-import { getAllThreads, getThreadsByPageAndItsReplys } from '@/lib/mongoHelper';
-import { Post } from '@/types/generalTypes';
+import { getThreadsByPageAndItsReplys } from '@/lib/mongoHelper';
 import { IBoards, boards } from '@/utils/boards';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
@@ -23,7 +22,9 @@ const page = async ({
     Number(params.threadId),
     params.board
   );
+
   if (thread && thread.op) {
+    delete thread.password;
     return (
       <>
         <Form
@@ -61,12 +62,12 @@ const page = async ({
 
 export default page;
 
-export async function generateStaticParams() {
-  const threads = await getAllThreads();
-  return (threads as Post[])
-    .filter((t) => t)
-    .map((thread) => ({
-      threadId: thread._id.toString(),
-      ...thread,
-    }));
-}
+// export async function generateStaticParams() {
+//   const threads = await getAllThreads();
+//   return (threads as Post[])
+//     .filter((t) => t)
+//     .map((thread) => ({
+//       threadId: thread._id.toString(),
+//       ...thread,
+//     }));
+// }

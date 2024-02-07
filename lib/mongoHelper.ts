@@ -37,9 +37,11 @@ export const isPost = (post: unknown): post is Post => {
   return false;
 };
 
-const processPost = (data: Post | Post[]) => {
+const processPost = (data: Post | Post[], withPass?: boolean) => {
   const process = (dataToProcess: Post) => {
-    delete dataToProcess.password;
+    if (!withPass) {
+      delete dataToProcess.password;
+    }
     return {
       ...dataToProcess,
       _id: dataToProcess._id.toString(),
@@ -73,42 +75,48 @@ const processPost = (data: Post | Post[]) => {
   return process(data);
 };
 
-const processData = (data: unknown) => {
+const processData = (data: unknown, withPass?: boolean) => {
   if (Array.isArray(data)) {
-    return processPost(data.filter(isPost));
+    return processPost(data, withPass);
   }
-  if (isPost(data)) return processPost(data);
+  if (data) return processPost(data as Post[], withPass);
 };
 
-export const getAllThreads = async () => {
-  const { collection, connection } = await getCollectionAndConnection('posts');
-  const threads = await collection
-    .find({ op: true })
-    .sort({ $natural: -1 })
-    .toArray();
-  await connection.close();
-  return processData(threads);
-};
+// export const getAllThreads = async () => {
+//   const { collection, connection } = await getCollectionAndConnection('posts');
+//   const threads = await collection
+//     .find({ op: true })
+//     .sort({ $natural: -1 })
+//     .project({ password: false })
+//     .toArray();
+//   await connection.close();
+//   return processData(threads);
+// };
 
-export const getAllThreadsFromSomeBoard = async (
-  board: IBoards
-  // projection: { [key: string]: boolean }
-) => {
+export const getAllThreadsFromSomeBoard = async (board: IBoards) => {
   const { collection, connection } = await getCollectionAndConnection('posts');
   const threads = await collection
     .find({ op: true, board })
     .sort({ $natural: -1 })
+    .project({
+      _id: 1,
+      catUrl: 1,
+      catWidth: 1,
+      catHeight: 1,
+      postContent: 1,
+      randomIdGeneratedByMe: 1,
+    })
     .toArray();
   await connection.close();
   return processData(threads);
 };
 
-export const getAllPosts = async () => {
-  const { collection, connection } = await getCollectionAndConnection('posts');
-  const posts = await collection.find().toArray();
-  await connection.close();
-  return processData(posts);
-};
+// export const getAllPosts = async () => {
+//   const { collection, connection } = await getCollectionAndConnection('posts');
+//   const posts = await collection.find().toArray();
+//   await connection.close();
+//   return processData(posts);
+// };
 
 export const getThreadsByPageAndItsReplys = async (
   threadId: number,
@@ -123,13 +131,19 @@ export const getThreadsByPageAndItsReplys = async (
       ],
     })
     .toArray();
-  const processedResult = processData(result) as Post[];
+  const processedResult = processData(result, true) as Post[];
   await connection.close();
-  const [thread, replys, redirectTo] = [
-    processedResult.find((p) => p.op),
-    processedResult.filter((p) => p.reply === threadId),
-    processedResult.find((p) => p.randomIdGeneratedByMe === threadId),
-  ];
+  const thread = processedResult.find((p) => p.op);
+  const replys = processedResult
+    .map((r) => {
+      !r.op && delete r.password;
+      return r;
+    })
+    .filter((p) => p.reply === threadId);
+  const redirectTo = processedResult.find(
+    (p) => p.randomIdGeneratedByMe === threadId
+  );
+
   return { thread, replys, redirectTo };
 };
 
@@ -148,44 +162,56 @@ export const getThreadsAndItsReplysByPage = async (
     .sort({ $natural: -1 })
     .skip(startFrom)
     .limit(stopOn)
+    .project({ password: false })
     .toArray();
-
-  if (!findThreadsByPage.length) return;
-  const processedTreads = findThreadsByPage.map(processData);
-  if (!processedTreads.length) return;
-  const replysQuery = processedTreads.map((thread) => {
-    return { reply: (thread as Post).randomIdGeneratedByMe };
-  });
-  if (!replysQuery.length) return;
-  const findAllReplys = await collection.find({ $or: replysQuery }).toArray();
-  findAllReplys.reverse();
+  if (!findThreadsByPage.length) return await connection.close();
+  const processedThreads = findThreadsByPage.map((i) => processData(i));
+  if (!processedThreads.length) return await connection.close();
+  const threadIds = findThreadsByPage.map(
+    (thread) => thread.randomIdGeneratedByMe
+  );
+  const findAllReplys = await collection
+    .find({ reply: { $in: threadIds } })
+    .sort({ randomIdGeneratedByMe: -1 })
+    .limit(5)
+    .project({ password: false })
+    .toArray();
   await connection.close();
-  return { threads: processedTreads, replys: findAllReplys.map(processData) };
+  const processedReplies = findAllReplys.map((i) => processData(i)).reverse();
+  return {
+    threads: processedThreads,
+    replys: processedReplies,
+  };
 };
 
-export const removeOldThreadsAndItsReplys = async () => {
+export const removeOldThreadsAndItsReplys = async (board: IBoards) => {
   try {
     const { collection, connection } = await getCollectionAndConnection(
       'posts'
     );
+    const threadsNumber = await collection.countDocuments({ op: true, board });
+    const limiteDeThreadsPorBoard = 80;
+    if (threadsNumber <= limiteDeThreadsPorBoard)
+      return await connection.close();
     const res = await collection
-      .find({ op: true })
+      .find({ op: true, board })
       .sort({ $natural: -1 })
-      .skip(80)
+      .skip(limiteDeThreadsPorBoard)
       .toArray();
-    if (!res.length) {
-      return;
-    }
+    if (!res.length) return await connection.close();
     const query = res.map((r) => [
-      { randomIdGeneratedByMe: r.randomIdGeneratedByMe },
-      { reply: r.randomIdGeneratedByMe },
+      { randomIdGeneratedByMe: r.randomIdGeneratedByMe, board },
+      { reply: r.randomIdGeneratedByMe, board },
     ]);
     const flatQuery = query.flat();
     if (!flatQuery.length) {
+      await connection.close();
       throw new Error('Something went wrong.');
     }
     await collection.deleteMany({ $or: flatQuery as any[] });
     await connection.close();
     return;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
