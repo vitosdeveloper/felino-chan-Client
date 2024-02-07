@@ -83,7 +83,7 @@ const Reply = ({ reply, board }: Props) => {
         {catUrl && showImage && (
           <PostImage src={catUrl} width={catWidth} height={catHeight} />
         )}
-        <p>{parseHtmlString(postContent)}</p>
+        <p>{parseHtmlString(postContent, board)}</p>
       </div>
     </div>
   );

@@ -110,11 +110,17 @@ export const getAllPosts = async () => {
   return processData(posts);
 };
 
-export const getThreadsByPageAndItsReplys = async (threadId: number) => {
+export const getThreadsByPageAndItsReplys = async (
+  threadId: number,
+  board: IBoards
+) => {
   const { collection, connection } = await getCollectionAndConnection('posts');
   const result = await collection
     .find({
-      $or: [{ randomIdGeneratedByMe: threadId }, { reply: threadId }],
+      $or: [
+        { randomIdGeneratedByMe: threadId, board },
+        { reply: threadId, board },
+      ],
     })
     .toArray();
   const processedResult = processData(result) as Post[];

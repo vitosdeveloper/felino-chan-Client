@@ -91,7 +91,7 @@ const Thread = ({ from, thread, children, board }: Props) => {
             op={op}
             board={board}
           />
-          <p>{parseHtmlString(postContent)}</p>
+          <p>{parseHtmlString(postContent, board)}</p>
         </div>
       </div>
       {children}

@@ -7,7 +7,7 @@ import { getAllThreads, getThreadsByPageAndItsReplys } from '@/lib/mongoHelper';
 import { Post } from '@/types/generalTypes';
 import { IBoards, boards } from '@/utils/boards';
 import { Metadata } from 'next';
-import { redirect, useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {};
 
@@ -20,7 +20,8 @@ const page = async ({
   metadata.description = 'Thread page including all replys';
   metadata.title = `Thread #${params.threadId}`;
   const { thread, replys, redirectTo } = await getThreadsByPageAndItsReplys(
-    Number(params.threadId)
+    Number(params.threadId),
+    params.board
   );
   if (thread && thread.op) {
     return (
@@ -69,5 +70,3 @@ export async function generateStaticParams() {
       ...thread,
     }));
 }
-
-// export const dynamicParams = 'blocking';
