@@ -173,11 +173,19 @@ export const getThreadsAndItsReplysByPage = async (
   const findAllReplys = await collection
     .find({ reply: { $in: threadIds } })
     .sort({ randomIdGeneratedByMe: -1 })
-    .limit(5)
     .project({ password: false })
     .toArray();
+  const replysObj: { [key: string]: Post[] } = {};
+  (findAllReplys as Post[]).forEach((re) => {
+    const selectedObj = replysObj[re.reply as number];
+    if (!selectedObj) return (replysObj[re.reply as number] = [re]);
+    return selectedObj.push(re);
+  });
+  const lastFiveReplys = Object.keys(replysObj)
+    .map((key) => replysObj[key].slice(0, 5))
+    .flat();
   await connection.close();
-  const processedReplies = findAllReplys.map((i) => processData(i)).reverse();
+  const processedReplies = lastFiveReplys.map((i) => processData(i)).reverse();
   return {
     threads: processedThreads,
     replys: processedReplies,
