@@ -29,9 +29,9 @@ export const handleDelete = async (
       $or: [{ _id: new ObjectId(id) }, { reply: Number(postNumber) }],
     });
     await connection.close();
-    revalidatePath('/hw/[pageNumber]', 'page');
-    revalidatePath('/hw/catalog', 'page');
-    revalidatePath('/res/[threadId]', 'page');
+    // revalidatePath('/hw/[pageNumber]', 'page');
+    // revalidatePath('/hw/catalog', 'page');
+    // revalidatePath('/res/[threadId]', 'page');
   } catch (error) {
     console.log(error);
   }

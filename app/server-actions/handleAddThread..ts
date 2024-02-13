@@ -57,9 +57,9 @@ export const handleAddThread = async (
     if (isPost(mountedThread)) {
       await addPost(mountedThread);
       await removeOldThreadsAndItsReplys(board);
-      revalidatePath(`/[board]/[pageNumber]`, 'page');
-      revalidatePath(`/[board]/catalog`, 'page');
-      revalidatePath(`/[board]/res/[threadId]`, 'page');
+      // revalidatePath(`/[board]/[pageNumber]`, 'page');
+      // revalidatePath(`/[board]/catalog`, 'page');
+      // revalidatePath(`/[board]/res/[threadId]`, 'page');
       return { error: '' };
     }
     return { error: '' };

@@ -1,7 +1,4 @@
-import Hr from '@/app/components/layout/Hr';
-import Links from '@/app/components/pages/board/Links';
 import PostsFromThisPage from '@/app/components/pages/board/PostsFromThisPage';
-import Form from '@/app/components/pages/board/form/Form';
 import { boards } from '@/utils/boards';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
@@ -11,7 +8,7 @@ export const metadata: Metadata = {
     'A board that contains a list of threads with random content and cat images',
 };
 
-const pages = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+// const pages = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 
 const HelloWorldPage = async ({
   params,
@@ -26,6 +23,8 @@ const HelloWorldPage = async ({
 
 export default HelloWorldPage;
 
-export async function generateStaticParams() {
-  return pages.map((pageNumber) => ({ pageNumber }));
-}
+// export async function generateStaticParams() {
+//   return pages.map((pageNumber) => ({ pageNumber }));
+// }
+
+export const revalidate = 0;

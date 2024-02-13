@@ -62,6 +62,8 @@ const page = async ({
 
 export default page;
 
+export const revalidate = 0;
+
 // export async function generateStaticParams() {
 //   const threads = await getAllThreads();
 //   return (threads as Post[])

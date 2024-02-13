@@ -13,6 +13,7 @@ import { useFormState } from 'react-dom';
 import CatInput from './CatInput';
 import { useEffect, useRef } from 'react';
 import { IBoards } from '@/utils/boards';
+import { useRouter } from 'next/navigation';
 
 type Props = { op: boolean; threadNumber?: number; board: IBoards };
 
@@ -21,6 +22,7 @@ const initialState = {
 };
 
 const Form = ({ op, threadNumber, board }: Props) => {
+  const router = useRouter();
   const emailRef = useRef<HTMLInputElement>(null);
   const assuntoRef = useRef<HTMLInputElement>(null);
   const postContentRef = useRef<HTMLTextAreaElement>(null);
@@ -59,8 +61,9 @@ const Form = ({ op, threadNumber, board }: Props) => {
         : document
             .querySelector('#bottom')
             ?.scrollIntoView({ behavior: 'smooth' });
+      router.refresh();
     }
-  }, [state, op]);
+  }, [state, op, router]);
 
   return (
     <Centralizer>

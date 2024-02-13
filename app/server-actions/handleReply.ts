@@ -66,9 +66,9 @@ export const handleReply = async (
       await addReplyAndBump(newReply, threadNumber!);
     }
 
-    revalidatePath(`/[board]/[pageNumber]`, 'page');
-    revalidatePath(`/[board]/catalog`, 'page');
-    revalidatePath(`/[board]/res/[threadId]`, 'page');
+    // revalidatePath(`/[board]/[pageNumber]`, 'page');
+    // revalidatePath(`/[board]/catalog`, 'page');
+    // revalidatePath(`/[board]/res/[threadId]`, 'page');
     return { error: '' };
   } catch (error) {
     console.log(error);

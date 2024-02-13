@@ -17,3 +17,4 @@ const Catalog = async ({ params }: { params: { board: IBoards } }) => {
 };
 
 export default Catalog;
+export const revalidate = 0;
