@@ -1,13 +1,38 @@
 .bigTitle {
-  font-size: 4.5rem;
+  font-size: 5.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  background: linear-gradient(135deg, var(--textColor) 0%, var(--accentColor) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  transition: all 0.3s ease;
+  margin-bottom: 0.5rem;
+  letter-spacing: -2px;
+}
+
+a .bigTitle {
+  cursor: pointer;
 }
 
 a .bigTitle:hover {
-  color: var(--linkHoverColor);
+  background: linear-gradient(135deg, var(--accentColor) 0%, var(--linkHoverColor) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transform: scale(1.02);
+}
+
+@media (max-width: 768px) {
+  .bigTitle {
+    font-size: 3.5rem;
+    letter-spacing: -1px;
+  }
 }
 
 @media (max-width: 450px) {
   .bigTitle {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
 }

@@ -1,15 +1,16 @@
-import { RefObject } from 'react';
+import { ChangeEvent } from 'react';
 import classes from './Input.module.css';
 import { useFormStatus } from 'react-dom';
 
 type Props = {
-  refProp?: RefObject<HTMLTextAreaElement>;
   placeholder: string;
   name: string;
   required?: boolean;
+  value?: string;
+  onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
-const FormTextarea = ({ refProp, placeholder, name, required }: Props) => {
+const FormTextarea = ({ placeholder, name, required, value, onChange }: Props) => {
   const { pending } = useFormStatus();
 
   return (
@@ -18,10 +19,11 @@ const FormTextarea = ({ refProp, placeholder, name, required }: Props) => {
         name={name}
         className={classes.input}
         rows={5}
-        ref={refProp}
         placeholder={placeholder}
         disabled={pending}
         required={required}
+        value={value}
+        onChange={onChange}
       ></textarea>
     </>
   );

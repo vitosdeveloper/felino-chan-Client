@@ -1,12 +1,12 @@
 import './globals.css';
-import { Roboto } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import { ReactNode } from 'react';
 
 export const dynamic = 'force-static';
 
-const roboto = Roboto({
-  weight: ['100', '300', '400', '500', '700', '900'],
+const inter = Inter({
   subsets: ['latin'],
+  display: 'swap',
 });
 
 export const metadata = {
@@ -14,12 +14,25 @@ export const metadata = {
   description: 'Imageboard that uses cat pictures.',
 };
 
-export type Themes = 'default' | 'dark' | 'brazil';
+export type Themes = 'default' | 'dark' | 'brazil' | 'cyberpunk' | 'vaporwave' | 'caramelo' | 'agostinho' | 'vasco' | 'usa' | 'tigrinho' | 'urss';
+
+import BoardNavigator from './components/layout/BoardNavigator';
+import AutoScroll from './components/layout/AutoScroll';
+import PageUtilities from './components/layout/PageUtilities';
+import { ThemeScript } from './components/layout/ThemeScript';
 
 function RootLayout({ children, ...props }: { children: ReactNode }) {
   return (
     <html lang='br'>
-      <body className={roboto.className}>{children}</body>
+      <head>
+        <ThemeScript />
+      </head>
+      <body className={inter.className}>
+        <AutoScroll />
+        {children}
+        <BoardNavigator />
+        <PageUtilities />
+      </body>
     </html>
   );
 }

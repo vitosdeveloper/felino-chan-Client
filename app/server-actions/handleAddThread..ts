@@ -21,9 +21,9 @@ export const handleAddThread = async (
       assunto: formData.get('assunto'),
       postContent: formData.get('postContent'),
       password: formData.get('password'),
-      allowCatImage: true,
+      allowCatImage: !!formData.get('allowCatImage'),
     };
-    const { email, assunto, postContent, password } = thread;
+    const { email, assunto, postContent, password, allowCatImage } = thread;
 
     if (
       !postContent ||
@@ -40,8 +40,17 @@ export const handleAddThread = async (
       password,
     };
 
-    const [cat] = await getCat();
-    const { url: catUrl, width: catWidth, height: catHeight } = cat;
+    let catUrl = null;
+    let catWidth = null;
+    let catHeight = null;
+
+    if (allowCatImage) {
+      const [cat] = await getCat();
+      catUrl = cat.url;
+      catWidth = cat.width;
+      catHeight = cat.height;
+    }
+
     const randomIdGeneratedByMe = await getIdCountAndIncrementByOne();
     const mountedThread = {
       ...form,
@@ -57,9 +66,8 @@ export const handleAddThread = async (
     if (isPost(mountedThread)) {
       await addPost(mountedThread);
       await removeOldThreadsAndItsReplys(board);
-      // revalidatePath(`/[board]/[pageNumber]`, 'page');
-      // revalidatePath(`/[board]/catalog`, 'page');
-      // revalidatePath(`/[board]/res/[threadId]`, 'page');
+      revalidatePath(`/${board}/[pageNumber]`, 'page');
+      revalidatePath(`/${board}/catalog`, 'page');
       return { error: '' };
     }
     return { error: '' };

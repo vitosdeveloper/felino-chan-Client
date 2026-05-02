@@ -1,28 +1,61 @@
 .cuteLittleLetter {
-  font-size: 0.6rem;
-  letter-spacing: 0.8rem;
+  font-size: 0.85rem;
+  letter-spacing: 1.2rem;
+  text-transform: uppercase;
+  color: var(--accentColor);
+  font-weight: 600;
+  margin: 2rem 0;
+  opacity: 0.8;
 }
 
 .about {
-  color: var(--linkHoverColor);
+  color: var(--textColor);
   text-align: left;
-  padding: 2rem;
-  border: 2px solid var(--linkColor);
-  background: var(--headerBgColor);
-  border-radius: 0.75rem;
-  margin-top: 2rem;
-  max-width: 450px;
-  line-height: 1.25rem;
+  padding: 2.5rem;
+  background: var(--glassBg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glassBorder);
+  border-radius: 1.5rem;
+  box-shadow: var(--cardShadow);
+  margin-top: 1rem;
+  max-width: 550px;
+  line-height: 1.6;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4);
 }
 
 .pSpacing {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  margin-bottom: 0.5rem;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+  font-size: 1.05rem;
+}
+
+.pSpacing i {
+  color: var(--accentColor);
+  font-weight: 500;
 }
 
 .social {
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.social svg {
+  width: 32px;
+  height: 32px;
+  fill: var(--textColor);
+  transition: all 0.3s ease;
+}
+
+.social a:hover svg {
+  fill: var(--accentColor);
+  transform: scale(1.1);
 }

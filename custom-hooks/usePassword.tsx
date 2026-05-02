@@ -7,14 +7,22 @@ const usePassword = () => {
   useEffect(() => {
     const localStoragePassword = getOneStorage('felinoChanPassword');
     if (!localStoragePassword) {
-      const newGeneratedPassword = String(Math.floor(Math.random() * 100000));
-      setOneStorage('felinoChanPassword', String(newGeneratedPassword));
+      // Generate only once
+      const newGeneratedPassword = String(Math.floor(100000 + Math.random() * 900000));
+      setOneStorage('felinoChanPassword', newGeneratedPassword);
       setPassword(newGeneratedPassword);
     } else {
       setPassword(localStoragePassword as string);
     }
   }, []);
-  return { password, setPassword };
+
+  // Update localStorage whenever state changes manually
+  const updatePassword = (newVal: string) => {
+    setPassword(newVal);
+    setOneStorage('felinoChanPassword', newVal);
+  };
+
+  return { password, setPassword: updatePassword };
 };
 
 export default usePassword;

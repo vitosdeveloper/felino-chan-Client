@@ -1,15 +1,27 @@
 .button {
-  padding: 0.5rem;
-  background: var(--inputBgColor);
-  border: 1px solid var(--linkHoverColor);
-  font-family: 'Roboto', sans-serif;
-  border-radius: 5px;
+  padding: 0.6rem 1rem;
+  background: var(--accentColor);
+  border: none;
+  font-family: inherit;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .button:hover {
-  cursor: pointer;
+  filter: brightness(1.15);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
 .button:active {
-  background: var(--headerBgColor);
+  transform: translateY(0);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
 }

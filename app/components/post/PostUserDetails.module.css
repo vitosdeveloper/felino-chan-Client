@@ -24,3 +24,16 @@
 .anon {
   color: var(--linkColor);
 }
+
+.quoteNumber {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0 0.25rem;
+  border-radius: 4px;
+}
+
+.quoteNumber:hover {
+  color: var(--accentColor);
+  background: var(--glassBg);
+  text-decoration: underline;
+}

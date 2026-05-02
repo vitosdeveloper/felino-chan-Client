@@ -1,6 +1,5 @@
 import React, { PropsWithChildren } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import Hr from '../layout/Hr';
 
 type Props = {};
 
@@ -11,7 +10,6 @@ const ThreadSkeleton = (props: Props) => {
         <ReplySkeletonUnity />
         <ReplySkeletonUnity />
       </ThreadSkeletonUnity>
-      <Hr />
 
       <ThreadSkeletonUnity>
         <ReplySkeletonUnity />
@@ -19,21 +17,16 @@ const ThreadSkeleton = (props: Props) => {
         <ReplySkeletonUnity />
         <ReplySkeletonUnity />
       </ThreadSkeletonUnity>
-      <Hr />
 
       <ThreadSkeletonUnity></ThreadSkeletonUnity>
-      <Hr />
 
       <ThreadSkeletonUnity>
         <ReplySkeletonUnity />
       </ThreadSkeletonUnity>
-      <Hr />
 
       <ThreadSkeletonUnity></ThreadSkeletonUnity>
-      <Hr />
 
       <ThreadSkeletonUnity></ThreadSkeletonUnity>
-      <Hr />
 
       <ThreadSkeletonUnity>
         <ReplySkeletonUnity />
@@ -49,43 +42,44 @@ export const ThreadSkeletonUnity = ({ children }: PropsWithChildren) => {
   return (
     <div>
       <Skeleton
-        baseColor='var(--linkHoverColor)'
-        highlightColor='var(--linkColor)'
+        baseColor='var(--inputBgColor)'
+        highlightColor='var(--glassBg)'
         style={{ maxWidth: 346, maxHeight: 10 }}
       />
       <Skeleton
         inline
-        baseColor='var(--linkHoverColor)'
-        highlightColor='var(--linkColor)'
+        baseColor='var(--inputBgColor)'
+        highlightColor='var(--glassBg)'
         style={{
           maxWidth: 250,
           height: 180,
           marginRight: '.75rem',
           float: 'left',
+          borderRadius: '8px'
         }}
         direction='rtl'
       />
       <Skeleton
         inline
-        baseColor='var(--linkHoverColor)'
-        highlightColor='var(--linkColor)'
+        baseColor='var(--inputBgColor)'
+        highlightColor='var(--glassBg)'
         style={{ maxWidth: 276, marginRight: 10, maxHeight: 10 }}
       />
       <Skeleton
         inline
-        baseColor='var(--linkHoverColor)'
-        highlightColor='var(--linkColor)'
+        baseColor='var(--inputBgColor)'
+        highlightColor='var(--glassBg)'
         style={{ maxWidth: 70, maxHeight: 10 }}
       />
       <br />
       <Skeleton
-        baseColor='var(--linkHoverColor)'
-        highlightColor='var(--linkColor)'
+        baseColor='var(--inputBgColor)'
+        highlightColor='var(--glassBg)'
         style={{ maxWidth: 746, maxHeight: 10 }}
       />
       <Skeleton
-        baseColor='var(--linkHoverColor)'
-        highlightColor='var(--linkColor)'
+        baseColor='var(--inputBgColor)'
+        highlightColor='var(--glassBg)'
         style={{ maxWidth: 686, maxHeight: 10 }}
       />
       {children}
@@ -97,8 +91,10 @@ export const ReplySkeletonUnity = () => {
   return (
     <div
       style={{
-        background: 'var(--replyBgColor)',
-        backgroundImage: 'var(--replyBgTexture)',
+        background: 'var(--glassBg)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        border: '1px solid var(--glassBorder)',
         padding: '.75rem',
         borderRadius: '8px',
         marginTop: '.5rem',
@@ -107,47 +103,46 @@ export const ReplySkeletonUnity = () => {
       }}
     >
       <Skeleton
-        baseColor='var(--linkHoverColor)'
-        highlightColor='var(--linkColor)'
+        baseColor='var(--inputBgColor)'
+        highlightColor='var(--headerBgColor)'
         style={{ maxWidth: 276, maxHeight: 10 }}
       />
       <Skeleton
-        baseColor='var(--linkHoverColor)'
-        highlightColor='var(--linkColor)'
+        baseColor='var(--inputBgColor)'
+        highlightColor='var(--headerBgColor)'
         style={{ maxWidth: 346, maxHeight: 10 }}
       />
       <Skeleton
         inline
-        baseColor='var(--linkHoverColor)'
-        highlightColor='var(--linkColor)'
+        baseColor='var(--inputBgColor)'
+        highlightColor='var(--headerBgColor)'
         style={{
           maxWidth: 250,
           height: 180,
           marginRight: '.75rem',
           float: 'left',
+          borderRadius: '8px'
         }}
         direction='rtl'
       />
       <Skeleton
-        // inline
-        baseColor='var(--linkHoverColor)'
-        highlightColor='var(--linkColor)'
+        baseColor='var(--inputBgColor)'
+        highlightColor='var(--headerBgColor)'
         style={{ maxWidth: 70, maxHeight: 10 }}
       />
-      {/* <br /> */}
       <Skeleton
-        baseColor='var(--linkHoverColor)'
-        highlightColor='var(--linkColor)'
+        baseColor='var(--inputBgColor)'
+        highlightColor='var(--headerBgColor)'
         style={{ maxWidth: 346, maxHeight: 10 }}
       />
       <Skeleton
-        baseColor='var(--linkHoverColor)'
-        highlightColor='var(--linkColor)'
+        baseColor='var(--inputBgColor)'
+        highlightColor='var(--headerBgColor)'
         style={{ maxWidth: 286, maxHeight: 10 }}
       />
       <Skeleton
-        baseColor='var(--linkHoverColor)'
-        highlightColor='var(--linkColor)'
+        baseColor='var(--inputBgColor)'
+        highlightColor='var(--headerBgColor)'
         style={{ maxWidth: 146, maxHeight: 10, marginBottom: '1rem' }}
       />
     </div>

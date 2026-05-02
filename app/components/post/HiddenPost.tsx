@@ -1,6 +1,5 @@
 import PostUserDetails from './PostUserDetails';
 import classes from './HiddenPost.module.css';
-import Hr from '../layout/Hr';
 import { IBoards } from '@/utils/boards';
 
 type Props = {
@@ -41,7 +40,6 @@ const HiddenPost = ({
         from={from}
         op={op}
       />
-      {op && <Hr />}
     </div>
   );
 };

@@ -1,9 +1,13 @@
-import React, { RefObject } from 'react';
+import React from 'react';
 import { useFormStatus } from 'react-dom';
 
-type Props = { op: boolean };
+type Props = { 
+  op: boolean;
+  checked?: boolean;
+  onChange?: () => void;
+};
 
-const CatInput = ({ op }: Props) => {
+const CatInput = ({ op, checked, onChange }: Props) => {
   const { pending } = useFormStatus();
 
   return (
@@ -14,7 +18,8 @@ const CatInput = ({ op }: Props) => {
         name='allowCatImage'
         type='checkbox'
         disabled={op || pending}
-        defaultChecked={true}
+        checked={op ? true : checked}
+        onChange={op ? undefined : onChange}
       />
       <label htmlFor='allowCatImage'>Random Cat Images</label>
     </>

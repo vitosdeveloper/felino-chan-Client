@@ -1,6 +1,49 @@
-.bold {
-  font-weight: bold;
+.paginationContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 3rem;
+  padding: 1rem;
+  background: var(--glassBg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glassBorder);
+  border-radius: 50px;
+  box-shadow: var(--cardShadow);
 }
-.normal {
-  font-weight: initial;
+
+.pageLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--inputBgColor);
+  color: var(--textColor);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.pageLink:hover {
+  transform: translateY(-3px);
+  background: var(--linkHoverColor);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.active {
+  background: var(--accentColor);
+  color: #fff;
+  font-weight: bold;
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+}
+
+.active:hover {
+  background: var(--accentColor);
+  transform: scale(1.1);
 }

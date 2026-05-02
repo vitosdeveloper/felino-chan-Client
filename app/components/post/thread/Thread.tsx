@@ -5,13 +5,13 @@ import PostFileDetails from '../PostFileDetails';
 import PostImage from '../PostImage';
 import PostUserDetails from '../PostUserDetails';
 import classes from '../General.module.css';
-import Hr from '@/app/components/layout/Hr';
 import Link from 'next/link';
 import parseHtmlString from '@/lib/parseStringToJsx';
 import HiddenPost from '../HiddenPost';
 import useHidden from '@/custom-hooks/useHidden';
 import { IBoards } from '@/utils/boards';
 import { useRouter } from 'next/navigation';
+import threadClasses from './Thread.module.css';
 
 type Props = {
   from: 'outside' | 'inside';
@@ -65,7 +65,7 @@ const Thread = ({ from, thread, children, board }: Props) => {
   }
 
   return (
-    <div>
+    <div className={`thread-item ${threadClasses.threadItem}`} data-search-content={`${assunto || ''} ${postContent || ''}`.toLowerCase()}>
       <div id={String(randomIdGeneratedByMe)}>
         <div className={classes.fileOrUserDetails}>
           <PostFileDetails
@@ -95,7 +95,6 @@ const Thread = ({ from, thread, children, board }: Props) => {
         </div>
       </div>
       {children}
-      <Hr />
       {from === 'inside' && (
         <span>
           [

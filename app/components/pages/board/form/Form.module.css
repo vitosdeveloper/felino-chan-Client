@@ -27,3 +27,93 @@
     width: auto;
   }
 }
+
+/* Floating Form */
+.floatingForm {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 5rem;
+  z-index: 999;
+  background: var(--glassBg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glassBorder);
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  max-width: 420px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  pointer-events: all;
+  animation: floatFormIn 0.4s ease;
+}
+
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(30px) scale(0.9);
+  pointer-events: none;
+}
+
+.floatingForm .form {
+  flex-direction: column;
+}
+
+.floatingForm .inputs {
+  width: 100%;
+}
+
+@keyframes floatFormIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.floatingToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--accentColor);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  margin-bottom: 0.75rem;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.floatingToggle:hover {
+  filter: brightness(1.15);
+  transform: scale(1.03);
+}
+
+.collapsed {
+  padding: 0.5rem;
+  border-radius: 12px;
+}
+
+.collapsed .floatingToggle {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .floatingForm {
+    right: 1rem;
+    left: 1rem;
+    max-width: none;
+    bottom: 1rem;
+  }
+}

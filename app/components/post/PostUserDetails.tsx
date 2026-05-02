@@ -31,6 +31,12 @@ const PostUserDetails = ({
   const linkHref =
     from === 'outside' ? '/' + board + '/res/' + postNumber : `/${board}/1`;
 
+  const handleQuoteClick = () => {
+    window.dispatchEvent(
+      new CustomEvent('felino-quote', { detail: postNumber })
+    );
+  };
+
   return (
     <div className={classes.details}>
       <PostDeleteCheckBox id={id} postNumber={postNumber} />
@@ -43,25 +49,17 @@ const PostUserDetails = ({
       </Link>
       <span>{postDay}</span>
       <span className={classes.anon}>No.</span>
-      <span className={classes.date}>{postNumber}</span>
+      <span
+        className={`${classes.date} ${classes.quoteNumber}`}
+        onClick={handleQuoteClick}
+        title="Citar este post"
+      >
+        {postNumber}
+      </span>
       {op && (
         <span>
           [
-          <Link
-            onClick={async (e) => {
-              e.preventDefault();
-              route.push(linkHref);
-              await new Promise((resolve) => {
-                setTimeout(() => {
-                  document
-                    .querySelector(`#top`)
-                    ?.scrollIntoView({ behavior: 'smooth' });
-                  resolve('');
-                }, 200);
-              });
-            }}
-            href={linkHref}
-          >
+          <Link href={linkHref + '#bottom'} scroll={true}>
             {linkText}
           </Link>
           ]
@@ -72,3 +70,4 @@ const PostUserDetails = ({
 };
 
 export default memo(PostUserDetails);
+

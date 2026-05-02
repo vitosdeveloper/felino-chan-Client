@@ -1,9 +1,21 @@
 .mainLayout {
-  padding: 2rem 1.25rem 2rem 1.25rem;
+  padding: 4rem 4rem;
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .mainLayout {
+    padding: 2rem 1.5rem;
+  }
 }
 
 @media (max-width: 450px) {
   .mainLayout {
-    padding: 1rem 1.25rem 1rem 1.25rem;
+    padding: 1.5rem 1rem;
   }
 }

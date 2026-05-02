@@ -75,7 +75,7 @@ const processPost = (data: Post | Post[], withPass?: boolean) => {
   return process(data);
 };
 
-const processData = (data: unknown, withPass?: boolean) => {
+export const processData = (data: unknown, withPass?: boolean) => {
   if (Array.isArray(data)) {
     return processPost(data, withPass);
   }

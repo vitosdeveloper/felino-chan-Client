@@ -1,21 +1,26 @@
 :root {
   --bodyBgTexture: none;
   --replyBgTexture: none;
-  --linkHoverColor: #9b9ea2;
-  --linkColor: #dbdee1;
-  --assuntoColor: #9bb5d0;
-  --replyBgColor: #383a40;
-  --hrColor: rgb(103, 103, 103);
-  --headerBgColor: #1e1f22;
-  --bodyBgColor: #2b2d31;
-  --inputBgColor: #383a40;
-  --textColor: #dbdee1;
+  --linkHoverColor: #a5b4fc;
+  --linkColor: #818cf8;
+  --assuntoColor: #6366f1;
+  --replyBgColor: rgba(30, 32, 38, 0.8);
+  --hrColor: rgba(255, 255, 255, 0.1);
+  --headerBgColor: rgba(15, 17, 21, 0.8);
+  --bodyBgColor: #0f1115;
+  --inputBgColor: rgba(30, 32, 38, 0.6);
+  --textColor: #f3f4f6;
+  --accentColor: #6366f1;
+  --glassBg: rgba(30, 32, 38, 0.5);
+  --glassBorder: rgba(255, 255, 255, 0.08);
+  --cardShadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 p,
@@ -46,7 +51,46 @@ body {
 body {
   background-image: var(--bodyBgTexture);
   background-color: var(--bodyBgColor);
-  background-attachment: scroll, scroll;
+  background-attachment: fixed;
+  background-size: cover;
+  min-height: 100vh;
+  position: relative;
+}
+
+body::before, body::after {
+  content: '';
+  position: fixed;
+  width: 50vw;
+  height: 50vh;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(100px);
+  opacity: 0.2;
+  animation: floatBlobs 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.5s ease;
+}
+
+body::before {
+  top: -10%;
+  left: -10%;
+  background: radial-gradient(circle, var(--accentColor) 0%, transparent 70%);
+  animation-delay: 0s;
+}
+
+body::after {
+  bottom: -10%;
+  right: -10%;
+  background: radial-gradient(circle, var(--linkColor) 0%, transparent 70%);
+  animation-delay: -10s;
+  animation-duration: 25s;
+}
+
+@keyframes floatBlobs {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(15%, 15%) scale(1.1); }
+  66% { transform: translate(-15%, 5%) scale(0.9); }
+  100% { transform: translate(5%, -15%) scale(1.05); }
 }
 
 * {
